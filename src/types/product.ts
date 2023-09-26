@@ -1,18 +1,21 @@
-export default interface product {
+export interface product {
   id: number;
   title: string;
   price: number;
   description: string;
   images: string[];
-  createdAt: string;
-  updatedAt: string;
-  category: Category;
+  categoryId: number;
 }
 
-interface Category {
+export interface newProduct {
+  title: string;
+  price: number;
+  description: string;
+  images: string[];
+  categoryId: number;
+}
+
+export interface updatedProduct {
   id: number;
-  name: string;
-  image: string;
-  createdAt: string;
-  updatedAt: string;
+  updatedData: Partial<newProduct>;
 }
