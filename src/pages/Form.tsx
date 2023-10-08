@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { createNewProductAsync } from '../redux/methods/productMethod';
 
-type FormPropsType = {
-  edit: boolean;
-};
-
-const Form: React.FC<FormPropsType> = ({ edit }) => {
+const Form: React.FC = () => {
   const [formData, setFormData] = useState({
     title: '',
     price: '',

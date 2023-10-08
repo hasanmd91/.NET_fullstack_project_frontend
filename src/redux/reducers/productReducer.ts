@@ -96,7 +96,7 @@ const productSlice = createSlice({
     /*DELETE A PRODUCT REDUCER*/
 
     builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError || Error)) {
+      if (!(action.payload instanceof AxiosError)) {
         state.products = state.products.filter(
           (product) => product.id !== action.payload
         );
