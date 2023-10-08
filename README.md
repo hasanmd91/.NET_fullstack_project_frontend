@@ -51,3 +51,23 @@ Launches the test runner in the interactive watch mode
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+**Basic requirements**
+
+- [ ] Fetch and display all and single products.
+- [ ] Create at least 4 pages (products, profile, user, cart)
+- [ ] Product reducer
+- [ ] User reducer
+- [ ] Cart reducer
+- [ ] Adding and removing from the cart
+- [ ] Login and authorization (admins can delete and update products)
+- [ ] Routing and private pages
+- [ ] Testing the reducers
+- [ ] Rewrite the README, deploy the project, add the deployment link here and to the README.md
+
+**Bonus requirements**
+
+- [ ] Context API
+- [ ] Pagination when fetching and displaying.
+- [ ] Any performance optimization, remember to mention it ie useMemo, debounce, etc
+- [ ] Anything else you are proud to have added.
