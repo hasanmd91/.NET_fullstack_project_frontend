@@ -32,6 +32,7 @@ export const createCategoryAsync = createAsyncThunk(
     }
   }
 );
+
 export const deleteCategoryAsync = createAsyncThunk(
   'deleteCategoryAsync',
   async (id: number) => {
@@ -48,6 +49,7 @@ export const deleteCategoryAsync = createAsyncThunk(
     }
   }
 );
+
 export const updateCategoryAsync = createAsyncThunk(
   'updateCategoryAsync',
   async (categoryData: category) => {
@@ -57,7 +59,6 @@ export const updateCategoryAsync = createAsyncThunk(
         `categories/${id}`,
         categoryData
       );
-
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
