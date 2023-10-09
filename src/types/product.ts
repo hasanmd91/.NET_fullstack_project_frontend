@@ -1,10 +1,14 @@
+import { category } from '../types/category';
+
 export interface product {
   id: number;
   title: string;
   price: number;
   description: string;
+  category: category;
   images: string[];
-  categoryId: number;
+  quantity?: number;
+  inStock?: boolean;
 }
 
 export interface newProduct {
