@@ -1,129 +1,46 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { AppBar, Button, Container, Toolbar } from '@mui/material';
 
-const pages = [
-  { page: 'Home', route: '/home' },
-  { page: 'Products', route: '/products' },
-  { page: 'About', route: '/about' },
-];
+import useAppSelector from '../../Hooks/useAppSelector';
+import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
+import NavigationBar from './NavigationBar/NavigationBar';
+import TooltipMenu from './TooltipMenu/TooltipMenu';
+import Link from '../Link/Link';
+import ShopingCart from '../shopingCart/ShopingCart';
 
-function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+const Navbar = () => {
+  const { loggedIn } = useAppSelector((state) => state.auth);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: '#ff6900' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <HamburgerMenu />
+          <NavigationBar />
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page, index) => (
+          {loggedIn ? (
+            <TooltipMenu />
+          ) : (
+            <Link to="/login">
               <Button
-                key={index}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  margin: 'auto',
+                  padding: '5px 10px',
+                  border: '1px solid #b24900',
+                }}
               >
-                {page.page}
+                LOGIN
               </Button>
-            ))}
-          </Box>
+            </Link>
+          )}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>DashBoard</MenuItem>
-              <MenuItem>Logout</MenuItem>
-            </Menu>
-          </Box>
+          <ShopingCart />
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
-export default ResponsiveAppBar;
+};
+export default Navbar;

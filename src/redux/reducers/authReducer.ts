@@ -20,7 +20,9 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logOut: (state, action) => {
+    logOut: (state) => {
+      console.log('i am logout get called ');
+
       localStorage.removeItem('accessToken');
       state.loggedIn = false;
       state.userInfo = null;
