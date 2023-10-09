@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { user } from '../../types/user';
 import {
+  createNewUserAsync,
   getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
@@ -8,7 +9,8 @@ import {
 import { AxiosError } from 'axios';
 
 type InitialStateType = {
-  users: user | user[];
+  users: user[];
+  currentUser?: user;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
@@ -64,7 +66,7 @@ const userSlice = createSlice({
       (state, action: PayloadAction<user | AxiosError>) => {
         if (!(action.payload instanceof AxiosError)) {
           state.status = 'succeeded';
-          state.users = action.payload;
+          state.currentUser = action.payload;
         }
       }
     );
@@ -76,7 +78,17 @@ const userSlice = createSlice({
       }
     });
 
-    /*UPDATE PRODUCT REDUCER*/
+    /*CREATE A USER REDUCER*/
+
+    builder.addCase(createNewUserAsync.fulfilled, (state, action) => {
+      if (!(action.payload instanceof AxiosError)) {
+        state.status = 'succeeded';
+        state.users = [...state.users, action.payload];
+        state.currentUser = action.payload;
+      }
+    });
+
+    /*UPDATE USER REDUCER*/
 
     builder.addCase(
       updateUserAsync.fulfilled,

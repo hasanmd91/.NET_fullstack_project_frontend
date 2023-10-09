@@ -11,6 +11,14 @@ export type user = {
   avatar: string;
 };
 
+export type registerUser = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  avatar: string;
+};
+
 export type newUser = Omit<user, 'id' | 'role'>;
 
 export type updateUser = {

@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { user } from '../../types/user';
-import { loginAsync } from '../methods/authMethod';
+import { getLogedUserAsync, loginAsync } from '../methods/authMethod';
 
 type InitialStateType = {
   loggedIn: boolean;
@@ -23,8 +23,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state) => {
-      console.log('i am logout get called ');
-
       localStorage.removeItem('accessToken');
       state.loggedIn = false;
       state.userInfo = null;
@@ -55,6 +53,22 @@ const authSlice = createSlice({
       state.error = true;
       state.errorMsg = action.payload as string;
     });
+
+    builder.addCase(
+      getLogedUserAsync.fulfilled,
+      (state, action: PayloadAction<user>) => {
+        if (
+          !(action.payload instanceof AxiosError) &&
+          action.payload &&
+          !('message' in action.payload)
+        ) {
+          state.loggedIn = true;
+          state.userInfo = action.payload;
+          state.error = false;
+          state.errorMsg = '';
+        }
+      }
+    );
   },
 });
 

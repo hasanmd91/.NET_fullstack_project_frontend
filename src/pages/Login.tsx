@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm/LoginForm';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { loginAsync } from '../redux/methods/authMethod';
@@ -10,13 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState<string>('');
 
   const { loggedIn } = useAppSelector((state) => state.auth);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loggedIn) {
-      navigate('/');
-    }
-  }, [loggedIn, navigate]);
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +27,7 @@ const Login = () => {
   };
 
   if (loggedIn) {
-    navigate('/');
+    return <Navigate to={'/'} replace />;
   }
 
   return (

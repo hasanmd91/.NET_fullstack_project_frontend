@@ -15,8 +15,6 @@ import useAppDispatch from '../../../Hooks/useAppDispatch';
 import { logOut } from '../../../redux/reducers/authReducer';
 
 const TooltipMenu = () => {
-  /* Tooltip active state  */
-
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -26,8 +24,6 @@ const TooltipMenu = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  /* Global state */
 
   const { userInfo } = useAppSelector((state) => state.auth);
 
@@ -41,7 +37,7 @@ const TooltipMenu = () => {
     <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="User" src={userInfo?.avatar} />
         </IconButton>
       </Tooltip>
       <Menu

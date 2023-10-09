@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
+import useAppDispatch from '../Hooks/useAppDispatch';
+import { getLogedUserAsync } from '../redux/methods/authMethod';
+import GetTokenfromLocalStroage from '../utils/GetTokenfromLocalStroage';
 
 const Root: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const Token = GetTokenfromLocalStroage();
+
+    if (!Token) {
+      return;
+    } else {
+      dispatch(getLogedUserAsync(Token));
+    }
+  }, [dispatch]);
+
   return (
     <>
       <Navbar />

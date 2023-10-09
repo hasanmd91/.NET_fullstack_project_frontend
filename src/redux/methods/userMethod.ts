@@ -5,7 +5,7 @@ import axiosInstance from '../../shared/axiosInstance';
 import {
   emailType,
   isEmailAvailable,
-  newUser,
+  registerUser,
   updateUser,
   user,
 } from '../../types/user';
@@ -46,14 +46,14 @@ export const getAUsersAsync = createAsyncThunk(
 
 export const createNewUserAsync = createAsyncThunk(
   'createNewUserAsync',
-  async (newUser: newUser) => {
+  async (newUser: registerUser, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post<user>('users', newUser);
       const newCreatedUser: user = response.data;
       return newCreatedUser;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );

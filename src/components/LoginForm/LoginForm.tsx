@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Container,
-  Paper,
-  Typography,
-  TextField,
-  Button,
-} from '@mui/material';
+import { Box, Container, Paper, Typography, Button } from '@mui/material';
 
+import TextField from '../TextField/TextField';
 import useAppSelector from '../../Hooks/useAppSelector';
 import Link from '../Link/Link';
 
@@ -51,13 +45,10 @@ const LoginForm: React.FC<LoginFormType> = ({
         }}
       >
         <form onSubmit={handleSubmit}>
-          <Typography variant="h3"> Welcome Back!</Typography>
+          <Typography variant="h5"> Welcome Back!</Typography>
           <TextField
             type="email"
             label="Email"
-            variant="outlined"
-            fullWidth
-            margin="normal"
             value={email}
             onChange={handleEmailChange}
             error={error}
@@ -66,9 +57,6 @@ const LoginForm: React.FC<LoginFormType> = ({
           <TextField
             type="password"
             label="Password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
             value={password}
             onChange={handlePasswordChange}
             error={error}
