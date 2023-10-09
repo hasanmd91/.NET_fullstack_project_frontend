@@ -6,7 +6,7 @@ import { AxiosError } from 'axios';
 
 export const loginAsync = createAsyncThunk(
   'loginAsync',
-  async (credentials: userCredentials) => {
+  async (credentials: userCredentials, { rejectWithValue }) => {
     try {
       const response = await loginUser(credentials);
       const accessToken = response.data?.access_token;
@@ -18,7 +18,12 @@ export const loginAsync = createAsyncThunk(
       }
     } catch (error) {
       const err = error as AxiosError;
-      return handleLoginError(err);
+      const errorMsg: string =
+        err.response?.status === 401
+          ? 'Email or Password are incorrect'
+          : 'Something went wrong, please try again';
+
+      return rejectWithValue(errorMsg);
     }
   }
 );
@@ -36,12 +41,4 @@ const fetchUserProfile = async (accessToken: string) => {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   return response.data;
-};
-
-const handleLoginError = (error: AxiosError) => {
-  let errorMsg: string = 'Something went wrong, please try again';
-  if (error.response?.status === 401) {
-    errorMsg = 'Email or Password are incorrect';
-  }
-  return { ...error, message: errorMsg };
 };

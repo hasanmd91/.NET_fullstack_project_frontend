@@ -1,7 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from '../components/LoginForm/LoginForm';
+import useAppDispatch from '../Hooks/useAppDispatch';
+import { loginAsync } from '../redux/methods/authMethod';
+import useAppSelector from '../Hooks/useAppSelector';
 
 const Login = () => {
-  return <div>Login</div>;
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const { loggedIn } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/');
+    }
+  }, [loggedIn, navigate]);
+
+  const dispatch = useAppDispatch();
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(loginAsync({ email, password }));
+  };
+
+  if (loggedIn) {
+    navigate('/');
+  }
+
+  return (
+    <LoginForm
+      email={email}
+      password={password}
+      handleEmailChange={handleEmailChange}
+      handlePasswordChange={handlePasswordChange}
+      handleSubmit={handleSubmit}
+    />
+  );
 };
 
 export default Login;

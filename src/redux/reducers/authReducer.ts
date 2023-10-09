@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { user } from '../../types/user';
@@ -14,6 +14,8 @@ type InitialStateType = {
 const initialState: InitialStateType = {
   loggedIn: false,
   userInfo: null,
+  error: false,
+  errorMsg: '',
 };
 
 const authSlice = createSlice({
@@ -31,24 +33,27 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginAsync.fulfilled, (state, action) => {
-      if (
-        !(action.payload instanceof AxiosError) &&
-        action.payload &&
-        !('message' in action.payload)
-      ) {
-        state.loggedIn = true;
-        state.userInfo = action.payload;
-        state.error = false;
-        state.errorMsg = '';
+    builder.addCase(
+      loginAsync.fulfilled,
+      (state, action: PayloadAction<user | undefined>) => {
+        if (
+          !(action.payload instanceof AxiosError) &&
+          action.payload &&
+          !('message' in action.payload)
+        ) {
+          state.loggedIn = true;
+          state.userInfo = action.payload;
+          state.error = false;
+          state.errorMsg = '';
+        }
       }
-    });
+    );
 
     builder.addCase(loginAsync.rejected, (state, action) => {
       state.loggedIn = false;
       state.userInfo = null;
       state.error = true;
-      state.errorMsg = action.error.message;
+      state.errorMsg = action.payload as string;
     });
   },
 });
