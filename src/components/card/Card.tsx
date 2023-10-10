@@ -28,6 +28,10 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
         margin: '0.5rem',
         position: 'relative',
         display: 'inline-block',
+        transition: 'box-shadow 0.3s ease-in-out',
+        '&:hover': {
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+        },
       }}
     >
       <CardMedia

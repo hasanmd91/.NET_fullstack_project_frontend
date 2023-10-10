@@ -8,7 +8,6 @@ import useAppSelector from '../Hooks/useAppSelector';
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
   const { loggedIn } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();

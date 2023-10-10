@@ -1,42 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Alert, Box, CircularProgress, Container } from '@mui/material';
+
 import useAppSelector from '../Hooks/useAppSelector';
 import useAppDispatch from '../Hooks/useAppDispatch';
-import {
-  getAllProductsAsync,
-  deleteProductAsync,
-} from '../redux/methods/productMethod';
-import Form from './Form';
-import { sortProduct } from '../redux/reducers/productReducer';
-import useButtonWithDelay from '../Hooks/useButtonWithDelay';
+import { getAllProductsAsync } from '../redux/methods/productMethod';
 import MediaCard from '../components/card/Card';
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Container,
-  circularProgressClasses,
-} from '@mui/material';
-import { error } from 'console';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import Pagination from '../components/Pagination/Pagination';
+import { usePagination } from '../Hooks/usePagination';
 
 const ProductList = () => {
   const { products, status, error } = useAppSelector((state) => state.product);
 
-  const [isDisabled, disabledButtonForASecond] = useButtonWithDelay();
+  const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
+    products,
+    20
+  );
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllProductsAsync());
-  }, []);
-
-  const handleDelete = (productId: number) => {
-    dispatch(deleteProductAsync(productId));
-    disabledButtonForASecond();
-  };
-
-  const sort = () => {
-    dispatch(sortProduct('Z-A'));
-  };
+  }, [dispatch]);
 
   if (status === 'loading') {
     return (
@@ -54,7 +39,7 @@ const ProductList = () => {
     );
   }
 
-  return products.length > 0 ? (
+  return currentProducts.length > 0 ? (
     <Container maxWidth="xl" sx={{ marginTop: '2rem' }}>
       <Box
         style={{
@@ -64,9 +49,15 @@ const ProductList = () => {
           alignItems: 'center',
         }}
       >
-        {products.map((product) => (
+        {currentProducts.map((product) => (
           <MediaCard key={product.id} product={product} />
         ))}
+
+        <Pagination
+          count={pageLimit}
+          currentPage={currentPage}
+          setPage={setPage}
+        />
       </Box>
     </Container>
   ) : null;
