@@ -6,7 +6,7 @@ import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
 import NavigationBar from './NavigationBar/NavigationBar';
 import TooltipMenu from './TooltipMenu/TooltipMenu';
 import Link from '../Link/Link';
-import ShopingCart from '../shopingCart/ShopingCart';
+import CartIcon from '../CartIcon/CartIcon';
 
 const Navbar = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
@@ -37,7 +37,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          <ShopingCart />
+          <CartIcon ItemCount={5} />
         </Toolbar>
       </Container>
     </AppBar>
