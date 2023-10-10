@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   Typography,
@@ -7,7 +7,6 @@ import {
   Box,
   Divider,
 } from '@mui/material';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams } from 'react-router-dom';
@@ -16,6 +15,7 @@ import useAppDispatch from '../Hooks/useAppDispatch';
 import { getAProductsAsync } from '../redux/methods/productMethod';
 import useAppSelector from '../Hooks/useAppSelector';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
 
 const ProductView = () => {
   const { product } = useAppSelector((state) => state.product);
@@ -30,37 +30,13 @@ const ProductView = () => {
     }
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    centerMode: true,
-    autoplaySpeed: 5000,
-  };
-
   if (product) {
     return (
       <Container maxWidth="lg">
         <CenteredContainer>
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6}>
-              <Slider {...settings}>
-                {product.images.map((image, index) => (
-                  <Box key={index}>
-                    <img
-                      src={image}
-                      alt={'products'}
-                      style={{
-                        maxWidth: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  </Box>
-                ))}
-              </Slider>
+              <ImageSlider images={product.images} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box>
