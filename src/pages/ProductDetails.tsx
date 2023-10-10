@@ -16,6 +16,7 @@ import { getAProductsAsync } from '../redux/methods/productMethod';
 import useAppSelector from '../Hooks/useAppSelector';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
+import { addItemToCart } from '../redux/reducers/cartReducer';
 
 const ProductView = () => {
   const { product } = useAppSelector((state) => state.product);
@@ -29,6 +30,20 @@ const ProductView = () => {
       dispatch(getAProductsAsync(productId));
     }
   }, []);
+
+  const addTocart = () => {
+    if (product !== undefined && product !== null) {
+      const cartItem = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: 1,
+        image: product.images[0],
+      };
+
+      dispatch(addItemToCart(cartItem));
+    }
+  };
 
   if (product) {
     return (
@@ -67,6 +82,7 @@ const ProductView = () => {
                     margin: '20px 0',
                     '&:hover': { background: '#b24900' },
                   }}
+                  onClick={addTocart}
                 >
                   Add to Cart
                 </Button>

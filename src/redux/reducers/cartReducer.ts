@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CartItem } from '../../types/cart';
+import { stat } from 'fs';
 
 type InitialStateType = {
   cartItems: CartItem[];
@@ -17,8 +18,16 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action: PayloadAction<CartItem>) => {
-      state.cartItems = [...state.cartItems, action.payload];
+      const Item = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
+      if (Item) {
+        Item.quantity++;
+      } else {
+        state.cartItems.push(action.payload);
+      }
     },
+
     removeItemFromCart: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== action.payload
@@ -28,35 +37,22 @@ const cartSlice = createSlice({
       state.cartItems = [];
     },
 
-    increaseItemQuantity: (state, action: PayloadAction<number>) => {
-      const item = state.cartItems.find((item) => item.id === action.payload);
+    setItemQuantity: (
+      state,
+      action: PayloadAction<{ quantity: number; id: number }>
+    ) => {
+      const item = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
       if (item) {
-        item.quantity += 1;
-      }
-    },
-
-    decreaseItemQuantity: (state, action: PayloadAction<number>) => {
-      const item = state.cartItems.find((item) => item.id === action.payload);
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity -= 1;
-        } else {
-          state.cartItems = state.cartItems.filter(
-            (item) => item.id !== action.payload
-          );
-        }
+        item.quantity = action.payload.quantity;
       }
     },
   },
 });
 
 const cartReducer = cartSlice.reducer;
-export const {
-  addItemToCart,
-  removeItemFromCart,
-  clearCart,
-  decreaseItemQuantity,
-  increaseItemQuantity,
-} = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart, clearCart, setItemQuantity } =
+  cartSlice.actions;
 
 export default cartReducer;
