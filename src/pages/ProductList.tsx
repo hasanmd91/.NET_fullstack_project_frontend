@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Box, CircularProgress, Container } from '@mui/material';
 
 import useAppSelector from '../Hooks/useAppSelector';
@@ -8,6 +8,7 @@ import MediaCard from '../components/card/Card';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import Pagination from '../components/Pagination/Pagination';
 import { usePagination } from '../Hooks/usePagination';
+import FilterBar from '../components/FilterBar/FilterBar';
 
 const ProductList = () => {
   const { products, status, error } = useAppSelector((state) => state.product);
@@ -49,6 +50,7 @@ const ProductList = () => {
           alignItems: 'center',
         }}
       >
+        <FilterBar />
         {currentProducts.map((product) => (
           <MediaCard key={product.id} product={product} />
         ))}

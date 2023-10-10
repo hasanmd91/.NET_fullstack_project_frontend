@@ -5,6 +5,7 @@ import {
   createNewProductAsync,
   deleteProductAsync,
   getAllProductsAsync,
+  getAllProductsByCategoryAsync,
   updateProductAsync,
 } from '../methods/productMethod';
 
@@ -122,6 +123,32 @@ const productSlice = createSlice({
 
     builder.addCase(updateProductAsync.rejected, (state, action) => {
       if (action.payload instanceof AxiosError) {
+        state.error = action.payload.message;
+      }
+    });
+
+    /*GET ALL PRODUCT BY CATEGORY REDUCER*/
+
+    builder.addCase(
+      getAllProductsByCategoryAsync.pending,
+      (state, action: PayloadAction<void>) => {
+        state.status = 'loading';
+      }
+    );
+
+    builder.addCase(
+      getAllProductsByCategoryAsync.fulfilled,
+      (state, action: PayloadAction<product[] | AxiosError>) => {
+        if (!(action.payload instanceof AxiosError)) {
+          state.status = 'succeeded';
+          state.products = action.payload;
+        }
+      }
+    );
+
+    builder.addCase(getAllProductsByCategoryAsync.rejected, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        state.status = 'failed';
         state.error = action.payload.message;
       }
     });

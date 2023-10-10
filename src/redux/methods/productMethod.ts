@@ -72,3 +72,21 @@ export const updateProductAsync = createAsyncThunk(
     }
   }
 );
+
+/* GET ALL PRODUCTS BY CATEGORY */
+
+export const getAllProductsByCategoryAsync = createAsyncThunk(
+  'getAllProductsByCategoryAsync',
+  async (id: number) => {
+    try {
+      const response = await axiosInstance.get<product[]>(
+        `categories/${id}/products`
+      );
+      const products: product[] = response.data;
+      return products;
+    } catch (error) {
+      const err = error as AxiosError;
+      return err;
+    }
+  }
+);
