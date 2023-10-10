@@ -27,7 +27,7 @@ const FilterByName: React.FC = () => {
   return (
     <FormControl fullWidth>
       <InputLabel>Filter By Name</InputLabel>
-      <Select variant="standard" onChange={categoryHandeler}>
+      <Select variant="standard" onChange={categoryHandeler} defaultValue="">
         {nameSortOptions.map((name) => (
           <MenuItem key={name.value} value={name.value}>
             {name.label}

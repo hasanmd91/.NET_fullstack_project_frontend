@@ -19,6 +19,20 @@ export const getAllProductsAsync = createAsyncThunk(
   }
 );
 
+export const getAProductsAsync = createAsyncThunk(
+  'getAProductsAsync',
+  async (id: number) => {
+    try {
+      const response = await axiosInstance.get<product>(`products/${id}`);
+      const products: product = response.data;
+      return products;
+    } catch (error) {
+      const err = error as AxiosError;
+      return err;
+    }
+  }
+);
+
 export const createNewProductAsync = createAsyncThunk(
   'createNewProductAsync',
   async (newProduct: Omit<product, 'id'>) => {

@@ -7,8 +7,6 @@ export interface product {
   description: string;
   category: category;
   images: string[];
-  quantity?: number;
-  inStock?: boolean;
 }
 
 export interface newProduct {

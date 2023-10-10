@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import {
   createNewProductAsync,
   deleteProductAsync,
+  getAProductsAsync,
   getAllProductsAsync,
   getAllProductsByCategoryAsync,
   updateProductAsync,
@@ -11,12 +12,14 @@ import {
 
 type InitialStateType = {
   products: product[];
+  product?: product | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
 const initialState: InitialStateType = {
   products: [],
+  product: null,
   status: 'loading',
 };
 
@@ -69,6 +72,32 @@ const productSlice = createSlice({
     );
 
     builder.addCase(getAllProductsAsync.rejected, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        state.status = 'failed';
+        state.error = action.payload.message;
+      }
+    });
+
+    /*GET A PRODUCT REDUCER*/
+
+    builder.addCase(
+      getAProductsAsync.pending,
+      (state, action: PayloadAction<void>) => {
+        state.status = 'loading';
+      }
+    );
+
+    builder.addCase(
+      getAProductsAsync.fulfilled,
+      (state, action: PayloadAction<product | AxiosError>) => {
+        if (!(action.payload instanceof AxiosError)) {
+          state.status = 'succeeded';
+          state.product = action.payload;
+        }
+      }
+    );
+
+    builder.addCase(getAProductsAsync.rejected, (state, action) => {
       if (action.payload instanceof AxiosError) {
         state.status = 'failed';
         state.error = action.payload.message;

@@ -9,6 +9,7 @@ import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import Pagination from '../components/Pagination/Pagination';
 import { usePagination } from '../Hooks/usePagination';
 import FilterBar from '../components/FilterBar/FilterBar';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const { products, status, error } = useAppSelector((state) => state.product);
@@ -52,7 +53,9 @@ const ProductList = () => {
       >
         <FilterBar />
         {currentProducts.map((product) => (
-          <MediaCard key={product.id} product={product} />
+          <Link to={`/products/${product.id}`} key={product.id}>
+            <MediaCard product={product} />
+          </Link>
         ))}
 
         <Pagination

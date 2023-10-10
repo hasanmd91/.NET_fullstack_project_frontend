@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import React from 'react';
 import Link from '../../Link/Link';
 import MenuIcon from '@mui/icons-material/Menu';

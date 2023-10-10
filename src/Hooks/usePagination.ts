@@ -9,7 +9,7 @@ export const usePagination = (products: product[], limitPerPage: number) => {
   const calculateCurrentProducts = (): product[] => {
     const indexOfLastProduct = currentPage * limitPerPage;
     const indexOfFirstProduct = indexOfLastProduct - limitPerPage;
-    const currentProducts = products.slice(
+    const currentProducts = products?.slice(
       indexOfFirstProduct,
       indexOfLastProduct
     );

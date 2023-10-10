@@ -29,7 +29,7 @@ const CategoryFilter = () => {
   return (
     <FormControl fullWidth>
       <InputLabel>Select Category</InputLabel>
-      <Select variant="standard" onChange={categoryHandeler}>
+      <Select variant="standard" onChange={categoryHandeler} defaultValue="">
         {categories.slice(0, 5).map((category) => (
           <MenuItem key={category.id} value={category.id}>
             {category.name}

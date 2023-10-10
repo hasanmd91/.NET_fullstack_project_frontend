@@ -21,13 +21,16 @@ const FilterByprice = () => {
 
   const categoryHandeler = (event: SelectChangeEvent<string>) => {
     const actionType = event.target.value;
-    dispatch(sortProduct(actionType));
+
+    if (actionType) {
+      dispatch(sortProduct(actionType));
+    }
   };
 
   return (
     <FormControl fullWidth>
       <InputLabel>Filter By Price</InputLabel>
-      <Select variant="standard" onChange={categoryHandeler}>
+      <Select variant="standard" onChange={categoryHandeler} defaultValue="">
         {priceSortOptions.map((price) => (
           <MenuItem key={price.value} value={price.value}>
             {price.label}
