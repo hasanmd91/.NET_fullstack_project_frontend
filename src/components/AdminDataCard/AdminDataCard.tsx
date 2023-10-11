@@ -1,5 +1,6 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
+import { Button, Grid, Paper, Typography } from '@mui/material';
+
 import { product } from '../../types/product';
 import useAppDispatch from '../../Hooks/useAppDispatch';
 import { deleteProductAsync } from '../../redux/methods/productMethod';

@@ -8,6 +8,7 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+
 import { product } from '../../types/product';
 
 type MediaCardPropsType = {

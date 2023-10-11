@@ -11,12 +11,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import useAppDispatch from '../Hooks/useAppDispatch';
-import { getAProductsAsync } from '../redux/methods/productMethod';
-import useAppSelector from '../Hooks/useAppSelector';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import { getAProductsAsync } from '../redux/methods/productMethod';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
 import { addItemToCart } from '../redux/reducers/cartReducer';
+import useAppDispatch from '../Hooks/useAppDispatch';
+import useAppSelector from '../Hooks/useAppSelector';
 
 const ProductView = () => {
   const { product } = useAppSelector((state) => state.product);

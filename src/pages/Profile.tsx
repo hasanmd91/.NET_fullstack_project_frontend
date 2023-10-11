@@ -1,14 +1,15 @@
 import React from 'react';
-import ProfileComp from '../components/ProfileComp/ProfileComp';
-import { updateUser } from '../types/user';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { UserEditschema } from '../Validation/UserEditschema';
 import { useForm } from 'react-hook-form';
+import { CircularProgress } from '@mui/material';
+
+import { updateUser } from '../types/user';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { UserEditschema } from '../Validation/UserEditschema';
 import { updateUserAsync } from '../redux/methods/userMethod';
+import ProfileComp from '../components/ProfileComp/ProfileComp';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import { CircularProgress } from '@mui/material';
 
 const Profile: React.FC = () => {
   const { currentUser } = useAppSelector((state) => state.auth);

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography, Paper, Box, Button } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CartItem as cartItem } from '../../types/cart';
 import useAppDispatch from '../../Hooks/useAppDispatch';
+import QuantitySelect from '../InputSelect/InputSelect';
 import {
   setItemQuantity,
   removeItemFromCart,
 } from '../../redux/reducers/cartReducer';
-import QuantitySelect from '../InputSelect/InputSelect';
 
 type CartItemType = {
   item: cartItem;

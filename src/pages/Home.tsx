@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import {
   Alert,
@@ -7,13 +8,13 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
+
+import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import { getAllProductsAsync } from '../redux/methods/productMethod';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
+import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
 import MediaCard from '../components/card/Card';
-import { Link } from 'react-router-dom';
-import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import useAppDispatch from '../Hooks/useAppDispatch';
-import { getAllProductsAsync } from '../redux/methods/productMethod';
 
 const Images = [
   'https://images.unsplash.com/photo-1572584642822-6f8de0243c93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',

@@ -10,10 +10,6 @@ import {
 import React, { useEffect } from 'react';
 import useAppSelector from '../Hooks/useAppSelector';
 import useAppDispatch from '../Hooks/useAppDispatch';
-import {
-  createNewProductAsync,
-  getAllProductsAsync,
-} from '../redux/methods/productMethod';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
 import Modal from '../components/Modal/Modal';
@@ -22,6 +18,10 @@ import { newProduct, newProductYup } from '../types/product';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../Validation/productDataValidation';
+import {
+  createNewProductAsync,
+  getAllProductsAsync,
+} from '../redux/methods/productMethod';
 
 const AdminDashbord = () => {
   const { products, status, error } = useAppSelector((state) => state.product);

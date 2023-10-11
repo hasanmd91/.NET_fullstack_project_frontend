@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Box, Grid, Typography } from '@mui/material';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
 import CartItem from '../components/CartItem/CartItem';
 import useAppSelector from '../Hooks/useAppSelector';
 import CartCalculator from '../components/cartCalculator/CartCalculator';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 const Cart = () => {
   const { cartItems } = useAppSelector((state) => state.cart);

@@ -8,8 +8,8 @@ import {
 } from '@mui/material';
 
 import useAppDispatch from '../../../Hooks/useAppDispatch';
-import { sortProduct } from '../../../redux/reducers/productReducer';
 import { nameSortOption } from '../../../types/nameFilter';
+import { sortProduct } from '../../../redux/reducers/productReducer';
 
 const nameSortOptions = [
   { label: 'A-Z', value: nameSortOption.AtoZ },

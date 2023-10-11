@@ -8,8 +8,8 @@ import {
 } from '@mui/material';
 
 import useAppDispatch from '../../../Hooks/useAppDispatch';
-import { getAllCategoryAsync } from '../../../redux/methods/categoryMethod';
 import useAppSelector from '../../../Hooks/useAppSelector';
+import { getAllCategoryAsync } from '../../../redux/methods/categoryMethod';
 import { getAllProductsByCategoryAsync } from '../../../redux/methods/productMethod';
 
 const CategoryFilter = () => {

@@ -8,14 +8,14 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import MediaCard from '../components/card/Card';
 import useAppSelector from '../Hooks/useAppSelector';
 import useAppDispatch from '../Hooks/useAppDispatch';
-import { getAllProductsAsync } from '../redux/methods/productMethod';
-import MediaCard from '../components/card/Card';
-import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import Pagination from '../components/Pagination/Pagination';
 import { usePagination } from '../Hooks/usePagination';
 import FilterBar from '../components/FilterBar/FilterBar';
+import Pagination from '../components/Pagination/Pagination';
+import { getAllProductsAsync } from '../redux/methods/productMethod';
+import CenteredContainer from '../components/CenterContainer/CenterContainer';
 
 const ProductList = () => {
   const { products, status, error } = useAppSelector((state) => state.product);
