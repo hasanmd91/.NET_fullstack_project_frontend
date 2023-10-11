@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 
 const Footer = () => {
@@ -11,13 +11,8 @@ const Footer = () => {
         padding: '16px',
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-        }}
-      >
-        <Box>
+      <Grid container display={'flex'} justifyContent={'space-evenly'}>
+        <Grid item xs={12} md={2}>
           <Typography variant="h5" gutterBottom>
             Opening Time
           </Typography>
@@ -30,8 +25,9 @@ const Footer = () => {
           <Typography variant="body2" color={'lightgrey'}>
             We Work All The Holidays
           </Typography>
-        </Box>
-        <Box>
+        </Grid>
+
+        <Grid item xs={12} md={2}>
           <Typography variant="h5" gutterBottom>
             My Account
           </Typography>
@@ -50,8 +46,9 @@ const Footer = () => {
           <Typography variant="body2" color={'lightgrey'} gutterBottom>
             FAQs
           </Typography>
-        </Box>
-        <Box>
+        </Grid>
+
+        <Grid item xs={12} md={2}>
           <Typography variant="h5" gutterBottom>
             About Us
           </Typography>
@@ -70,28 +67,17 @@ const Footer = () => {
           <Typography variant="body2" color={'lightgrey'} gutterBottom>
             Terms & Conditions
           </Typography>
-        </Box>
-      </Box>
-
-      <Box
-        marginTop={'5rem'}
-        display={'flex'}
-        flexDirection={'column'}
-        justifyContent={'center'}
-        alignItems={'center'}
-      >
-        <Typography variant="body2" color={'lightgrey'} gutterBottom>
-          WE ACCEPT
-        </Typography>
-
-        <Box maxWidth={'500px'}>
-          <img
-            src="/assets/card.png"
-            alt=""
-            style={{ width: '100%', objectFit: 'cover' }}
-          />
-        </Box>
-      </Box>
+        </Grid>
+        <Grid md={12} item margin={'0 auto'}>
+          <Box maxWidth={'500px'} margin={'5rem auto'}>
+            <img
+              src="/assets/card.png"
+              alt=""
+              style={{ width: '100%', objectFit: 'cover' }}
+            />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
