@@ -68,9 +68,9 @@ const LoginForm: React.FC<LoginFormType> = ({
             fullWidth
             size="large"
             sx={{
-              background: '#ff6900',
+              background: '#0d2134',
               margin: '20px 0',
-              '&:hover': { background: '#b24900' },
+              '&:hover': { background: '#d93226' },
             }}
           >
             Login
@@ -86,8 +86,8 @@ const LoginForm: React.FC<LoginFormType> = ({
               size="large"
               style={{ marginTop: '16px' }}
               sx={{
-                background: '#ff6900',
-                '&:hover': { background: '#b24900' },
+                background: '#0d2134',
+                '&:hover': { background: '#d93226' },
               }}
             >
               Register

@@ -54,7 +54,7 @@ const HamburgerMenu = () => {
         {pages.map((page, index) => (
           <MenuItem key={index} onClick={handleCloseNavMenu}>
             <Link to={page.route}>
-              <Button sx={{ width: 100, color: 'black' }}>{page.page}</Button>
+              <Button sx={{ width: 100, color: '#0d2134' }}>{page.page}</Button>
             </Link>
           </MenuItem>
         ))}

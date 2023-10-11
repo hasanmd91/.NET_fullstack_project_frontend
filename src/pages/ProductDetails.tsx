@@ -78,9 +78,9 @@ const ProductView = () => {
                   type="submit"
                   size="large"
                   sx={{
-                    background: '#ff6900',
+                    background: '#0d2134',
                     margin: '20px 0',
-                    '&:hover': { background: '#b24900' },
+                    '&:hover': { background: '#d93226' },
                   }}
                   onClick={addTocart}
                 >
@@ -91,9 +91,9 @@ const ProductView = () => {
                   type="submit"
                   size="large"
                   sx={{
-                    background: '#b24900 ',
+                    background: '#d93226 ',
                     margin: '20px 0',
-                    '&:hover': { background: '#ff6900' },
+                    '&:hover': { background: '#0d2134' },
                   }}
                 >
                   Add to Wishlist

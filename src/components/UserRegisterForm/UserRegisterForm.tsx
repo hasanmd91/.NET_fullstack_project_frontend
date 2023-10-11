@@ -48,7 +48,6 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
   return (
     <Container
       sx={{
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -59,12 +58,13 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
         elevation={1}
         sx={{
           width: '90%',
-          maxWidth: '800px',
-          padding: '20px',
+          maxWidth: '600px',
+          padding: '10px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
+          margin: '2rem 0',
         }}
       >
         <Typography variant="h5"> Why not register!!</Typography>
@@ -163,8 +163,8 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
             style={{ marginTop: '16px' }}
             sx={{
               marginRight: '1rem',
-              background: '#ff6900',
-              '&:hover': { background: '#b24900' },
+              background: '#0d2134',
+              '&:hover': { background: '#d93226' },
             }}
           >
             Submit
@@ -175,8 +175,8 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
             size="large"
             style={{ marginTop: '16px' }}
             sx={{
-              background: '#ff6900',
-              '&:hover': { background: '#b24900' },
+              background: '#0d2134',
+              '&:hover': { background: '#d93226' },
             }}
             onClick={() => reset()}
           >

@@ -57,7 +57,7 @@ const CartCalculator = () => {
         size="large"
         variant="contained"
         fullWidth
-        sx={{ background: 'black' }}
+        sx={{ background: '#0d2134' }}
       >
         CHECKOUT
       </Button>

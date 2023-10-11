@@ -14,7 +14,7 @@ const Navbar = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
 
   return (
-    <AppBar position="static" sx={{ background: '#ff6900' }}>
+    <AppBar position="static" sx={{ background: '#0d2134' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <HamburgerMenu />
@@ -31,7 +31,7 @@ const Navbar = () => {
                   display: 'block',
                   margin: 'auto',
                   padding: '5px 10px',
-                  border: '1px solid #b24900',
+                  border: '1px solid #d93226',
                 }}
               >
                 LOGIN
