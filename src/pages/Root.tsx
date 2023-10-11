@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { getLogedUserAsync } from '../redux/methods/authMethod';
 import GetTokenfromLocalStroage from '../utils/GetTokenfromLocalStroage';
+import Footer from './Footer';
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const Root: React.FC = () => {
     <>
       <Navbar />
       <Outlet />
+      <Footer />
     </>
   );
 };
