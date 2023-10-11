@@ -8,9 +8,9 @@ type CustomerAuthGurdType = {
 };
 
 const CustomerAuthGurd: React.FC<CustomerAuthGurdType> = ({ children }) => {
-  const { userInfo } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.auth);
 
-  return userInfo?.role === userRole.customer ? (
+  return currentUser?.role === userRole.customer ? (
     <>{children}</>
   ) : (
     <Navigate to="/" replace={true} />

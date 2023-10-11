@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { getAProductsAsync } from '../redux/methods/productMethod';
@@ -22,6 +22,7 @@ const ProductView = () => {
   const { product } = useAppSelector((state) => state.product);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const ProductView = () => {
       const productId: number = parseInt(id);
       dispatch(getAProductsAsync(productId));
     }
-  }, []);
+  }, [dispatch, id]);
 
   const addTocart = () => {
     if (product !== undefined && product !== null) {
@@ -95,8 +96,9 @@ const ProductView = () => {
                     margin: '20px 0',
                     '&:hover': { background: '#0d2134' },
                   }}
+                  onClick={() => navigate(-1)}
                 >
-                  Add to Wishlist
+                  BACK TO PRODUCT
                 </Button>
               </Box>
             </Grid>

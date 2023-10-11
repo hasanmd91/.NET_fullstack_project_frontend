@@ -3,7 +3,6 @@ import { AxiosError } from 'axios';
 
 import axiosInstance from '../../shared/axiosInstance';
 import { product, updatedProduct } from '../../types/product';
-import paginationaQuery from '../../types/paginationQuery';
 
 export const getAllProductsAsync = createAsyncThunk(
   'getAllProductsAsync',

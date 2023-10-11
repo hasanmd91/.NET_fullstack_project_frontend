@@ -25,7 +25,7 @@ const TooltipMenu = () => {
     setAnchorElUser(null);
   };
 
-  const { userInfo } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -37,7 +37,7 @@ const TooltipMenu = () => {
     <Box sx={{ flexGrow: 0, marginRight: '10px' }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="User" src={userInfo?.avatar} />
+          <Avatar alt="User" src={currentUser?.avatar} />
         </IconButton>
       </Tooltip>
       <Menu
@@ -56,12 +56,12 @@ const TooltipMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {userInfo?.role === userRole.customer && (
+        {currentUser?.role === userRole.customer && (
           <Link to="/profile">
             <MenuItem>Profile</MenuItem>
           </Link>
         )}
-        {userInfo?.role === userRole.admin && (
+        {currentUser?.role === userRole.admin && (
           <Link to="/admidashbord">
             <MenuItem>DashBoard</MenuItem>
           </Link>

@@ -1,4 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
+
 import { user } from '../../types/user';
 import {
   createNewUserAsync,
@@ -6,7 +8,6 @@ import {
   getAllUsersAsync,
   updateUserAsync,
 } from '../methods/userMethod';
-import { AxiosError } from 'axios';
 
 type InitialStateType = {
   users: user[];

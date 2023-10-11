@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { product } from '../../types/product';
 import { AxiosError } from 'axios';
+
+import { product } from '../../types/product';
 import {
   createNewProductAsync,
   deleteProductAsync,

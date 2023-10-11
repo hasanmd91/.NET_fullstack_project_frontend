@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Alert, Box, CircularProgress, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import useAppSelector from '../Hooks/useAppSelector';
 import useAppDispatch from '../Hooks/useAppDispatch';
@@ -9,7 +10,6 @@ import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import Pagination from '../components/Pagination/Pagination';
 import { usePagination } from '../Hooks/usePagination';
 import FilterBar from '../components/FilterBar/FilterBar';
-import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const { products, status, error } = useAppSelector((state) => state.product);

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
 
 import axiosInstance from '../../shared/axiosInstance';
 import { category, newCategory } from '../../types/category';
-import { AxiosError } from 'axios';
 
 export const getAllCategoryAsync = createAsyncThunk(
   'getAllCategoryAsync',

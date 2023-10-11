@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
+import { user } from '../../types/user';
 import axiosInstance from '../../shared/axiosInstance';
 import { LoginResponse, userCredentials } from '../../types/auth';
-import { user } from '../../types/user';
 import saveAccessToken from '../../utils/SaveAccessToken';
 import fetchUserProfile from '../../utils/fetchUserProfile';
 

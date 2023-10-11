@@ -8,10 +8,10 @@ type AdminAuthGurdType = {
 };
 
 const AdminAuthGurd: React.FC<AdminAuthGurdType> = ({ children }) => {
-  const { userInfo } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.auth);
 
   if (children) {
-    return userInfo?.role === userRole.admin ? (
+    return currentUser?.role === userRole.admin ? (
       <>{children}</>
     ) : (
       <Navigate to="/" replace={true} />

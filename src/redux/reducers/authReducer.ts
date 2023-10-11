@@ -6,14 +6,14 @@ import { getLogedUserAsync, loginAsync } from '../methods/authMethod';
 
 type InitialStateType = {
   loggedIn: boolean;
-  userInfo: user | null;
+  currentUser: user | null;
   error?: boolean;
   errorMsg?: string;
 };
 
 const initialState: InitialStateType = {
   loggedIn: false,
-  userInfo: null,
+  currentUser: null,
   error: false,
   errorMsg: '',
 };
@@ -25,7 +25,7 @@ const authSlice = createSlice({
     logOut: (state) => {
       localStorage.removeItem('accessToken');
       state.loggedIn = false;
-      state.userInfo = null;
+      state.currentUser = null;
       state.error = false;
       state.errorMsg = '';
     },
@@ -40,7 +40,7 @@ const authSlice = createSlice({
           !('message' in action.payload)
         ) {
           state.loggedIn = true;
-          state.userInfo = action.payload;
+          state.currentUser = action.payload;
           state.error = false;
           state.errorMsg = '';
         }
@@ -49,7 +49,7 @@ const authSlice = createSlice({
 
     builder.addCase(loginAsync.rejected, (state, action) => {
       state.loggedIn = false;
-      state.userInfo = null;
+      state.currentUser = null;
       state.error = true;
       state.errorMsg = action.payload as string;
     });
@@ -63,7 +63,7 @@ const authSlice = createSlice({
           !('message' in action.payload)
         ) {
           state.loggedIn = true;
-          state.userInfo = action.payload;
+          state.currentUser = action.payload;
           state.error = false;
           state.errorMsg = '';
         }
