@@ -1,11 +1,14 @@
-import { Box } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-interface CenteredContainerProps {
+type CenteredContainerProps = {
   children: ReactNode;
-}
+} & BoxProps;
 
-const CenteredContainer: React.FC<CenteredContainerProps> = ({ children }) => (
+const CenteredContainer: React.FC<CenteredContainerProps> = ({
+  children,
+  ...rest
+}) => (
   <Box
     style={{
       display: 'flex',
@@ -14,6 +17,7 @@ const CenteredContainer: React.FC<CenteredContainerProps> = ({ children }) => (
       alignItems: 'center',
       height: '100vh',
     }}
+    {...rest}
   >
     {children}
   </Box>
