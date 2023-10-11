@@ -58,7 +58,7 @@ const TooltipMenu = () => {
       >
         {currentUser?.role === userRole.customer && (
           <Link to="/profile">
-            <MenuItem>Profile</MenuItem>
+            <MenuItem>My Profile</MenuItem>
           </Link>
         )}
         {currentUser?.role === userRole.admin && (

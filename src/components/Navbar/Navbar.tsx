@@ -9,7 +9,7 @@ import Link from '../Link/Link';
 import CartIcon from '../CartIcon/CartIcon';
 
 const Navbar = () => {
-  const { loggedIn } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.auth);
 
   const { cartItems } = useAppSelector((state) => state.cart);
 
@@ -20,7 +20,7 @@ const Navbar = () => {
           <HamburgerMenu />
           <NavigationBar />
 
-          {loggedIn ? (
+          {currentUser ? (
             <TooltipMenu />
           ) : (
             <Link to="/login">

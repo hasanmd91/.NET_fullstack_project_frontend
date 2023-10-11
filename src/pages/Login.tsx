@@ -8,7 +8,7 @@ import useAppSelector from '../Hooks/useAppSelector';
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { loggedIn } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +25,7 @@ const Login = () => {
     dispatch(loginAsync({ email, password }));
   };
 
-  if (loggedIn) {
+  if (currentUser) {
     return <Navigate to={'/'} replace />;
   }
 

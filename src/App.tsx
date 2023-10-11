@@ -54,7 +54,7 @@ const App = () => {
           element: <WishList />,
         },
         {
-          path: '/admindashbord',
+          path: '/admidashbord',
           element: (
             <AdminAuthGurd>
               <AdminDashbord />
