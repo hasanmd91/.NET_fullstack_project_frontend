@@ -6,8 +6,8 @@ import {
   emailType,
   isEmailAvailable,
   registerUser,
-  updateUser,
   user,
+  updateUserDataType,
 } from '../../types/user';
 
 /* GET ALL USER METHOD*/
@@ -62,12 +62,9 @@ export const createNewUserAsync = createAsyncThunk(
 
 export const updateUserAsync = createAsyncThunk(
   'updateUserAsync',
-  async (updatedUserData: updateUser, userId) => {
+  async ({ data, id }: updateUserDataType) => {
     try {
-      const response = await axiosInstance.put<user>(
-        `users/${userId}`,
-        updatedUserData
-      );
+      const response = await axiosInstance.put<user>(`users/${id}`, data);
       const updatedUser: user = response.data;
       return updatedUser;
     } catch (error) {

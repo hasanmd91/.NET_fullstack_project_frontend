@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Alert,
   Box,
@@ -12,6 +12,8 @@ import useAppSelector from '../Hooks/useAppSelector';
 import MediaCard from '../components/card/Card';
 import { Link } from 'react-router-dom';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import useAppDispatch from '../Hooks/useAppDispatch';
+import { getAllProductsAsync } from '../redux/methods/productMethod';
 
 const Images = [
   'https://images.unsplash.com/photo-1572584642822-6f8de0243c93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
@@ -21,6 +23,12 @@ const Images = [
 
 const Home = () => {
   const { products, status, error } = useAppSelector((state) => state.product);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsAsync());
+  }, []);
 
   if (status === 'loading') {
     return (
@@ -47,11 +55,12 @@ const Home = () => {
         <Typography variant="h5" gutterBottom>
           Featured Products
         </Typography>
-        {products.slice(0, 8)?.map((product) => (
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <MediaCard product={product} />
-          </Link>
-        ))}
+        {products.length > 10 &&
+          products.slice(0, 8).map((product) => (
+            <Link to={`/products/${product.id}`} key={product.id}>
+              <MediaCard product={product} />
+            </Link>
+          ))}
       </Box>
     </Container>
   );

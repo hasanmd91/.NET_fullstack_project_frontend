@@ -1,6 +1,5 @@
 import React from 'react';
 import useAppSelector from '../Hooks/useAppSelector';
-import { Navigate } from 'react-router-dom';
 import { userRole } from '../types/user';
 
 type CustomerAuthGurdType = {
@@ -10,11 +9,7 @@ type CustomerAuthGurdType = {
 const CustomerAuthGurd: React.FC<CustomerAuthGurdType> = ({ children }) => {
   const { currentUser } = useAppSelector((state) => state.auth);
 
-  return currentUser?.role === userRole.customer ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/" replace={true} />
-  );
+  return currentUser?.role === userRole.customer ? <>{children}</> : null;
 };
 
 export default CustomerAuthGurd;

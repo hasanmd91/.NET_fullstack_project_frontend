@@ -1,6 +1,5 @@
 import React from 'react';
 import useAppSelector from '../Hooks/useAppSelector';
-import { Navigate } from 'react-router-dom';
 import { userRole } from '../types/user';
 
 type AdminAuthGurdType = {
@@ -10,14 +9,7 @@ type AdminAuthGurdType = {
 const AdminAuthGurd: React.FC<AdminAuthGurdType> = ({ children }) => {
   const { currentUser } = useAppSelector((state) => state.auth);
 
-  if (children) {
-    return currentUser?.role === userRole.admin ? (
-      <>{children}</>
-    ) : (
-      <Navigate to="/" replace={true} />
-    );
-  }
-  return null;
+  return currentUser?.role === userRole.admin ? <>{children}</> : null;
 };
 
 export default AdminAuthGurd;

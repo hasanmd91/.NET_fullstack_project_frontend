@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Button, Container, Toolbar } from '@mui/material';
+import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
 
 import useAppSelector from '../../Hooks/useAppSelector';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
@@ -7,6 +7,7 @@ import NavigationBar from './NavigationBar/NavigationBar';
 import TooltipMenu from './TooltipMenu/TooltipMenu';
 import Link from '../Link/Link';
 import CartIcon from '../CartIcon/CartIcon';
+import Logo from '../Logo/Logo';
 
 const Navbar = () => {
   const { currentUser } = useAppSelector((state) => state.auth);
@@ -17,6 +18,7 @@ const Navbar = () => {
     <AppBar position="static" sx={{ background: '#0d2134' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <Logo />
           <HamburgerMenu />
           <NavigationBar />
 

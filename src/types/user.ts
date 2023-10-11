@@ -22,7 +22,13 @@ export type registerUser = {
 export type newUser = Omit<user, 'id' | 'role'>;
 
 export type updateUser = {
-  newData: Partial<Omit<user, 'id' | 'role'>>;
+  name: string;
+  email: string;
+};
+
+export type updateUserDataType = {
+  data: updateUser;
+  id: number;
 };
 
 export type isEmailAvailable = {
