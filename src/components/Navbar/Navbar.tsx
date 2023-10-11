@@ -11,6 +11,8 @@ import CartIcon from '../CartIcon/CartIcon';
 const Navbar = () => {
   const { loggedIn } = useAppSelector((state) => state.auth);
 
+  const { cartItems } = useAppSelector((state) => state.cart);
+
   return (
     <AppBar position="static" sx={{ background: '#ff6900' }}>
       <Container maxWidth="xl">
@@ -37,7 +39,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          <CartIcon ItemCount={5} />
+          <CartIcon ItemCount={cartItems.length} />
         </Toolbar>
       </Container>
     </AppBar>

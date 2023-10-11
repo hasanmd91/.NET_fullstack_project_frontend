@@ -25,7 +25,7 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
   };
 
   return (
-    <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
+    <Paper elevation={1} style={{ padding: '10px', marginBottom: '6px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
         <Box>
           <img
