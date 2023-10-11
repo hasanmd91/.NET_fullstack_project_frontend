@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import axiosInstance from '../../shared/axiosInstance';
-import { product, updatedProduct } from '../../types/product';
+import { newProduct, product, updatedProduct } from '../../types/product';
 
 export const getAllProductsAsync = createAsyncThunk(
   'getAllProductsAsync',
@@ -34,7 +34,7 @@ export const getAProductsAsync = createAsyncThunk(
 
 export const createNewProductAsync = createAsyncThunk(
   'createNewProductAsync',
-  async (newProduct: Omit<product, 'id'>) => {
+  async (newProduct: newProduct) => {
     try {
       const response = await axiosInstance.post<product>(
         '/products/',

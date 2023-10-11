@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Alert, Box, CircularProgress, Container } from '@mui/material';
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Container,
+  Typography,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import useAppSelector from '../Hooks/useAppSelector';
@@ -65,7 +71,11 @@ const ProductList = () => {
         />
       </Box>
     </Container>
-  ) : null;
+  ) : (
+    <CenteredContainer>
+      <Typography>NO PRODUCT IN THE STORE</Typography>
+    </CenteredContainer>
+  );
 };
 
 export default ProductList;
