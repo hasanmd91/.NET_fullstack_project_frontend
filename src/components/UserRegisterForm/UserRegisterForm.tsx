@@ -43,7 +43,7 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
     setShowPassword(!showPassword);
   };
 
-  const { error } = useAppSelector((state) => state.user);
+  const { error } = useAppSelector((state) => state.userReducer);
 
   return (
     <Container

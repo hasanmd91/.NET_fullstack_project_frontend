@@ -14,7 +14,7 @@ import useAppSelector from '../../Hooks/useAppSelector';
 import { product } from '../../types/product';
 
 const CartCalculator = () => {
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const { cartItems } = useAppSelector((state) => state.cartReducer);
 
   const totalCartPrice = () => {
     const totalPrice = cartItems.reduce((total: number, item: product) => {

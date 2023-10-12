@@ -14,7 +14,7 @@ import { getAllProductsByCategoryAsync } from '../../../redux/methods/productMet
 import { category } from '../../../types/category';
 
 const CategoryFilter = () => {
-  const { categories } = useAppSelector((state) => state.category);
+  const { categories } = useAppSelector((state) => state.categoryReducer);
 
   const dispatch = useAppDispatch();
 

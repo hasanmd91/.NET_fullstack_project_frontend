@@ -7,7 +7,7 @@ type CustomerAuthGurdType = {
 };
 
 const CustomerAuthGurd: React.FC<CustomerAuthGurdType> = ({ children }) => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.authReducer);
 
   return currentUser?.role === userRole.customer ? <>{children}</> : null;
 };

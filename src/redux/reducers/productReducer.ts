@@ -55,22 +55,16 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     /*GET ALL PRODUCT REDUCER*/
 
-    builder.addCase(
-      getAllProductsAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
+    builder.addCase(getAllProductsAsync.pending, (state, action) => {
+      state.status = 'loading';
+    });
 
-    builder.addCase(
-      getAllProductsAsync.fulfilled,
-      (state, action: PayloadAction<product[] | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.products = action.payload;
-        }
+    builder.addCase(getAllProductsAsync.fulfilled, (state, action) => {
+      if (!(action.payload instanceof AxiosError)) {
+        state.status = 'succeeded';
+        state.products = action.payload;
       }
-    );
+    });
 
     builder.addCase(getAllProductsAsync.rejected, (state, action) => {
       if (action.payload instanceof AxiosError) {

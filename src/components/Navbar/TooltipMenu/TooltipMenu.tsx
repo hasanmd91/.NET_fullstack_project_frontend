@@ -25,7 +25,7 @@ const TooltipMenu = () => {
     setAnchorElUser(null);
   };
 
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.authReducer);
 
   const dispatch = useAppDispatch();
 

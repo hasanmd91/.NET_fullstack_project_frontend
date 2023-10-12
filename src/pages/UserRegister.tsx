@@ -26,7 +26,7 @@ const UserRegister = () => {
     dispatch(createNewUserAsync(data));
   };
 
-  const { currentUser } = useAppSelector((state) => state.user);
+  const { currentUser } = useAppSelector((state) => state.userReducer);
 
   if (currentUser) {
     return <Navigate to={'/login'} replace />;

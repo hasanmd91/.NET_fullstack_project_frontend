@@ -34,7 +34,7 @@ const ProfileComp: React.FC<ProfileCompType> = ({
   errors,
   reset,
 }): ReactElement => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.authReducer);
 
   return (
     <Container maxWidth="lg">

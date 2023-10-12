@@ -10,9 +10,9 @@ import CartIcon from '../CartIcon/CartIcon';
 import Logo from '../Logo/Logo';
 
 const Navbar = () => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.authReducer);
 
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const { cartItems } = useAppSelector((state) => state.cartReducer);
 
   return (
     <AppBar position="static" sx={{ background: '#0d2134' }}>

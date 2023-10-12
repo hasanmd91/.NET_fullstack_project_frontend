@@ -25,11 +25,11 @@ const persistConfig: PersistConfig<any> = {
 };
 
 const rootReducer = combineReducers({
-  product: productReducer,
-  category: categoryReducer,
-  user: userReducer,
-  auth: authReducer,
-  cart: cartReducer,
+  productReducer,
+  categoryReducer,
+  userReducer,
+  authReducer,
+  cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { user } from '../../types/user';
 import { getLogedUserAsync, loginAsync } from '../methods/authMethod';
 
-type InitialStateType = {
+export type InitialStateType = {
   currentUser: user | null;
   error?: boolean;
   errorMsg?: string;

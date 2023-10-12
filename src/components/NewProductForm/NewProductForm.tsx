@@ -26,7 +26,7 @@ const NewProductForm: React.FC<NewProductFormType> = ({
   errors,
   reset,
 }) => {
-  const { error } = useAppSelector((state) => state.user);
+  const { error } = useAppSelector((state) => state.userReducer);
 
   return (
     <Container>

@@ -19,7 +19,7 @@ import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
 
 const ProductView = () => {
-  const { product } = useAppSelector((state) => state.product);
+  const { product } = useAppSelector((state) => state.productReducer);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

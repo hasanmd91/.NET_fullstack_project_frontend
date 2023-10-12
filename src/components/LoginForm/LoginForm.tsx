@@ -20,7 +20,7 @@ const LoginForm: React.FC<LoginFormType> = ({
   handlePasswordChange,
   handleSubmit,
 }) => {
-  const { error, errorMsg } = useAppSelector((state) => state.auth);
+  const { error, errorMsg } = useAppSelector((state) => state.authReducer);
 
   return (
     <Container

@@ -24,7 +24,9 @@ const Images = [
 ];
 
 const Home = () => {
-  const { products, status, error } = useAppSelector((state) => state.product);
+  const { products, status, error } = useAppSelector(
+    (state) => state.productReducer
+  );
 
   const dispatch = useAppDispatch();
 

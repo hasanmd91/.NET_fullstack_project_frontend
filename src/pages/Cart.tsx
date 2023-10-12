@@ -9,7 +9,7 @@ import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import { CartItem as CartItemType } from '../types/cart';
 
 const Cart = () => {
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const { cartItems } = useAppSelector((state) => state.cartReducer);
 
   if (!cartItems.length) {
     return (
