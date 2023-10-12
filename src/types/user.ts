@@ -3,7 +3,7 @@ export enum userRole {
   customer = 'customer',
 }
 export type user = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -18,8 +18,6 @@ export type registerUser = {
   confirmPassword: string;
   avatar: string;
 };
-
-export type newUser = Omit<user, 'id' | 'role'>;
 
 export type updateUser = {
   name: string;
