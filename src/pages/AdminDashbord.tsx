@@ -14,7 +14,7 @@ import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
 import Modal from '../components/Modal/Modal';
 import NewProductForm from '../components/NewProductForm/NewProductForm';
-import { newProduct, newProductYup } from '../types/product';
+import { newProduct, newProductYup, product } from '../types/product';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../Validation/productDataValidation';
@@ -115,7 +115,7 @@ const AdminDashbord = () => {
         </Grid>
 
         <Grid item md={10}>
-          {products.map((product) => (
+          {products.map((product: product) => (
             <AdminDataCard product={product} key={product.id} />
           ))}
         </Grid>

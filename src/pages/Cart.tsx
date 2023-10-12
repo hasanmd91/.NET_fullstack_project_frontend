@@ -6,6 +6,7 @@ import CartItem from '../components/CartItem/CartItem';
 import useAppSelector from '../Hooks/useAppSelector';
 import CartCalculator from '../components/cartCalculator/CartCalculator';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import { CartItem as CartItemType } from '../types/cart';
 
 const Cart = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
@@ -24,7 +25,7 @@ const Cart = () => {
       <Grid container spacing={4} marginTop={'2rem'}>
         <Grid item xs={12} md={8}>
           <Box mt={4}>
-            {cartItems.map((item) => (
+            {cartItems.map((item: CartItemType) => (
               <CartItem key={item.id} item={item} />
             ))}
           </Box>

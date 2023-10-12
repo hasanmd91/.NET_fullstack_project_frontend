@@ -15,6 +15,7 @@ import ImageSlider from '../components/ImageSlider/ImageSlider';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
 import MediaCard from '../components/card/Card';
+import { product } from '../types/product';
 
 const Images = [
   'https://images.unsplash.com/photo-1572584642822-6f8de0243c93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
@@ -57,7 +58,7 @@ const Home = () => {
           Featured Products
         </Typography>
         {products.length > 10 &&
-          products.slice(0, 8).map((product) => (
+          products.slice(0, 8).map((product: product) => (
             <Link to={`/products/${product.id}`} key={product.id}>
               <MediaCard product={product} />
             </Link>

@@ -11,12 +11,13 @@ import {
   Typography,
 } from '@mui/material';
 import useAppSelector from '../../Hooks/useAppSelector';
+import { product } from '../../types/product';
 
 const CartCalculator = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
 
   const totalCartPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => {
+    const totalPrice = cartItems.reduce((total: number, item: product) => {
       return total + item.price;
     }, 0);
     return totalPrice;

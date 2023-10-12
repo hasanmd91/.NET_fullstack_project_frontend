@@ -37,7 +37,7 @@ const ProfileComp: React.FC<ProfileCompType> = ({
   const { currentUser } = useAppSelector((state) => state.auth);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <Paper elevation={2} sx={{ marginTop: '5rem', padding: '1rem' }}>
         <Box display="flex" gap={'15px'}>
           <Avatar alt="avatar" src={currentUser?.avatar} />
@@ -117,7 +117,7 @@ const ProfileComp: React.FC<ProfileCompType> = ({
                 '&:hover': { background: '#d93226' },
               }}
             >
-              Submit
+              Edit
             </Button>
             <Button
               type="reset"
