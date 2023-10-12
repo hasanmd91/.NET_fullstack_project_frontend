@@ -1,27 +1,23 @@
-// import { getAllProductsAsync } from '../../redux/methods/productMethod';
-// import {
-//   ProductReducerStateType,
-//   sortProduct,
-// } from '../../redux/reducers/productReducer';
-// import { allProductsMockData } from '../../utils/MockTestData';
-// import { createStore } from '../../redux/store';
-// import productServer from '../mockApi/productServer';
-// import { create } from 'domain';
+import { getAllProductsAsync } from '../../redux/methods/productMethod';
+import {
+  ProductReducerStateType,
+  sortProduct,
+} from '../../redux/reducers/productReducer';
+import { allProductsMockData } from '../../utils/MockTestData';
+import { createStore } from '../../redux/store';
+import productServer from '../mockApi/productServer';
+import { create } from 'domain';
 
-// let store: ProductReducerStateType;
+let store: ProductReducerStateType;
 
-// beforeEach(() => {
-//   store = createStore();
-// });
+beforeEach(() => {});
 
-// beforeAll(() => {
-//   productServer.listen();
-// });
+beforeAll(() => {
+  productServer.listen();
+});
 
-// afterAll(() => productServer.close());
+afterAll(() => productServer.close());
 
-// describe('Product reducer actions', () => {
-//   it('should sort product by price', () => {});
-// });
-
-export default {};
+describe('Product reducer actions', () => {
+  it('should sort product by price', () => {});
+});

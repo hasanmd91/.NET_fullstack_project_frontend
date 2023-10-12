@@ -1,14 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import axiosInstance from '../../shared/axiosInstance';
 import { newProduct, product, updatedProduct } from '../../types/product';
+import BASE_URL from '../../shared/BASE_URL';
 
 export const getAllProductsAsync = createAsyncThunk(
   'getAllProductsAsync',
   async () => {
     try {
-      const response = await axiosInstance.get<product[]>('products');
+      const response = await axios.get<product[]>(`${BASE_URL}/products`);
       const products: product[] = response.data;
       return products;
     } catch (error) {
@@ -22,9 +23,9 @@ export const getAProductsAsync = createAsyncThunk(
   'getAProductsAsync',
   async (id: number) => {
     try {
-      const response = await axiosInstance.get<product>(`products/${id}`);
-      const products: product = response.data;
-      return products;
+      const response = await axios.get<product>(`${BASE_URL}/products/${id}`);
+      const product: product = response.data;
+      return product;
     } catch (error) {
       const err = error as AxiosError;
       return err;
@@ -36,8 +37,8 @@ export const createNewProductAsync = createAsyncThunk(
   'createNewProductAsync',
   async (newProduct: newProduct) => {
     try {
-      const response = await axiosInstance.post<product>(
-        '/products/',
+      const response = await axios.post<product>(
+        `${BASE_URL}/products`,
         newProduct
       );
       const createdProduct: product = response.data;
@@ -51,15 +52,15 @@ export const createNewProductAsync = createAsyncThunk(
 
 export const deleteProductAsync = createAsyncThunk(
   'deleteProductAsync',
-  async (productId: number) => {
+  async (id: number) => {
     try {
-      const response = await axiosInstance.delete<boolean>(
-        `products/${productId}`
+      const response = await axios.delete<boolean>(
+        `${BASE_URL}/products/${id}`
       );
       if (!response.data) {
         throw new Error('Unable to Delete Product');
       } else {
-        return productId;
+        return id;
       }
     } catch (error) {
       const err = error as AxiosError;

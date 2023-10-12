@@ -13,14 +13,13 @@ import {
 
 export type ProductReducerStateType = {
   products: product[];
-  product?: product | null;
+  product?: product;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
 const initialState: ProductReducerStateType = {
   products: [],
-  product: null,
   status: 'loading',
 };
 
