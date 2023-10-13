@@ -28,8 +28,10 @@ const UserRegister = () => {
 
   const { currentUser } = useAppSelector((state) => state.user);
 
+  console.log(currentUser);
+
   if (currentUser) {
-    return <Navigate to={'/login'} replace />;
+    return <Navigate to={'/login'} />;
   }
 
   return (

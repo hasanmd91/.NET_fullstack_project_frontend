@@ -78,8 +78,10 @@ const userSlice = createSlice({
     });
 
     builder.addCase(createNewUserAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.loading = false;
       state.users = [...state.users, action.payload];
+      state.currentUser = action.payload;
     });
 
     builder.addCase(createNewUserAsync.rejected, (state, action) => {
