@@ -1,14 +1,10 @@
-import productReducer from '../../redux/reducers/productReducer';
 import {
   createNewProductAsync,
-  deleteProductAsync,
-  getAProductsAsync,
   getAllProductsAsync,
 } from '../../redux/methods/productMethod';
 import { createStore } from '../../redux/store';
-import productsServer from '../../tests/mockApi/productServer';
-import productsData from '../Data/productsMockData';
 import { newProduct } from '../../types/product';
+import productsServer from '../server/productServer';
 
 let store = createStore();
 
@@ -64,11 +60,4 @@ describe('Async actions', () => {
     await store.dispatch(createNewProductAsync(newproduct1));
     expect(store.getState().product.products.length).toBe(2);
   });
-
-  // test('should delete product', async () => {
-  //   const productID = 2;
-  //   await store.dispatch(getAllProductsAsync());
-  //   await store.dispatch(deleteProductAsync(productID));
-  //   expect(store.getState().product.products.length).toBe(2);
-  // });
 });

@@ -49,7 +49,7 @@ describe('Test usersReducer async actions', () => {
     expect(store.getState().user.users[0].password).toBe('12345');
   });
 
-  test('Should update a new user', async () => {
+  test('Should update a existing user', async () => {
     await store.dispatch(getAllUsersAsync());
     const updateUserData = {
       email: 'jahn@mail.com',
