@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CartItem } from '../../types/cart';
 
-type InitialStateType = {
+type cartStateType = {
   cartItems: CartItem[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
-const initialState: InitialStateType = {
+const initialState: cartStateType = {
   cartItems: [],
   status: 'idle',
 };

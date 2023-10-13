@@ -9,14 +9,14 @@ import {
   updateUserAsync,
 } from '../methods/userMethod';
 
-type InitialStateType = {
+type userStateType = {
   users: user[];
   currentUser?: user;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
-const initialState: InitialStateType = {
+const initialState: userStateType = {
   users: [],
   status: 'idle',
 };

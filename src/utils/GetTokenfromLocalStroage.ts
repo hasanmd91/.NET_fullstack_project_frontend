@@ -1,6 +1,6 @@
 const GetTokenfromLocalStroage = () => {
   const token = localStorage.getItem('accessToken');
-  if (token === null || token === undefined) {
+  if (!token) {
     return null;
   }
   return token;

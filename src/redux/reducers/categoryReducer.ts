@@ -6,15 +6,14 @@ import {
   getAllCategoryAsync,
   updateCategoryAsync,
 } from '../methods/categoryMethod';
-import { AxiosError } from 'axios';
 
-type InitialStateType = {
+type categoryStateType = {
   categories: category[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
-const initialState: InitialStateType = {
+const initialState: categoryStateType = {
   categories: [],
   status: 'idle',
 };
@@ -35,8 +34,8 @@ const categorySlice = createSlice({
 
     builder.addCase(
       getAllCategoryAsync.fulfilled,
-      (state, action: PayloadAction<category[] | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
+      (state, action: PayloadAction<category[]>) => {
+        if (state.status !== 'failed') {
           state.status = 'succeeded';
           state.categories = action.payload;
         }
@@ -44,18 +43,16 @@ const categorySlice = createSlice({
     );
 
     builder.addCase(getAllCategoryAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
     /*CREATE NEW CATEGORY REDUCER*/
 
     builder.addCase(
       createCategoryAsync.fulfilled,
-      (state, action: PayloadAction<category | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
+      (state, action: PayloadAction<category>) => {
+        if (state.status !== 'failed') {
           state.status = 'succeeded';
           state.categories = [...state.categories, action.payload];
         }
@@ -63,16 +60,14 @@ const categorySlice = createSlice({
     );
 
     builder.addCase(createCategoryAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
     /*DELETE CATEGORY REDUCER*/
 
     builder.addCase(deleteCategoryAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError || Error)) {
+      if (state.status !== 'failed') {
         state.categories = state.categories.filter(
           (category) => category.id !== action.payload
         );
@@ -80,15 +75,13 @@ const categorySlice = createSlice({
     });
 
     builder.addCase(deleteCategoryAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.error = action.payload.message;
-      }
+      state.error = action.payload as string;
     });
 
     /*UPDATE CATEGORY REDUCER*/
 
     builder.addCase(updateCategoryAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError)) {
+      if (state.status !== 'failed') {
         const updatedCategory = action.payload;
         state.categories = state.categories.map((category) =>
           category.id === updatedCategory.id ? updatedCategory : category
@@ -97,9 +90,7 @@ const categorySlice = createSlice({
     });
 
     builder.addCase(updateCategoryAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.error = action.payload.message;
-      }
+      state.error = action.payload as string;
     });
   },
 });

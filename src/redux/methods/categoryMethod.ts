@@ -6,20 +6,20 @@ import { category, newCategory } from '../../types/category';
 
 export const getAllCategoryAsync = createAsyncThunk(
   'getAllCategoryAsync',
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get<category[]>('categories');
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const createCategoryAsync = createAsyncThunk(
   'createCategoryAsync',
-  async (newCategory: newCategory) => {
+  async (newCategory: newCategory, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post<category>(
         'categories',
@@ -28,14 +28,14 @@ export const createCategoryAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const deleteCategoryAsync = createAsyncThunk(
   'deleteCategoryAsync',
-  async (id: number) => {
+  async (id: number, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post<boolean>(`categories/${id}`);
       if (!response.data) {
@@ -45,14 +45,14 @@ export const deleteCategoryAsync = createAsyncThunk(
       }
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const updateCategoryAsync = createAsyncThunk(
   'updateCategoryAsync',
-  async (categoryData: category) => {
+  async (categoryData: category, { rejectWithValue }) => {
     const { id } = categoryData;
     try {
       const response = await axiosInstance.put<category>(
@@ -62,7 +62,7 @@ export const updateCategoryAsync = createAsyncThunk(
       return response.data;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );

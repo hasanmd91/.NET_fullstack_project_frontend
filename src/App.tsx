@@ -11,8 +11,8 @@ import WishList from './pages/WishList';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import AdminDashbord from './pages/AdminDashbord';
-import AdminAuthGurd from './utils/AdminAuthGurd';
-import CustomerAuthGurd from './utils/CustomerAuthGurd';
+import AdminAuthGuard from './utils/AdminAuthGuard';
+import CustomerAuthGuard from './utils/CustomerAuthGuard';
 import Profile from './pages/Profile';
 
 const App = () => {
@@ -56,18 +56,18 @@ const App = () => {
         {
           path: '/admidashbord',
           element: (
-            <AdminAuthGurd>
+            <AdminAuthGuard>
               <AdminDashbord />
-            </AdminAuthGurd>
+            </AdminAuthGuard>
           ),
         },
 
         {
           path: '/profile',
           element: (
-            <CustomerAuthGurd>
+            <CustomerAuthGuard>
               <Profile />
-            </CustomerAuthGurd>
+            </CustomerAuthGuard>
           ),
         },
       ],

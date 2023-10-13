@@ -11,14 +11,14 @@ import {
   updateProductAsync,
 } from '../methods/productMethod';
 
-export type ProductReducerStateType = {
+export type productStateType = {
   products: product[];
   product?: product;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error?: string;
 };
 
-const initialState: ProductReducerStateType = {
+const initialState: productStateType = {
   products: [],
   status: 'loading',
 };

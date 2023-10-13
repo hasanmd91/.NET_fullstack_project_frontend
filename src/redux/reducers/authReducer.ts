@@ -4,13 +4,13 @@ import { AxiosError } from 'axios';
 import { user } from '../../types/user';
 import { getLogedUserAsync, loginAsync } from '../methods/authMethod';
 
-type InitialStateType = {
+type authStateType = {
   currentUser: user | null;
   error?: boolean;
   errorMsg?: string;
 };
 
-const initialState: InitialStateType = {
+const initialState: authStateType = {
   currentUser: null,
   error: false,
   errorMsg: '',
