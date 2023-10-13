@@ -3,7 +3,6 @@ import usersData from '../Data/userData';
 import server from '../server/userServer';
 import {
   createNewUserAsync,
-  getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
 } from '../../redux/methods/userMethod';
@@ -23,14 +22,6 @@ describe('Test usersReducer async actions', () => {
   test('Should fetch all users', async () => {
     await store.dispatch(getAllUsersAsync());
     expect(store.getState().user.users.length).toBe(3);
-  });
-
-  test('Should get a user by id', async () => {
-    await store.dispatch(getAUsersAsync(usersData[0].id));
-    expect(store.getState().user.currentUser.id).toBe(usersData[0].id);
-
-    await store.dispatch(getAUsersAsync(usersData[1].id));
-    expect(store.getState().user.currentUser.id).toBe(usersData[1].id);
   });
 
   test('Should create a new user', async () => {

@@ -12,7 +12,7 @@ import Link from '../../Link/Link';
 import useAppSelector from '../../../Hooks/useAppSelector';
 import { userRole } from '../../../types/user';
 import useAppDispatch from '../../../Hooks/useAppDispatch';
-import { logOut } from '../../../redux/reducers/authReducer';
+import { logOut } from '../../../redux/reducers/userReducer';
 
 const TooltipMenu = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -25,7 +25,7 @@ const TooltipMenu = () => {
     setAnchorElUser(null);
   };
 
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
 

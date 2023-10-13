@@ -1,102 +1,116 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
 import { user } from '../../types/user';
+
 import {
   createNewUserAsync,
-  getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
+  loginUserAsync,
+  authenticateUserAsync,
 } from '../methods/userMethod';
 
 type userStateType = {
   users: user[];
   currentUser?: user;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  loading: boolean;
   error?: string;
 };
 
 const initialState: userStateType = {
   users: [],
-  status: 'idle',
+  loading: false,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      state.currentUser = undefined;
+    },
+  },
 
   extraReducers: (builder) => {
-    /* GET ALL USER REDUCER */
+    /*LOGIN USER USING LOGIN CREDENTIAL */
 
-    builder.addCase(
-      getAllUsersAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
-
-    builder.addCase(
-      getAllUsersAsync.fulfilled,
-      (state, action: PayloadAction<user[]>) => {
-        state.status = 'succeeded';
-        state.users = action.payload;
-      }
-    );
-
-    builder.addCase(getAllUsersAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+    builder.addCase(loginUserAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(loginUserAsync.fulfilled, (state, action) => {
+      state.currentUser = action.payload;
+    });
+    builder.addCase(loginUserAsync.rejected, (state, action) => {
+      state.error = action.payload;
     });
 
-    /* GET A USER REDUCER */
+    /*FETCHING USER USING ACCESS TOKEN */
 
-    builder.addCase(
-      getAUsersAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
+    builder.addCase(authenticateUserAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(authenticateUserAsync.fulfilled, (state, action) => {
+      state.currentUser = action.payload;
+    });
+    builder.addCase(authenticateUserAsync.rejected, (state, action) => {
+      state.error = action.payload;
+    });
 
-    builder.addCase(
-      getAUsersAsync.fulfilled,
-      (state, action: PayloadAction<user>) => {
-        state.status = 'succeeded';
-        state.currentUser = action.payload;
-      }
-    );
+    /* GET ALL USER REDUCER */
 
-    builder.addCase(getAUsersAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+    builder.addCase(getAllUsersAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(getAllUsersAsync.fulfilled, (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+    });
+
+    builder.addCase(getAllUsersAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
 
     /* CREATE A USER REDUCER */
 
+    builder.addCase(createNewUserAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+
     builder.addCase(createNewUserAsync.fulfilled, (state, action) => {
-      state.status = 'succeeded';
+      state.loading = false;
       state.users = [...state.users, action.payload];
-      state.currentUser = action.payload;
+    });
+
+    builder.addCase(createNewUserAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
 
     /* UPDATE USER REDUCER */
 
+    builder.addCase(updateUserAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+
     builder.addCase(
       updateUserAsync.fulfilled,
       (state, action: PayloadAction<user>) => {
-        if (Array.isArray(state.users)) {
-          const updatedUser = action.payload;
-          state.users = state.users.map((user) =>
-            user.id === updatedUser.id ? updatedUser : user
-          );
-        }
+        const updatedUser = action.payload;
+        state.users = state.users.map((user) =>
+          user.id === updatedUser.id ? updatedUser : user
+        );
+        state.loading = false;
       }
     );
 
     builder.addCase(updateUserAsync.rejected, (state, action) => {
-      state.error = action.payload as string;
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });
 
 const userReducer = userSlice.reducer;
+export const { logOut } = userSlice.actions;
 export default userReducer;

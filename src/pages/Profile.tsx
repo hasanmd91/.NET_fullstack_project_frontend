@@ -12,7 +12,7 @@ import ProfileComp from '../components/ProfileComp/ProfileComp';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 
 const Profile: React.FC = () => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const {

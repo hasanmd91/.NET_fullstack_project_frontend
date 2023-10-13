@@ -7,7 +7,7 @@ type CustomerAuthGuardType = {
 };
 
 const CustomerAuthGuard: React.FC<CustomerAuthGuardType> = ({ children }) => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.user);
 
   return currentUser?.role === userRole.customer ? <>{children}</> : null;
 };

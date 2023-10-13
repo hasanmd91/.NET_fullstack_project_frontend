@@ -3,13 +3,13 @@ import { Navigate } from 'react-router-dom';
 
 import LoginForm from '../components/LoginForm/LoginForm';
 import useAppDispatch from '../Hooks/useAppDispatch';
-import { loginAsync } from '../redux/methods/authMethod';
 import useAppSelector from '../Hooks/useAppSelector';
+import { loginUserAsync } from '../redux/methods/userMethod';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(loginAsync({ email, password }));
+    dispatch(loginUserAsync({ email, password }));
   };
 
   if (currentUser) {

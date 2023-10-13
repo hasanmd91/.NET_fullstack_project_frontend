@@ -7,7 +7,7 @@ type AdminAuthGuardType = {
 };
 
 const AdminAuthGuard: React.FC<AdminAuthGuardType> = ({ children }) => {
-  const { currentUser } = useAppSelector((state) => state.auth);
+  const { currentUser } = useAppSelector((state) => state.user);
 
   return currentUser?.role === userRole.admin ? <>{children}</> : null;
 };

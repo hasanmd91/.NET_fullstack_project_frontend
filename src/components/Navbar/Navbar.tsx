@@ -10,8 +10,7 @@ import CartIcon from '../CartIcon/CartIcon';
 import Logo from '../Logo/Logo';
 
 const Navbar = () => {
-  const { currentUser } = useAppSelector((state) => state.auth);
-
+  const { currentUser } = useAppSelector((state) => state.user);
   const { cartItems } = useAppSelector((state) => state.cart);
 
   return (
