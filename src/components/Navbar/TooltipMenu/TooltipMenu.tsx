@@ -63,7 +63,7 @@ const TooltipMenu = () => {
         )}
         {currentUser?.role === userRole.admin && (
           <Link to="/admidashbord">
-            <MenuItem>DashBoard</MenuItem>
+            <MenuItem>Admin DashBoard</MenuItem>
           </Link>
         )}
 

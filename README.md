@@ -20,6 +20,26 @@ This project requires implementation of TypeScript and SASS.
 | **Form Validation**                  | Yup                                                           |
 | **Testing**                          | Jest, MSW (Mock Service Worker)                               |
 
+## Deployment
+
+[https://ilhstore.netlify.app/](https://ilhstore.netlify.app/)
+
+**Demo Admin User**
+
+```
+"email": "admin@mail.com",
+"password": "admin123"
+
+```
+
+**Demo Customer User**
+
+```
+"email": "john@mail.com",
+"password": "changeme"
+
+```
+
 ## Api Reference
 
 Platzi Fake Store API
@@ -50,10 +70,6 @@ Launches the test runner in the interactive watch mode
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Deployment
-
-[LIVE DEMO](https://ilhstore.netlify.app/)
 
 ## Folder Structure
 
