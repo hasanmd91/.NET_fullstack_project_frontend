@@ -7,9 +7,24 @@
 
 This project requires implementation of TypeScript and SASS.
 
-## Api
+# E-commerce store ILH
 
-- [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
+## Technologies
+
+| **Category**                         | **Libraries and Tools**                                       |
+| ------------------------------------ | ------------------------------------------------------------- |
+| **Frontend Framework and Libraries** | TypeScript, React, React Router, React Slick, React Hook Form |
+| **State Management**                 | Redux Toolkit, React-Redux, Redux-persist                     |
+| **User Interface and Styling**       | Material UI, Material Icons                                   |
+| **HTTP Requests**                    | Axios                                                         |
+| **Form Validation**                  | Yup                                                           |
+| **Testing**                          | Jest, MSW (Mock Service Worker)                               |
+
+## Api Reference
+
+Platzi Fake Store API
+
+[https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
 
 ## Instruction to start the project
 
@@ -36,7 +51,61 @@ Launches the test runner in the interactive watch mode
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Basic requirements\*\*
+## Deployment
+
+[LIVE DEMO](https://ilhstore.netlify.app/)
+
+## Folder Structure
+
+```
+|───public
+│ └───assets
+└───src
+├───components
+│ ├───AdminDataCard
+│ ├───card
+│ ├───cartCalculator
+│ ├───CartIcon
+│ ├───CartItem
+│ ├───CenterContainer
+│ ├───FilterBar
+│ │ ├───CategoryFilter
+│ │ ├───FilterByName
+│ │ └───FilterByprice
+│ ├───ImageSlider
+│ ├───InputSelect
+│ ├───Link
+│ ├───LoginForm
+│ ├───Logo
+│ ├───Modal
+│ ├───Navbar
+│ │ ├───HamburgerMenu
+│ │ ├───NavigationBar
+│ │ └───TooltipMenu
+│ ├───NewProductForm
+│ ├───Pagination
+│ ├───ProfileComp
+│ ├───TextField
+│ └───UserRegisterForm
+├───Hooks
+├───pages
+├───redux
+│ ├───methods
+│ └───reducers
+├───shared
+├───test
+│ ├───Data
+│ ├───Reducers
+│ └───server
+├───tests
+│ ├───mockApi
+│ └───Reducers
+├───types
+├───utils
+└───Validation
+```
+
+## Features Done
 
 - [x] Fetch and display all and single products.
 - [x] Create at least 4 pages (products, profile, user, cart)
@@ -48,10 +117,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 - [x] Routing and private pages
 - [x] Testing the reducers
 - [x] Rewrite the README, deploy the project, add the deployment link here and to the README.md
+- [x] Pagination when fetching and displaying.
 
-**Bonus requirements**
+## Screenshots
 
-- [] Context API
-- [] Pagination when fetching and displaying.
-- [] Any performance optimization, remember to mention it ie useMemo, debounce, etc
-- [] Anything else you are proud to have added.
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
