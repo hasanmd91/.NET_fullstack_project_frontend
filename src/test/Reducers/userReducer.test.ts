@@ -1,12 +1,12 @@
+import { createStore } from '../../redux/store';
+import usersData from '../Data/userData';
+import server from '../server/userServer';
 import {
   createNewUserAsync,
   getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
 } from '../../redux/methods/userMethod';
-import { createStore } from '../../redux/store';
-import usersData from '../Data/userData';
-import server from '../server/userServer';
 
 let store = createStore();
 beforeEach(() => {

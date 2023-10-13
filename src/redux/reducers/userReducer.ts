@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 
 import { user } from '../../types/user';
 import {

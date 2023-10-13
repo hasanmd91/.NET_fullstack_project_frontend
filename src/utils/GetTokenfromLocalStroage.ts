@@ -1,4 +1,4 @@
-const GetTokenfromLocalStroage = () => {
+const getTokenfromLocalStroage = () => {
   const token = localStorage.getItem('accessToken');
   if (!token) {
     return null;
@@ -6,4 +6,4 @@ const GetTokenfromLocalStroage = () => {
   return token;
 };
 
-export default GetTokenfromLocalStroage;
+export default getTokenfromLocalStroage;

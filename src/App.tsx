@@ -11,8 +11,8 @@ import WishList from './pages/WishList';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import AdminDashbord from './pages/AdminDashbord';
-import AdminAuthGuard from './utils/AdminAuthGuard';
-import CustomerAuthGuard from './utils/CustomerAuthGuard';
+import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
+import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/Profile';
 
 const App = () => {

@@ -14,7 +14,7 @@ import { getAllProductsAsync } from '../redux/methods/productMethod';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
-import MediaCard from '../components/card/Card';
+import MediaCard from '../components/Card/Card';
 import { product } from '../types/product';
 
 const Images = [

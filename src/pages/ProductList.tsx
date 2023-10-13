@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import MediaCard from '../components/card/Card';
+import MediaCard from '../components/Card/Card';
 import useAppSelector from '../Hooks/useAppSelector';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { usePagination } from '../Hooks/usePagination';

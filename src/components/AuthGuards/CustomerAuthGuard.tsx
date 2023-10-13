@@ -1,6 +1,6 @@
 import React from 'react';
-import useAppSelector from '../Hooks/useAppSelector';
-import { userRole } from '../types/user';
+import useAppSelector from '../../Hooks/useAppSelector';
+import { userRole } from '../../types/user';
 
 type CustomerAuthGuardType = {
   children: React.ReactElement;

@@ -5,13 +5,13 @@ import Footer from './Footer';
 import Navbar from '../components/Navbar/Navbar';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import { getLogedUserAsync } from '../redux/methods/authMethod';
-import GetTokenfromLocalStroage from '../utils/GetTokenfromLocalStroage';
+import getTokenfromLocalStroage from '../utils/getTokenfromLocalStroage';
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const Token = GetTokenfromLocalStroage();
+    const Token = getTokenfromLocalStroage();
 
     if (!Token) {
       return;
