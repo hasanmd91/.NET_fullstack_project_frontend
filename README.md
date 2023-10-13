@@ -5,9 +5,17 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![SASS](https://img.shields.io/badge/SASS-v.1-hotpink)
 
-This project requires implementation of TypeScript and SASS.
+# Introduction
 
-# E-commerce store ILH
+Welcome to the ILH Store E-commerce Application, a online shopping platform, and a front-end project by Integify Assignment. Developed using React, Redux, and Material UI, our application offers user registration and login features, along with admin functionality and advanced product filtering methods.
+
+## Table of content
+
+- [Technologies](#technologies)
+- [Deployment](#deployment)
+- [Api Reference](#api-reference)
+- [Folder Structure](#folder-structure)
+- [Screenshots](#screenshots)
 
 ## Technologies
 
@@ -22,7 +30,7 @@ This project requires implementation of TypeScript and SASS.
 
 ## Deployment
 
-[https://ilhstore.netlify.app/](https://ilhstore.netlify.app/)
+Live Link : [https://ilhstore.netlify.app/](https://ilhstore.netlify.app/)
 
 **Demo Admin User**
 
@@ -46,7 +54,7 @@ Platzi Fake Store API
 
 [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
 
-## Instruction to start the project
+## Usage
 
 In the project directory, you can run:
 
