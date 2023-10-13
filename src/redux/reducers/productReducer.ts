@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 
 import { product } from '../../types/product';
 import {
@@ -63,19 +62,15 @@ const productSlice = createSlice({
 
     builder.addCase(
       getAllProductsAsync.fulfilled,
-      (state, action: PayloadAction<product[] | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.products = action.payload;
-        }
+      (state, action: PayloadAction<product[]>) => {
+        state.status = 'succeeded';
+        state.products = action.payload;
       }
     );
 
     builder.addCase(getAllProductsAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
     /*GET A PRODUCT REDUCER*/
@@ -89,71 +84,55 @@ const productSlice = createSlice({
 
     builder.addCase(
       getAProductsAsync.fulfilled,
-      (state, action: PayloadAction<product | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.product = action.payload;
-        }
+      (state, action: PayloadAction<product>) => {
+        state.status = 'succeeded';
+        state.product = action.payload;
       }
     );
 
     builder.addCase(getAProductsAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
     /*CREATE NEW PRODUCT REDUCER*/
 
     builder.addCase(
       createNewProductAsync.fulfilled,
-      (state, action: PayloadAction<product | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.products = [...state.products, action.payload];
-        }
+      (state, action: PayloadAction<product>) => {
+        state.status = 'succeeded';
+        state.products = [...state.products, action.payload];
       }
     );
 
     builder.addCase(createNewProductAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
     /*DELETE A PRODUCT REDUCER*/
 
     builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError)) {
-        state.products = state.products.filter(
-          (product) => product.id !== action.payload
-        );
-      }
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload
+      );
     });
 
     builder.addCase(deleteProductAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.error = action.payload.message;
-      }
+      state.error = action.payload as string;
     });
 
     /*UPDATE PRODUCT REDUCER*/
 
     builder.addCase(updateProductAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError)) {
-        const updatedProduct = action.payload;
-        state.products = state.products.map((product) =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        );
-      }
+      const updatedProduct = action.payload;
+      state.products = state.products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      );
     });
 
     builder.addCase(updateProductAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.error = action.payload.message;
-      }
+      state.error = action.payload as string;
     });
 
     /*GET ALL PRODUCT BY CATEGORY REDUCER*/
@@ -167,19 +146,15 @@ const productSlice = createSlice({
 
     builder.addCase(
       getAllProductsByCategoryAsync.fulfilled,
-      (state, action: PayloadAction<product[] | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.products = action.payload;
-        }
+      (state, action: PayloadAction<product[]>) => {
+        state.status = 'succeeded';
+        state.products = action.payload;
       }
     );
 
     builder.addCase(getAllProductsByCategoryAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
   },
 });

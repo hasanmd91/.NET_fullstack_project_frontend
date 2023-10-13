@@ -7,35 +7,35 @@ import BASE_URL from '../../shared/BASE_URL';
 
 export const getAllProductsAsync = createAsyncThunk(
   'getAllProductsAsync',
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get<product[]>(`${BASE_URL}/products`);
       const products: product[] = response.data;
       return products;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const getAProductsAsync = createAsyncThunk(
   'getAProductsAsync',
-  async (id: number) => {
+  async (id: number, { rejectWithValue }) => {
     try {
       const response = await axios.get<product>(`${BASE_URL}/products/${id}`);
       const product: product = response.data;
       return product;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const createNewProductAsync = createAsyncThunk(
   'createNewProductAsync',
-  async (newProduct: newProduct) => {
+  async (newProduct: newProduct, { rejectWithValue }) => {
     try {
       const response = await axios.post<product>(
         `${BASE_URL}/products`,
@@ -45,14 +45,14 @@ export const createNewProductAsync = createAsyncThunk(
       return createdProduct;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const deleteProductAsync = createAsyncThunk(
   'deleteProductAsync',
-  async (id: number) => {
+  async (id: number, { rejectWithValue }) => {
     try {
       const response = await axios.delete<boolean>(
         `${BASE_URL}/products/${id}`
@@ -64,14 +64,14 @@ export const deleteProductAsync = createAsyncThunk(
       }
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
 
 export const updateProductAsync = createAsyncThunk(
   'updateProductAsync',
-  async (updateProduct: updatedProduct) => {
+  async (updateProduct: updatedProduct, { rejectWithValue }) => {
     try {
       const { id, updatedData } = updateProduct;
       const response = await axiosInstance.put<product>(
@@ -82,7 +82,7 @@ export const updateProductAsync = createAsyncThunk(
       return updateNewProduct;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
@@ -91,7 +91,7 @@ export const updateProductAsync = createAsyncThunk(
 
 export const getAllProductsByCategoryAsync = createAsyncThunk(
   'getAllProductsByCategoryAsync',
-  async (id: number) => {
+  async (id: number, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get<product[]>(
         `categories/${id}/products`
@@ -100,7 +100,7 @@ export const getAllProductsByCategoryAsync = createAsyncThunk(
       return products;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
