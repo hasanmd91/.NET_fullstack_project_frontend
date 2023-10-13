@@ -7,7 +7,7 @@ import { registerUser, user, updateUserDataType } from '../../types/user';
 
 export const getAllUsersAsync = createAsyncThunk(
   'getAllUsersAsync',
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get<user[]>(
         'https://api.escuelajs.co/api/v1/users'
@@ -16,7 +16,7 @@ export const getAllUsersAsync = createAsyncThunk(
       return users;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
@@ -25,7 +25,7 @@ export const getAllUsersAsync = createAsyncThunk(
 
 export const getAUsersAsync = createAsyncThunk(
   'getAUsersAsync',
-  async (userId: number) => {
+  async (userId: number, { rejectWithValue }) => {
     try {
       const response = await axios.get<user>(
         `https://api.escuelajs.co/api/v1/users/${userId}`
@@ -34,7 +34,7 @@ export const getAUsersAsync = createAsyncThunk(
       return users;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );
@@ -62,7 +62,7 @@ export const createNewUserAsync = createAsyncThunk(
 
 export const updateUserAsync = createAsyncThunk(
   'updateUserAsync',
-  async ({ data, id }: updateUserDataType) => {
+  async ({ data, id }: updateUserDataType, { rejectWithValue }) => {
     try {
       const response = await axios.put<user>(
         `https://api.escuelajs.co/api/v1/users/${id}`,
@@ -72,7 +72,7 @@ export const updateUserAsync = createAsyncThunk(
       return updatedUser;
     } catch (error) {
       const err = error as AxiosError;
-      return err;
+      return rejectWithValue(err);
     }
   }
 );

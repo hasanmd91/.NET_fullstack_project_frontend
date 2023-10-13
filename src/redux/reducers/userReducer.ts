@@ -27,7 +27,7 @@ const userSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    /*GET ALL USER REDUCER*/
+    /* GET ALL USER REDUCER */
 
     builder.addCase(
       getAllUsersAsync.pending,
@@ -38,22 +38,18 @@ const userSlice = createSlice({
 
     builder.addCase(
       getAllUsersAsync.fulfilled,
-      (state, action: PayloadAction<user[] | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.users = action.payload;
-        }
+      (state, action: PayloadAction<user[]>) => {
+        state.status = 'succeeded';
+        state.users = action.payload;
       }
     );
 
     builder.addCase(getAllUsersAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
-    /*GET A USER REDUCER*/
+    /* GET A USER REDUCER */
 
     builder.addCase(
       getAUsersAsync.pending,
@@ -64,40 +60,31 @@ const userSlice = createSlice({
 
     builder.addCase(
       getAUsersAsync.fulfilled,
-      (state, action: PayloadAction<user | AxiosError>) => {
-        if (!(action.payload instanceof AxiosError)) {
-          state.status = 'succeeded';
-          state.currentUser = action.payload;
-        }
+      (state, action: PayloadAction<user>) => {
+        state.status = 'succeeded';
+        state.currentUser = action.payload;
       }
     );
 
     builder.addCase(getAUsersAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.status = 'failed';
-        state.error = action.payload.message;
-      }
+      state.status = 'failed';
+      state.error = action.payload as string;
     });
 
-    /*CREATE A USER REDUCER*/
+    /* CREATE A USER REDUCER */
 
     builder.addCase(createNewUserAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof AxiosError)) {
-        state.status = 'succeeded';
-        state.users = [...state.users, action.payload];
-        state.currentUser = action.payload;
-      }
+      state.status = 'succeeded';
+      state.users = [...state.users, action.payload];
+      state.currentUser = action.payload;
     });
 
-    /*UPDATE USER REDUCER*/
+    /* UPDATE USER REDUCER */
 
     builder.addCase(
       updateUserAsync.fulfilled,
-      (state, action: PayloadAction<user | AxiosError>) => {
-        if (
-          Array.isArray(state.users) &&
-          !(action.payload instanceof AxiosError)
-        ) {
+      (state, action: PayloadAction<user>) => {
+        if (Array.isArray(state.users)) {
           const updatedUser = action.payload;
           state.users = state.users.map((user) =>
             user.id === updatedUser.id ? updatedUser : user
@@ -107,9 +94,7 @@ const userSlice = createSlice({
     );
 
     builder.addCase(updateUserAsync.rejected, (state, action) => {
-      if (action.payload instanceof AxiosError) {
-        state.error = action.payload.message;
-      }
+      state.error = action.payload as string;
     });
   },
 });
