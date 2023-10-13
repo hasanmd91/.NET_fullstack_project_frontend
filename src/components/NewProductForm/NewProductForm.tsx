@@ -1,4 +1,4 @@
-import { Container, TextField, Button, Alert } from '@mui/material';
+import { Container, TextField, Button, Alert, Typography } from '@mui/material';
 import React from 'react';
 import {
   UseFormHandleSubmit,
@@ -30,6 +30,9 @@ const NewProductForm: React.FC<NewProductFormType> = ({
 
   return (
     <Container>
+      <Typography variant="h5" gutterBottom>
+        Add new product
+      </Typography>
       <form
         onSubmit={handleSubmit(submitHandeler)}
         style={{

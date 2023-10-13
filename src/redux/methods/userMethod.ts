@@ -1,14 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
-import axiosInstance from '../../shared/axiosInstance';
-import {
-  emailType,
-  isEmailAvailable,
-  registerUser,
-  user,
-  updateUserDataType,
-} from '../../types/user';
+import { registerUser, user, updateUserDataType } from '../../types/user';
 
 /* GET ALL USER METHOD*/
 

@@ -27,7 +27,7 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    sortProduct: (state, action: PayloadAction<String>) => {
+    sortProduct: (state, action: PayloadAction<string>) => {
       if (action.payload === 'LOW_TO_HIGH_PRICE') {
         state.products = state.products.sort((a, b) =>
           a.price > b.price ? 1 : -1
