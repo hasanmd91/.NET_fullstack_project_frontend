@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllProductsAsync());
-  }, []);
+  }, [dispatch]);
 
   if (status === 'loading') {
     return (

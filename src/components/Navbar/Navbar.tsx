@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Container, Toolbar } from '@mui/material';
 
 import useAppSelector from '../../Hooks/useAppSelector';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
