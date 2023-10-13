@@ -145,9 +145,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ## Screenshots
 
-![Home](public\projectImages\home.png)
-![Products](public\projectImages\products.png)
-![Product](public\projectImages\product.png)
-![cart](public\projectImages\cart.png)
-![admin](public\projectImages\admin.png)
-![customer](public\projectImages\customer.png)
+![Home](public/projectImages/home.png)
+![Products](public/projectImages/products.png)
+![Product](public/projectImages/product.png)
+![cart](public/projectImages/cart.png)
+![admin](public/projectImages/admin.png)
+![customer](public/projectImages/customer.png)
