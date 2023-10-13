@@ -24,5 +24,4 @@ const usersData = [
     avatar: 'https://picsum.photos/640/640?r=9185',
   },
 ];
-
 export default usersData;

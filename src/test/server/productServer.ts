@@ -28,7 +28,7 @@ export const handlers = [
     if (product) {
       return res(ctx.json(true));
     } else {
-      return res(ctx.status(404, 'Product is not found'));
+      return res(ctx.status(404, 'Product not found'));
     }
   }),
 ];
