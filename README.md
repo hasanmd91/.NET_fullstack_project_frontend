@@ -121,9 +121,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 │ ├───Data
 │ ├───Reducers
 │ └───server
-├───tests
-│ ├───mockApi
-│ └───Reducers
 ├───types
 ├───utils
 └───Validation
