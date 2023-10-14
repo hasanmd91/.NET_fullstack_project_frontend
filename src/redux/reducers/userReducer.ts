@@ -8,6 +8,7 @@ import {
   loginUserAsync,
   authenticateUserAsync,
 } from '../thunks/userThunk';
+import { stat } from 'fs';
 
 type userStateType = {
   users: user[];
@@ -37,10 +38,13 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(loginUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
       state.currentUser = action.payload;
     });
     builder.addCase(loginUserAsync.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.payload;
+      state.currentUser = undefined;
     });
 
     /*FETCHING USER USING ACCESS TOKEN */
@@ -49,9 +53,11 @@ const userSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(authenticateUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
       state.currentUser = action.payload;
     });
     builder.addCase(authenticateUserAsync.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.payload;
     });
 

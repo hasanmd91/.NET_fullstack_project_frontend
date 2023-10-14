@@ -20,6 +20,23 @@ afterEach(() => server.resetHandlers());
 
 afterAll(() => server.close());
 
+describe('Test authintication', () => {
+  test('A user should login with correct email and password', async () => {
+    await store.dispatch(
+      loginUserAsync({
+        email: 'john@mail.com',
+        password: 'changeme',
+      })
+    );
+    expect(store.getState().user.currentUser.email).toBe('john@mail.com');
+  });
+
+  test('Should authenticate with right token', async () => {
+    await store.dispatch(authenticateUserAsync(access_token + '_2'));
+    expect(store.getState().user.currentUser).toMatchObject(usersData[1]);
+  });
+});
+
 describe('Test usersReducer async actions', () => {
   test('Should fetch all users', async () => {
     await store.dispatch(getAllUsersAsync());
@@ -40,23 +57,6 @@ describe('Test usersReducer async actions', () => {
     expect(store.getState().user.users[0].name).toBe('Maria');
     expect(store.getState().user.users[0].email).toBe('maria@mail.com');
     expect(store.getState().user.users[0].password).toBe('12345');
-  });
-
-  test('Should authenticate witg right token', async () => {
-    await store.dispatch(authenticateUserAsync(access_token + '_2'));
-    expect(store.getState().usersReducer.currentUser).toMatchObject(
-      usersData[1]
-    );
-  });
-
-  test('A user should login with correct email and password', async () => {
-    await store.dispatch(
-      loginUserAsync({
-        email: 'john@mail.com',
-        password: 'changeme',
-      })
-    );
-    expect(store.getState().user.currentUser.email).toBe('john@mail.com');
   });
 
   test('Should update a existing user', async () => {

@@ -5,20 +5,13 @@ import usersData from '../data/userData';
 export const access_token = 'my-access-token';
 
 export const handlers = [
-  rest.get('https://api.escuelajs.co/api/v1/users', (req, res, ctx) => {
-    return res(ctx.json(usersData));
-  }),
-
   rest.post(
     'https://api.escuelajs.co/api/v1/auth/login',
     async (req, res, ctx) => {
       const { email, password } = await req.json();
-
       const foundUser = usersData.find(
         (u) => u.email === email && u.password === password
       );
-
-      console.log(foundUser);
 
       if (foundUser) {
         const token = access_token + '_' + foundUser.id;
@@ -34,7 +27,6 @@ export const handlers = [
     const token = req.headers.get('Authorization')?.split(' ')[1];
     const originalToken = token?.split('_')[0];
     const userId = token?.split('_')[1];
-    console.log('token: ', token);
     const user = usersData.find((u) => u.id === Number(userId));
     if (originalToken === access_token && user) {
       return res(ctx.json(user));
@@ -44,6 +36,23 @@ export const handlers = [
     }
   }),
 
+  rest.get('https://api.escuelajs.co/api/v1/users', (req, res, ctx) => {
+    return res(ctx.json(usersData));
+  }),
+
+  rest.post('https://api.escuelajs.co/api/v1/users', async (req, res, ctx) => {
+    const newUser = await req.json();
+
+    if (newUser) {
+      usersData.push(newUser);
+      return res(ctx.json(newUser));
+    } else {
+      return res(
+        ctx.status(400),
+        ctx.json({ error: 'User can not be created' })
+      );
+    }
+  }),
   rest.put(
     'https://api.escuelajs.co/api/v1/users/:id',
     async (req, res, ctx) => {
