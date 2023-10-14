@@ -21,7 +21,7 @@ import { schema } from '../Validation/productDataValidation';
 import {
   createNewProductAsync,
   getAllProductsAsync,
-} from '../redux/methods/productMethod';
+} from '../redux/thunks/productThunk';
 
 const AdminDashbord = () => {
   const { products, status, error } = useAppSelector((state) => state.product);

@@ -3,7 +3,7 @@ import {
   getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
-} from '../../redux/methods/userMethod';
+} from '../../redux/thunks/userThunk';
 import { createStore } from '../../redux/store';
 import usersData from '../Data/userData';
 import server from '../server/userServer';

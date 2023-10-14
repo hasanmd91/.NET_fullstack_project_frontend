@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { registerUser } from '../types/user';
 import { schema } from '../Validation/userValidation';
 import useAppDispatch from '../Hooks/useAppDispatch';
-import { createNewUserAsync } from '../redux/methods/userMethod';
+import { createNewUserAsync } from '../redux/thunks/userThunk';
 import useAppSelector from '../Hooks/useAppSelector';
 import UserRegisterForm from '../components/UserRegisterForm/UserRegisterForm';
 

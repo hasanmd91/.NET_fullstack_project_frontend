@@ -3,7 +3,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 
 import { product } from '../../types/product';
 import useAppDispatch from '../../Hooks/useAppDispatch';
-import { deleteProductAsync } from '../../redux/methods/productMethod';
+import { deleteProductAsync } from '../../redux/thunks/productThunk';
 
 type AdminDataCardType = {
   product: product;

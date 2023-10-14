@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import { getAllProductsAsync } from '../redux/methods/productMethod';
+import { getAllProductsAsync } from '../redux/thunks/productThunk';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
 import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';

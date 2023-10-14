@@ -14,7 +14,7 @@ import useAppDispatch from '../Hooks/useAppDispatch';
 import { usePagination } from '../Hooks/usePagination';
 import FilterBar from '../components/FilterBar/FilterBar';
 import Pagination from '../components/Pagination/Pagination';
-import { getAllProductsAsync } from '../redux/methods/productMethod';
+import { getAllProductsAsync } from '../redux/thunks/productThunk';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 
 const ProductList = () => {

@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import { user } from '../../types/user';
-import { getLogedUserAsync, loginAsync } from '../methods/authMethod';
+import { getLogedUserAsync, loginAsync } from '../thunks/authMethod';
 
 type authStateType = {
   currentUser: user | null;

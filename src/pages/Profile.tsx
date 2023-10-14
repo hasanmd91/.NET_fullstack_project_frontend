@@ -7,7 +7,7 @@ import useAppDispatch from '../Hooks/useAppDispatch';
 import useAppSelector from '../Hooks/useAppSelector';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { UserEditschema } from '../Validation/UserEditschema';
-import { updateUserAsync } from '../redux/methods/userMethod';
+import { updateUserAsync } from '../redux/thunks/userThunk';
 import ProfileComp from '../components/ProfileComp/ProfileComp';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 

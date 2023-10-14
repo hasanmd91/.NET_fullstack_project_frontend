@@ -7,7 +7,7 @@ import {
   getAUsersAsync,
   getAllUsersAsync,
   updateUserAsync,
-} from '../methods/userMethod';
+} from '../thunks/userThunk';
 
 type userStateType = {
   users: user[];

@@ -1,7 +1,7 @@
 import {
   createNewProductAsync,
   getAllProductsAsync,
-} from '../../redux/methods/productMethod';
+} from '../../redux/thunks/productThunk';
 import { createStore } from '../../redux/store';
 import { newProduct } from '../../types/product';
 import productsServer from '../server/productServer';
