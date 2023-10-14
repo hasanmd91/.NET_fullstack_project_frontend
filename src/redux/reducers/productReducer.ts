@@ -13,13 +13,13 @@ import {
 export type productStateType = {
   products: product[];
   product?: product;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  loading: boolean;
   error?: string;
 };
 
 const initialState: productStateType = {
   products: [],
-  status: 'loading',
+  loading: false,
 };
 
 const productSlice = createSlice({
@@ -53,108 +53,106 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     /*GET ALL PRODUCT REDUCER*/
 
-    builder.addCase(
-      getAllProductsAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
+    builder.addCase(getAllProductsAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
-    builder.addCase(
-      getAllProductsAsync.fulfilled,
-      (state, action: PayloadAction<product[]>) => {
-        state.status = 'succeeded';
-        state.products = action.payload;
-      }
-    );
+    builder.addCase(getAllProductsAsync.fulfilled, (state, action) => {
+      state.products = action.payload;
+      state.loading = false;
+    });
 
     builder.addCase(getAllProductsAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+      state.error = action.payload;
+      state.loading = false;
     });
 
     /*GET A PRODUCT REDUCER*/
 
-    builder.addCase(
-      getAProductsAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
+    builder.addCase(getAProductsAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
-    builder.addCase(
-      getAProductsAsync.fulfilled,
-      (state, action: PayloadAction<product>) => {
-        state.status = 'succeeded';
-        state.product = action.payload;
-      }
-    );
+    builder.addCase(getAProductsAsync.fulfilled, (state, action) => {
+      state.product = action.payload;
+      state.loading = false;
+    });
 
     builder.addCase(getAProductsAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+      state.error = action.payload;
+      state.loading = false;
     });
 
     /*CREATE NEW PRODUCT REDUCER*/
 
-    builder.addCase(
-      createNewProductAsync.fulfilled,
-      (state, action: PayloadAction<product>) => {
-        state.status = 'succeeded';
-        state.products = [...state.products, action.payload];
-      }
-    );
+    builder.addCase(createNewProductAsync.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(createNewProductAsync.fulfilled, (state, action) => {
+      state.products = [...state.products, action.payload];
+      state.loading = false;
+    });
 
     builder.addCase(createNewProductAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+      state.error = action.payload;
+      state.loading = false;
     });
 
     /*DELETE A PRODUCT REDUCER*/
+
+    builder.addCase(deleteProductAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
       state.products = state.products.filter(
         (product) => product.id !== action.payload
       );
+      state.loading = false;
     });
 
     builder.addCase(deleteProductAsync.rejected, (state, action) => {
-      state.error = action.payload as string;
+      state.error = action.payload;
+      state.loading = false;
     });
 
     /*UPDATE PRODUCT REDUCER*/
+
+    builder.addCase(updateProductAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(updateProductAsync.fulfilled, (state, action) => {
       const updatedProduct = action.payload;
       state.products = state.products.map((product) =>
         product.id === updatedProduct.id ? updatedProduct : product
       );
+      state.loading = false;
     });
 
     builder.addCase(updateProductAsync.rejected, (state, action) => {
-      state.error = action.payload as string;
+      state.error = action.payload;
+      state.loading = false;
     });
 
     /*GET ALL PRODUCT BY CATEGORY REDUCER*/
 
-    builder.addCase(
-      getAllProductsByCategoryAsync.pending,
-      (state, action: PayloadAction<void>) => {
-        state.status = 'loading';
-      }
-    );
+    builder.addCase(getAllProductsByCategoryAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(
       getAllProductsByCategoryAsync.fulfilled,
-      (state, action: PayloadAction<product[]>) => {
-        state.status = 'succeeded';
+      (state, action) => {
+        state.loading = false;
         state.products = action.payload;
       }
     );
 
     builder.addCase(getAllProductsByCategoryAsync.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.payload as string;
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });

@@ -1,36 +1,70 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import BASE_URL from '../../shared/BASE_URL';
 import productsData from '../data/productsData';
-import { newProduct } from '../../types/product';
 
 export const handlers = [
-  rest.get(`${BASE_URL}/products`, async (req, res, ctx) => {
-    return res(ctx.json(productsData));
-  }),
+  rest.get(
+    `https://api.escuelajs.co/api/v1/products`,
+    async (req, res, ctx) => {
+      return res(ctx.json(productsData));
+    }
+  ),
 
-  rest.get(`${BASE_URL}/products`, async (req, res, ctx) => {
-    const { id } = req.params;
-    const product = productsData.find((product) => product.id === Number(id));
-    if (product) {
+  rest.get(
+    `https://api.escuelajs.co/api/v1/products/:id`,
+    async (req, res, ctx) => {
+      const { id } = req.params;
+      const product = productsData.find((product) => product.id === Number(id));
+      if (product) {
+        return res(ctx.json(product));
+      }
+    }
+  ),
+
+  rest.post(
+    `https://api.escuelajs.co/api/v1/products`,
+    async (req, res, ctx) => {
+      const product = await req.json();
+      productsData.push(product);
       return res(ctx.json(product));
     }
-  }),
+  ),
 
-  rest.post(`${BASE_URL}/products`, async (req, res, ctx) => {
-    const product: newProduct = await req.json();
-    return res(ctx.json(product));
-  }),
+  rest.put(
+    `https://api.escuelajs.co/api/v1/products/:id`,
+    async (req, res, ctx) => {
+      const { id } = req.params;
+      const updatedData = await req.json();
+      const productIndex = productsData.findIndex(
+        (product) => product.id === Number(id)
+      );
 
-  rest.delete(`${BASE_URL}/products/:id`, async (req, res, ctx) => {
-    const { id } = req.params;
-    const product = productsData.find((product) => product.id === Number(id));
-    if (product) {
-      return res(ctx.json(true));
-    } else {
-      return res(ctx.status(404, 'Product not found'));
+      if (productIndex === -1) {
+        return res(ctx.status(404), ctx.json({ error: 'Product not found' }));
+      }
+
+      productsData[productIndex] = {
+        ...productsData[productIndex],
+        ...updatedData,
+      };
+      return res(ctx.json(productsData[productIndex]));
     }
-  }),
+  ),
+
+  rest.delete(
+    `https://api.escuelajs.co/api/v1/products/:id`,
+    async (req, res, ctx) => {
+      const { id } = req.params;
+      const product = productsData.filter(
+        (product) => product.id !== Number(id)
+      );
+      if (product) {
+        return res(ctx.json(true));
+      } else {
+        return res(ctx.status(404, 'Product not found'));
+      }
+    }
+  ),
 ];
 
 const productsServer = setupServer(...handlers);
