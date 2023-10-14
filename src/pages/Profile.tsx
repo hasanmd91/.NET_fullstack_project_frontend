@@ -6,7 +6,7 @@ import { updateUser } from '../types/user';
 import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { UserEditschema } from '../validation/UserEditschema';
+import { userEditschema } from '../validation/userEditschema';
 import { updateUserAsync } from '../redux/thunks/userThunk';
 import ProfileComp from '../components/ProfileComp/ProfileComp';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<updateUser>({
-    resolver: yupResolver(UserEditschema),
+    resolver: yupResolver(userEditschema),
   });
 
   const submitHandeler = (data: updateUser) => {
