@@ -9,12 +9,12 @@ import {
 import { Link } from 'react-router-dom';
 
 import MediaCard from '../components/Card/Card';
-import useAppSelector from '../Hooks/useAppSelector';
-import useAppDispatch from '../Hooks/useAppDispatch';
-import { usePagination } from '../Hooks/usePagination';
+import useAppSelector from '../hooks/useAppSelector';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { usePagination } from '../hooks/usePagination';
 import FilterBar from '../components/FilterBar/FilterBar';
 import Pagination from '../components/Pagination/Pagination';
-import { getAllProductsAsync } from '../redux/methods/productMethod';
+import { getAllProductsAsync } from '../redux/thunks/productThunk';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 
 const ProductList = () => {

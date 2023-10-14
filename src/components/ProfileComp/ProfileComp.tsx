@@ -17,7 +17,7 @@ import {
 } from 'react-hook-form';
 import { updateUser } from '../../types/user';
 import TextField from '../../components/TextField/TextField';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 
 type ProfileCompType = {
   handleSubmit: UseFormHandleSubmit<updateUser>;

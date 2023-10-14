@@ -9,9 +9,9 @@ import {
 } from '@mui/material';
 
 import Link from '../../Link/Link';
-import useAppSelector from '../../../Hooks/useAppSelector';
+import useAppSelector from '../../../hooks/useAppSelector';
 import { userRole } from '../../../types/user';
-import useAppDispatch from '../../../Hooks/useAppDispatch';
+import useAppDispatch from '../../../hooks/useAppDispatch';
 import { logOut } from '../../../redux/reducers/userReducer';
 
 const TooltipMenu = () => {

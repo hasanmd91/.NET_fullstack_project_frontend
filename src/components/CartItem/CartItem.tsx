@@ -3,7 +3,7 @@ import { Typography, Paper, Box, Button } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CartItem as cartItem } from '../../types/cart';
-import useAppDispatch from '../../Hooks/useAppDispatch';
+import useAppDispatch from '../../hooks/useAppDispatch';
 import QuantitySelect from '../InputSelect/InputSelect';
 import {
   setItemQuantity,

@@ -5,7 +5,7 @@ import {
   deleteCategoryAsync,
   getAllCategoryAsync,
   updateCategoryAsync,
-} from '../methods/categoryMethod';
+} from '../thunks/categoryThunk';
 
 type categoryStateType = {
   categories: category[];

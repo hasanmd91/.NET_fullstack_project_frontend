@@ -8,8 +8,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useEffect } from 'react';
-import useAppSelector from '../Hooks/useAppSelector';
-import useAppDispatch from '../Hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
+import useAppDispatch from '../hooks/useAppDispatch';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
 import Modal from '../components/Modal/Modal';
@@ -17,11 +17,11 @@ import NewProductForm from '../components/NewProductForm/NewProductForm';
 import { newProduct, newProductYup, product } from '../types/product';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '../Validation/productDataValidation';
+import { schema } from '../validation/productDataValidation';
 import {
   createNewProductAsync,
   getAllProductsAsync,
-} from '../redux/methods/productMethod';
+} from '../redux/thunks/productThunk';
 
 const AdminDashbord = () => {
   const { products, status, error } = useAppSelector((state) => state.product);

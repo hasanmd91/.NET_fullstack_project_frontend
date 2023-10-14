@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import LoginForm from '../components/LoginForm/LoginForm';
-import useAppDispatch from '../Hooks/useAppDispatch';
-import useAppSelector from '../Hooks/useAppSelector';
-import { loginUserAsync } from '../redux/methods/userMethod';
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
+import { loginUserAsync } from '../redux/thunks/userThunk';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');

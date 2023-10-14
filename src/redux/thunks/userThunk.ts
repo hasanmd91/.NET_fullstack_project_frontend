@@ -4,7 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { registerUser, user, updateUserDataType } from '../../types/user';
 import { LoginResponse, userCredentials } from '../../types/auth';
 
-/* LOGIN USER METHOD USING LOGIN CREDENTIAL */
+/* LOGIN USER THUNK USING LOGIN CREDENTIAL */
 
 export const loginUserAsync = createAsyncThunk<
   user,
@@ -34,7 +34,7 @@ export const loginUserAsync = createAsyncThunk<
   }
 });
 
-/* LOGIN USER METHOD USING ACCESS TOKEN */
+/* LOGIN USER THUNK USING ACCESS TOKEN */
 
 export const authenticateUserAsync = createAsyncThunk<
   user,
@@ -57,7 +57,7 @@ export const authenticateUserAsync = createAsyncThunk<
   }
 });
 
-/* GET ALL USER METHOD*/
+/* GET ALL USER THUNK*/
 
 export const getAllUsersAsync = createAsyncThunk<
   user[],
@@ -76,7 +76,7 @@ export const getAllUsersAsync = createAsyncThunk<
   }
 });
 
-/* CREATE A USER METHOD*/
+/* CREATE A USER THUNK*/
 
 export const createNewUserAsync = createAsyncThunk<
   user,
@@ -96,7 +96,7 @@ export const createNewUserAsync = createAsyncThunk<
   }
 });
 
-/* UPDATE A USER METHOD*/
+/* UPDATE A USER THUNK*/
 
 export const updateUserAsync = createAsyncThunk<
   user,

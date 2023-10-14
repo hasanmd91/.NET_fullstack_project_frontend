@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import BASE_URL from '../../shared/BASE_URL';
-import productsData from '../Data/productsData';
+import productsData from '../data/productsData';
 import { newProduct } from '../../types/product';
 
 export const handlers = [

@@ -7,10 +7,10 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import useAppDispatch from '../../../Hooks/useAppDispatch';
-import useAppSelector from '../../../Hooks/useAppSelector';
-import { getAllCategoryAsync } from '../../../redux/methods/categoryMethod';
-import { getAllProductsByCategoryAsync } from '../../../redux/methods/productMethod';
+import useAppDispatch from '../../../hooks/useAppDispatch';
+import useAppSelector from '../../../hooks/useAppSelector';
+import { getAllCategoryAsync } from '../../../redux/thunks/categoryThunk';
+import { getAllProductsByCategoryAsync } from '../../../redux/thunks/productThunk';
 import { category } from '../../../types/category';
 
 const CategoryFilter = () => {

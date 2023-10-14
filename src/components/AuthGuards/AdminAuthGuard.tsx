@@ -1,5 +1,5 @@
 import React from 'react';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 import { userRole } from '../../types/user';
 
 type AdminAuthGuardType = {

@@ -10,7 +10,7 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 import { product } from '../../types/product';
 
 const CartCalculator = () => {

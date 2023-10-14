@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { CircularProgress } from '@mui/material';
 
 import { updateUser } from '../types/user';
-import useAppDispatch from '../Hooks/useAppDispatch';
-import useAppSelector from '../Hooks/useAppSelector';
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { UserEditschema } from '../Validation/UserEditschema';
-import { updateUserAsync } from '../redux/methods/userMethod';
+import { UserEditschema } from '../validation/UserEditschema';
+import { updateUserAsync } from '../redux/thunks/userThunk';
 import ProfileComp from '../components/ProfileComp/ProfileComp';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 

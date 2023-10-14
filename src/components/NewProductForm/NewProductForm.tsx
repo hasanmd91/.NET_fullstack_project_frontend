@@ -8,7 +8,7 @@ import {
   FieldErrors,
   Controller,
 } from 'react-hook-form';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 import { newProductYup } from '../../types/product';
 
 type NewProductFormType = {

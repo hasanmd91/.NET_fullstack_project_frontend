@@ -3,7 +3,7 @@ import { Container, Box, Grid, Typography } from '@mui/material';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 import CartItem from '../components/CartItem/CartItem';
-import useAppSelector from '../Hooks/useAppSelector';
+import useAppSelector from '../hooks/useAppSelector';
 import CartCalculator from '../components/CartCalculator/CartCalculator';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import { CartItem as CartItemType } from '../types/cart';

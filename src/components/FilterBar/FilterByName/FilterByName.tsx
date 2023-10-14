@@ -7,7 +7,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import useAppDispatch from '../../../Hooks/useAppDispatch';
+import useAppDispatch from '../../../hooks/useAppDispatch';
 import { nameSortOption } from '../../../types/nameFilter';
 import { sortProduct } from '../../../redux/reducers/productReducer';
 

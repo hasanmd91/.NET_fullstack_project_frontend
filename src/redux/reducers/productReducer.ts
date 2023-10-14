@@ -8,7 +8,7 @@ import {
   getAllProductsAsync,
   getAllProductsByCategoryAsync,
   updateProductAsync,
-} from '../methods/productMethod';
+} from '../thunks/productThunk';
 
 export type productStateType = {
   products: product[];

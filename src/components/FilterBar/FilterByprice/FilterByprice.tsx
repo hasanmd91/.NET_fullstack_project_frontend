@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 
 import { PriceSortOption } from '../../../types/price';
-import useAppDispatch from '../../../Hooks/useAppDispatch';
+import useAppDispatch from '../../../hooks/useAppDispatch';
 import { sortProduct } from '../../../redux/reducers/productReducer';
 
 const priceSortOptions = [

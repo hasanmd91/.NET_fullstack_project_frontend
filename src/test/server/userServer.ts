@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import usersData from '../Data/userData';
+import usersData from '../data/userData';
 
 export const access_token = 'my-access-token';
 

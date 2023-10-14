@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Paper, Typography, Button } from '@mui/material';
 
 import TextField from '../TextField/TextField';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 import Link from '../Link/Link';
 
 type LoginFormType = {

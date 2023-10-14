@@ -7,7 +7,7 @@
 
 # Introduction
 
-Welcome to the ILH Store E-commerce Application, a online shopping platform, and a front-end project by Integify Assignment. Developed using React, Redux, and Material UI, our application offers user registration and login features, along with admin functionality and advanced product filtering methods.
+Welcome to the ILH Store E-commerce Application, a online shopping platform, and a front-end project by Integify Assignment. Developed using React, Redux, and Material UI, our application offers user registration and login features, along with admin functionality and advanced product filtering thunks.
 
 ## Table of content
 
@@ -114,7 +114,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 ├───Hooks
 ├───pages
 ├───redux
-│ ├───methods
+│ ├───thunks
 │ └───reducers
 ├───shared
 ├───test

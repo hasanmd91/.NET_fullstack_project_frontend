@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppBar, Button, Container, Toolbar } from '@mui/material';
 
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
 import NavigationBar from './NavigationBar/NavigationBar';
 import TooltipMenu from './TooltipMenu/TooltipMenu';

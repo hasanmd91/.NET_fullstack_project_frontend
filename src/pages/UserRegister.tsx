@@ -4,10 +4,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { registerUser } from '../types/user';
-import { schema } from '../Validation/userValidation';
-import useAppDispatch from '../Hooks/useAppDispatch';
-import { createNewUserAsync } from '../redux/methods/userMethod';
-import useAppSelector from '../Hooks/useAppSelector';
+import { schema } from '../validation/userValidation';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { createNewUserAsync } from '../redux/thunks/userThunk';
+import useAppSelector from '../hooks/useAppSelector';
 import UserRegisterForm from '../components/UserRegisterForm/UserRegisterForm';
 
 const UserRegister = () => {

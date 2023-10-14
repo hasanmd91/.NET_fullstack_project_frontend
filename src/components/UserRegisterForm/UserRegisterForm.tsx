@@ -20,7 +20,7 @@ import {
 } from 'react-hook-form';
 import TextField from '../TextField/TextField';
 import { registerUser } from '../../types/user';
-import useAppSelector from '../../Hooks/useAppSelector';
+import useAppSelector from '../../hooks/useAppSelector';
 
 type UserRegisterFormType = {
   handleSubmit: UseFormHandleSubmit<registerUser>;

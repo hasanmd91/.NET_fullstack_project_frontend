@@ -1,5 +1,5 @@
 import { createStore } from '../../redux/store';
-import usersData from '../Data/userData';
+import usersData from '../data/userData';
 import server, { access_token } from '../server/userServer';
 import {
   authenticateUserAsync,
@@ -7,7 +7,7 @@ import {
   getAllUsersAsync,
   loginUserAsync,
   updateUserAsync,
-} from '../../redux/methods/userMethod';
+} from '../../redux/thunks/userThunk';
 
 let store = createStore();
 beforeEach(() => {
