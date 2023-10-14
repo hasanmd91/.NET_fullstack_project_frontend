@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Divider,
   FormControl,
   InputLabel,
@@ -10,19 +9,13 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import useAppSelector from '../../hooks/useAppSelector';
-import { product } from '../../types/product';
+import Button from '../Button/Button';
 
-const CartCalculator = () => {
-  const { cartItems } = useAppSelector((state) => state.cart);
+type CartCalculatorType = {
+  totalAmount: number;
+};
 
-  const totalCartPrice = () => {
-    const totalPrice = cartItems.reduce((total: number, item: product) => {
-      return total + item.price;
-    }, 0);
-    return totalPrice;
-  };
-
+const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
   return (
     <Paper
       elevation={1}
@@ -39,7 +32,7 @@ const CartCalculator = () => {
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography variant="h6">Sub-Total</Typography>
-        <Typography variant="h6">${totalCartPrice()}</Typography>
+        <Typography variant="h6">${totalAmount}</Typography>
       </Box>
 
       <Typography variant="h6" gutterBottom>
@@ -54,14 +47,7 @@ const CartCalculator = () => {
         </Select>
       </FormControl>
 
-      <Button
-        size="large"
-        variant="contained"
-        fullWidth
-        sx={{ background: '#0d2134' }}
-      >
-        CHECKOUT
-      </Button>
+      <Button fullWidth>CHECKOUT</Button>
 
       <Typography variant="h6" gutterBottom>
         WE ACCEPT:

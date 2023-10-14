@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Alert,
-  Button,
   Container,
   IconButton,
   InputAdornment,
@@ -21,6 +20,7 @@ import {
 import TextField from '../TextField/TextField';
 import { registerUser } from '../../types/user';
 import useAppSelector from '../../hooks/useAppSelector';
+import Button from '../Button/Button';
 
 type UserRegisterFormType = {
   handleSubmit: UseFormHandleSubmit<registerUser>;
@@ -156,30 +156,10 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
             )}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            style={{ marginTop: '16px' }}
-            sx={{
-              marginRight: '1rem',
-              background: '#0d2134',
-              '&:hover': { background: '#d93226' },
-            }}
-          >
+          <Button type="submit" sx={{ marginRight: '1rem' }}>
             Submit
           </Button>
-          <Button
-            type="reset"
-            variant="contained"
-            size="large"
-            style={{ marginTop: '16px' }}
-            sx={{
-              background: '#0d2134',
-              '&:hover': { background: '#d93226' },
-            }}
-            onClick={() => reset()}
-          >
+          <Button type="reset" onClick={() => reset()}>
             Reset
           </Button>
         </form>

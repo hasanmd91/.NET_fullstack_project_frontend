@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Box, Grid, Typography } from '@mui/material';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
@@ -7,9 +7,17 @@ import useAppSelector from '../hooks/useAppSelector';
 import CartCalculator from '../components/CartCalculator/CartCalculator';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import { CartItem as CartItemType } from '../types/cart';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { clearCart, totalCartPrice } from '../redux/reducers/cartReducer';
+import Button from '../components/Button/Button';
 
 const Cart = () => {
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const { cartItems, totalAmount } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(totalCartPrice());
+  }, [dispatch]);
 
   if (!cartItems.length) {
     return (
@@ -28,10 +36,13 @@ const Cart = () => {
             {cartItems.map((item: CartItemType) => (
               <CartItem key={item.id} item={item} />
             ))}
+            <Button size="small" onClick={() => dispatch(clearCart())}>
+              Empty cart
+            </Button>
           </Box>
         </Grid>
         <Grid item xs={12} md={4}>
-          <CartCalculator />
+          <CartCalculator totalAmount={totalAmount} />
         </Grid>
       </Grid>
     </Container>

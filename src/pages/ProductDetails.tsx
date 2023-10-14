@@ -1,12 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Button,
-  Grid,
-  Box,
-  Divider,
-} from '@mui/material';
+import { Container, Typography, Grid, Box, Divider } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -17,6 +10,8 @@ import ImageSlider from '../components/ImageSlider/ImageSlider';
 import { addItemToCart } from '../redux/reducers/cartReducer';
 import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
+import { CartItem } from '../types/cart';
+import Button from '../components/Button/Button';
 
 const ProductView = () => {
   const { product } = useAppSelector((state) => state.product);
@@ -34,10 +29,11 @@ const ProductView = () => {
 
   const addTocart = () => {
     if (product !== undefined && product !== null) {
-      const cartItem = {
+      const cartItem: CartItem = {
         id: product.id,
         title: product.title,
         price: product.price,
+        totalPrice: product.price,
         quantity: 1,
         image: product.images[0],
       };
@@ -56,7 +52,7 @@ const ProductView = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Box>
-                <Typography variant="h3" fontWeight={'bold'}>
+                <Typography variant="h4" fontWeight={'bold'}>
                   {product?.title}
                 </Typography>
                 <Divider />
@@ -74,28 +70,12 @@ const ProductView = () => {
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', gap: '5px', marginTop: '2rem' }}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  sx={{
-                    background: '#0d2134',
-                    margin: '20px 0',
-                    '&:hover': { background: '#d93226' },
-                  }}
-                  onClick={addTocart}
-                >
+                <Button type="button" onClick={addTocart}>
                   Add to Cart
                 </Button>
                 <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  sx={{
-                    background: '#d93226 ',
-                    margin: '20px 0',
-                    '&:hover': { background: '#0d2134' },
-                  }}
+                  sx={{ background: '#d93226' }}
+                  type="button"
                   onClick={() => navigate(-1)}
                 >
                   BACK TO PRODUCT

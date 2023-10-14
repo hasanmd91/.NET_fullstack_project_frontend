@@ -26,6 +26,8 @@ afterEach(() => productsServer.resetHandlers());
 
 afterAll(() => productsServer.close());
 
+// productReducer InitialState tests
+
 describe('Product Reducer Initial State', () => {
   test('Should have an initial state with no products', async () => {
     expect(store.getState().product.products).toHaveLength(0);
@@ -54,6 +56,8 @@ describe('Product Reducer Initial State', () => {
     expect(store.getState().product.error).toBe('something went wrong');
   });
 });
+
+// productReducer action tests
 
 describe('Product Sorting in Product Reducer', () => {
   test('Should sort all products by price high to low', () => {
@@ -113,6 +117,8 @@ describe('Product Sorting in Product Reducer', () => {
     expect(products[2].title).toBe('Amplifire');
   });
 });
+
+// productReducer thunk action tests
 
 describe('Test async thunk actions in productsReducer', () => {
   test('Should fetch all products', async () => {

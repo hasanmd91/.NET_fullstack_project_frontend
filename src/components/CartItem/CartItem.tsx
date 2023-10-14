@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography, Paper, Box, Button } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,6 +8,7 @@ import QuantitySelect from '../InputSelect/InputSelect';
 import {
   setItemQuantity,
   removeItemFromCart,
+  totalCartPrice,
 } from '../../redux/reducers/cartReducer';
 
 type CartItemType = {
@@ -19,28 +20,35 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
 
   const removeItem = (id: number) => {
     dispatch(removeItemFromCart(id));
+    dispatch(totalCartPrice());
   };
 
   const changeQuantity = (quantity: number, id: number) => {
     dispatch(setItemQuantity({ quantity, id }));
+    dispatch(totalCartPrice());
   };
 
   return (
-    <Paper elevation={1} style={{ padding: '10px', marginBottom: '6px' }}>
+    <Paper elevation={1} style={{ padding: '5px', marginBottom: '6px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-        <Box>
+        <Box flexGrow={1} margin={'auto'}>
           <img
             src={item.image}
             alt={item.title}
-            style={{ maxWidth: '100%', maxHeight: '100px' }}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '70px',
+              height: 'auto',
+              borderRadius: '4px',
+            }}
           />
         </Box>
 
-        <Box>
-          <Typography variant="h6" gutterBottom>
+        <Box flexGrow={2}>
+          <Typography variant="body1" gutterBottom>
             {item.title}
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             ${item.price}
           </Typography>
           <Typography variant="caption" color="textSecondary" gutterBottom>
@@ -49,9 +57,12 @@ const CartItem: React.FC<CartItemType> = ({ item }) => {
           <Button onClick={() => removeItem(item.id)}>
             <DeleteIcon style={{ color: 'gray' }} />
           </Button>
+          <Typography variant="caption" color="textSecondary" gutterBottom>
+            Total {item.totalPrice}
+          </Typography>
         </Box>
 
-        <Box>
+        <Box flexGrow={1}>
           <QuantitySelect changeQuantity={changeQuantity} id={item.id} />
         </Box>
       </Box>

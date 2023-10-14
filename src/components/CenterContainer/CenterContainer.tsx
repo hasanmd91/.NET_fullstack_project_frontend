@@ -15,7 +15,8 @@ const CenteredContainer: React.FC<CenteredContainerProps> = ({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      minHeight: '100vh',
+      marginTop: '16px',
     }}
     {...rest}
   >

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Container, Paper, Typography, Button } from '@mui/material';
+import { Box, Container, Paper, Typography } from '@mui/material';
 
 import TextField from '../TextField/TextField';
 import useAppSelector from '../../hooks/useAppSelector';
 import Link from '../Link/Link';
+import Button from '../Button/Button';
 
 type LoginFormType = {
   email: string;
@@ -62,34 +63,14 @@ const LoginForm: React.FC<LoginFormType> = ({
             error={error}
             helperText={errorMsg}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            size="large"
-            sx={{
-              background: '#0d2134',
-              margin: '20px 0',
-              '&:hover': { background: '#d93226' },
-            }}
-          >
+          <Button type="submit" fullWidth>
             Login
           </Button>
         </form>
         <Box>
           <Typography variant="h6">Are you a new customer ?</Typography>
           <Link to="/register">
-            <Button
-              type="submit"
-              variant="contained"
-              fullWidth
-              size="large"
-              style={{ marginTop: '16px' }}
-              sx={{
-                background: '#0d2134',
-                '&:hover': { background: '#d93226' },
-              }}
-            >
+            <Button fullWidth size="large">
               Register
             </Button>
           </Link>
