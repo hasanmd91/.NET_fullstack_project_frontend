@@ -24,7 +24,6 @@ const Pagination: React.FC<PaginationType> = ({
         onChange={handleChange}
         variant="outlined"
         shape="rounded"
-        size="large"
       />
     </Stack>
   );

@@ -58,7 +58,7 @@ const Home = () => {
           Featured Products
         </Typography>
         {products.length > 10 &&
-          products.slice(0, 8).map((product: product) => (
+          products.slice(0, 10).map((product: product) => (
             <Link to={`/products/${product.id}`} key={product.id}>
               <MediaCard product={product} />
             </Link>

@@ -22,7 +22,7 @@ const ProductList = () => {
 
   const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
     products,
-    20
+    30
   );
 
   const dispatch = useAppDispatch();
@@ -48,7 +48,16 @@ const ProductList = () => {
   }
 
   return currentProducts.length > 0 ? (
-    <Container maxWidth="xl" sx={{ marginTop: '2rem' }}>
+    <Container
+      maxWidth="xl"
+      sx={{
+        marginTop: '2rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
       <Box
         style={{
           display: 'flex',
@@ -63,13 +72,13 @@ const ProductList = () => {
             <MediaCard product={product} />
           </Link>
         ))}
-
-        <Pagination
-          count={pageLimit}
-          currentPage={currentPage}
-          setPage={setPage}
-        />
       </Box>
+
+      <Pagination
+        count={pageLimit}
+        currentPage={currentPage}
+        setPage={setPage}
+      />
     </Container>
   ) : (
     <CenteredContainer>
