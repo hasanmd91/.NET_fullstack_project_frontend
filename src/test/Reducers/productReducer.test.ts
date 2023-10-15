@@ -11,6 +11,7 @@ import {
   deleteProductAsync,
   getAProductsAsync,
   getAllProductsAsync,
+  getAllProductsByCategoryAsync,
   updateProductAsync,
 } from '../../redux/thunks/productThunk';
 
@@ -134,9 +135,20 @@ describe('Test async thunk actions in productsReducer', () => {
     expect(store.getState().product.product).toMatchObject(productsData[1]);
   });
 
+  test('Should get all products in the same category', async () => {
+    const categoryId = productsData[0].category.id;
+    await store.dispatch(getAllProductsByCategoryAsync(categoryId));
+    expect(store.getState().product.products).toHaveLength(2);
+    expect(store.getState().product.products[0].category.name).toBe(
+      'Electronics'
+    );
+    expect(store.getState().product.products[0].category.name).toBe(
+      'Electronics'
+    );
+  });
+
   test('Should create a product', async () => {
     await store.dispatch(getAllProductsAsync());
-
     const newproduct: newProduct = {
       title: 'Test Create Product1',
       price: 500,
@@ -144,7 +156,6 @@ describe('Test async thunk actions in productsReducer', () => {
       categoryId: 1,
       images: ['https://api.lorem.space/image/dummyImage'],
     };
-
     await store.dispatch(createNewProductAsync(newproduct));
     expect(store.getState().product.products.length).toBe(4);
   });

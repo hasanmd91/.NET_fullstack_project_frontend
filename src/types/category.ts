@@ -8,3 +8,8 @@ export interface newCategory {
   name: string;
   image: string;
 }
+
+export interface updatedCategory {
+  id: number;
+  updatedData: Partial<newCategory>;
+}

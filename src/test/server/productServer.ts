@@ -30,6 +30,23 @@ export const handlers = [
     }
   ),
 
+  rest.get(
+    `https://api.escuelajs.co/api/v1/categories/:id/products`,
+    async (req, res, ctx) => {
+      const { id } = req.params;
+
+      const products = productsData.filter((product) => {
+        return product.category.id === Number(id);
+      });
+
+      if (products.length) {
+        return res(ctx.json(products));
+      } else {
+        return res(ctx.status(404, 'no product found in this category'));
+      }
+    }
+  ),
+
   rest.put(
     `https://api.escuelajs.co/api/v1/products/:id`,
     async (req, res, ctx) => {
