@@ -24,7 +24,7 @@ const Images = [
 ];
 
 const Home = () => {
-  const { products, status, error } = useAppSelector((state) => state.product);
+  const { products, loading, error } = useAppSelector((state) => state.product);
 
   const dispatch = useAppDispatch();
 
@@ -32,7 +32,7 @@ const Home = () => {
     dispatch(getAllProductsAsync());
   }, [dispatch]);
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <CenteredContainer>
         <CircularProgress color="error" size="5rem" />
@@ -51,7 +51,6 @@ const Home = () => {
   return (
     <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
       <ImageSlider images={Images} />
-
       <Box sx={{ marginTop: '2rem' }}>
         <Divider />
         <Typography variant="h5" gutterBottom>

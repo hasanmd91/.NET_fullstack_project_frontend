@@ -4,6 +4,7 @@ import productsServer from '../server/productServer';
 import productsData from '../data/productsData';
 import productReducer, {
   productStateType,
+  searchProduct,
   sortProduct,
 } from '../../redux/reducers/productReducer';
 import {
@@ -116,6 +117,18 @@ describe('Product Sorting in Product Reducer', () => {
     expect(products[0].title).toBe('Camera');
     expect(products[1].title).toBe('Bag');
     expect(products[2].title).toBe('Amplifire');
+  });
+
+  test('Should search products by name', () => {
+    const state: productStateType = {
+      products: productsData,
+      loading: false,
+      error: '',
+    };
+    const products = productReducer(state, searchProduct('Camera')).products;
+
+    expect(products[0].title).toBe('Camera');
+    expect(products).toHaveLength(1);
   });
 });
 

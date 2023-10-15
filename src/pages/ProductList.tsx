@@ -16,9 +16,10 @@ import FilterBar from '../components/FilterBar/FilterBar';
 import Pagination from '../components/Pagination/Pagination';
 import { getAllProductsAsync } from '../redux/thunks/productThunk';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import SearchBar from '../components/InputSearch/SearchBar';
 
 const ProductList = () => {
-  const { products, status, error } = useAppSelector((state) => state.product);
+  const { products, loading, error } = useAppSelector((state) => state.product);
 
   const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
     products,
@@ -31,7 +32,7 @@ const ProductList = () => {
     dispatch(getAllProductsAsync());
   }, [dispatch]);
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <CenteredContainer>
         <CircularProgress color="error" size="5rem" />
@@ -66,6 +67,7 @@ const ProductList = () => {
           alignItems: 'center',
         }}
       >
+        <SearchBar />
         <FilterBar />
         {currentProducts.map((product) => (
           <Link to={`/products/${product.id}`} key={product.id}>

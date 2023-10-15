@@ -48,6 +48,12 @@ const productSlice = createSlice({
         );
       }
     },
+
+    searchProduct: (state, action: PayloadAction<string>) => {
+      state.products = state.products.filter((product) =>
+        product.title.includes(action.payload)
+      );
+    },
   },
 
   extraReducers: (builder) => {
@@ -157,7 +163,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { sortProduct } = productSlice.actions;
+export const { sortProduct, searchProduct } = productSlice.actions;
 const productReducer = productSlice.reducer;
 
 export default productReducer;
