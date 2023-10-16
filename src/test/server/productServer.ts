@@ -1,8 +1,25 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import productsData from '../data/productsData';
+import { url } from 'inspector';
 
 export const handlers = [
+  rest.get(
+    `https://api.escuelajs.co/api/v1/products`,
+    async (req, res, ctx) => {
+      const searchParam = req.url.searchParams.get('title');
+      if (searchParam) {
+        const products = productsData.filter(
+          (product) => product.title === searchParam
+        );
+        if (products) {
+          return res(ctx.json(products));
+        }
+        return res(ctx.status(404, 'no product found'));
+      }
+    }
+  ),
+
   rest.get(
     `https://api.escuelajs.co/api/v1/products`,
     async (req, res, ctx) => {

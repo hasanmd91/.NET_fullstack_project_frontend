@@ -1,15 +1,16 @@
 import React from 'react';
 import { IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import { searchProduct } from '../../redux/reducers/productReducer';
 
-const SearchBar = () => {
-  const dispatch = useAppDispatch();
+type searchType = {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+};
 
+const SearchBar: React.FC<searchType> = ({ search, setSearch }) => {
   const searchHandeler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toString();
-    dispatch(searchProduct(value));
+    const value = e.target.value.toString().toLowerCase();
+    setSearch(value);
   };
 
   return (
@@ -27,6 +28,7 @@ const SearchBar = () => {
         <SearchIcon />
       </IconButton>
       <InputBase
+        value={search}
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search"
         inputProps={{ 'aria-label': 'Search ' }}

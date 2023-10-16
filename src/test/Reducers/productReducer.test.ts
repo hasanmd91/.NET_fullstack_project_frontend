@@ -4,7 +4,6 @@ import productsServer from '../server/productServer';
 import productsData from '../data/productsData';
 import productReducer, {
   productStateType,
-  searchProduct,
   sortProduct,
 } from '../../redux/reducers/productReducer';
 import {
@@ -13,6 +12,7 @@ import {
   getAProductsAsync,
   getAllProductsAsync,
   getAllProductsByCategoryAsync,
+  getProductByTitleAsync,
   updateProductAsync,
 } from '../../redux/thunks/productThunk';
 
@@ -118,18 +118,6 @@ describe('Product Sorting in Product Reducer', () => {
     expect(products[1].title).toBe('Bag');
     expect(products[2].title).toBe('Amplifire');
   });
-
-  test('Should search products by name', () => {
-    const state: productStateType = {
-      products: productsData,
-      loading: false,
-      error: '',
-    };
-    const products = productReducer(state, searchProduct('Camera')).products;
-
-    expect(products[0].title).toBe('Camera');
-    expect(products).toHaveLength(1);
-  });
 });
 
 // productReducer thunk action tests
@@ -174,16 +162,16 @@ describe('Test async thunk actions in productsReducer', () => {
   });
 
   test('Should update a product', async () => {
-    const id = productsData[0].id;
+    const id = productsData[1].id;
     const updatedData = {
-      title: 'Diaper',
+      title: 'Camera',
       description: 'new description',
       price: 320,
     };
 
     await store.dispatch(getAllProductsAsync());
     await store.dispatch(updateProductAsync({ id, updatedData }));
-    expect(store.getState().product.products[0].title).toBe('Diaper');
+    expect(store.getState().product.products[1].title).toBe('Camera');
   });
 
   test('Should delete a product', async () => {
@@ -194,5 +182,13 @@ describe('Test async thunk actions in productsReducer', () => {
     const { payload } = await store.dispatch(deleteProductAsync(id));
     expect(payload).toBe(id);
     expect(store.getState().product.products).toHaveLength(3);
+  });
+
+  test('Should get a product by name getProductByTitleAsync', async () => {
+    await store.dispatch(getProductByTitleAsync('Camera'));
+
+    expect(store.getState().product.products).toHaveLength(2);
+    expect(store.getState().product.products[0].title).toBe('Camera');
+    expect(store.getState().product.products[1].title).toBe('Camera');
   });
 });

@@ -122,3 +122,22 @@ export const getAllProductsByCategoryAsync = createAsyncThunk<
     return rejectWithValue(err.message);
   }
 });
+
+/* SEARCH PRODUCTS BY TITLE */
+
+export const getProductByTitleAsync = createAsyncThunk<
+  product[],
+  string,
+  { rejectValue: string }
+>('getProductByTitleAsync', async (searchQuery, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<product[]>(
+      `https://api.escuelajs.co/api/v1/products/?title=${searchQuery}`
+    );
+
+    return response.data;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.message);
+  }
+});
