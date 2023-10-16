@@ -45,6 +45,8 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
 
   const { error } = useAppSelector((state) => state.user);
 
+  console.log(error);
+
   return (
     <Container
       sx={{
@@ -163,7 +165,11 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
             Reset
           </Button>
         </form>
-        {error && <Alert severity="error">{error}</Alert>}
+        {error && (
+          <Alert severity="error" sx={{ marginTop: '10px' }}>
+            {error}
+          </Alert>
+        )}
       </Paper>
     </Container>
   );

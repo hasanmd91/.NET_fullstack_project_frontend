@@ -34,7 +34,7 @@ const ProductList = () => {
 
   useEffect(() => {
     dispatch(getAllProductsAsync());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (
