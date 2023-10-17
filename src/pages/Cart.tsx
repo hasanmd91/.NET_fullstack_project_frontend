@@ -10,10 +10,12 @@ import { CartItem as CartItemType } from '../types/cart';
 import useAppDispatch from '../hooks/useAppDispatch';
 import { clearCart, totalCartPrice } from '../redux/reducers/cartReducer';
 import Button from '../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { cartItems, totalAmount } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(totalCartPrice());
@@ -36,8 +38,15 @@ const Cart = () => {
             {cartItems.map((item: CartItemType) => (
               <CartItem key={item.id} item={item} />
             ))}
-            <Button size="small" onClick={() => dispatch(clearCart())}>
+            <Button
+              size="small"
+              sx={{ marginRight: '2px' }}
+              onClick={() => dispatch(clearCart())}
+            >
               Empty cart
+            </Button>
+            <Button size="small" onClick={() => navigate('/products')}>
+              Continue Shopping
             </Button>
           </Box>
         </Grid>

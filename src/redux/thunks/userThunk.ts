@@ -105,14 +105,12 @@ export const updateUserAsync = createAsyncThunk<
 >(
   'updateUserAsync',
   async ({ data, id }: updateUserDataType, { rejectWithValue }) => {
-    console.log(data);
     try {
       const response = await axios.put<user>(
         `https://api.escuelajs.co/api/v1/users/${id}`,
         data
       );
       const updatedUser: user = response.data;
-      console.log(updatedUser);
       return updatedUser;
     } catch (error) {
       const err = error as AxiosError;

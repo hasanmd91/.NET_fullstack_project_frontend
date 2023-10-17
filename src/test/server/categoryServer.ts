@@ -1,7 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import categoriesData from '../data/categoriesData';
-import productsData from '../data/productsData';
 
 export const handlers = [
   rest.get(
