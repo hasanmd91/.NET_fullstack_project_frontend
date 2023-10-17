@@ -1,32 +1,50 @@
-import { Container, TextField, Button, Alert, Typography } from '@mui/material';
-import React from 'react';
+import {
+  Container,
+  TextField,
+  Alert,
+  Typography,
+  Box,
+  Button as MuiButton,
+} from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import React, { useEffect } from 'react';
 import {
   UseFormHandleSubmit,
   SubmitHandler,
   UseFormReset,
-  Control,
   FieldErrors,
-  Controller,
+  UseFormRegister,
+  useFieldArray,
 } from 'react-hook-form';
 import useAppSelector from '../../hooks/useAppSelector';
-import { newProductYup } from '../../types/product';
+import { newProduct } from '../../types/product';
+import Button from '../Button/Button';
 
 type NewProductFormType = {
-  handleSubmit: UseFormHandleSubmit<newProductYup>;
-  submitHandeler: SubmitHandler<newProductYup>;
-  reset: UseFormReset<newProductYup>;
-  control: Control<newProductYup>;
-  errors: FieldErrors<newProductYup>;
+  handleSubmit: UseFormHandleSubmit<newProduct>;
+  submitHandeler: SubmitHandler<newProduct>;
+  reset: UseFormReset<newProduct>;
+  errors: FieldErrors<newProduct>;
+  register: UseFormRegister<newProduct>;
 };
 
 const NewProductForm: React.FC<NewProductFormType> = ({
   handleSubmit,
   submitHandeler,
-  control,
+  register,
   errors,
   reset,
 }) => {
   const { error } = useAppSelector((state) => state.user);
+
+  const { fields, append, remove } = useFieldArray({ name: 'images' });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append({});
+    }
+    reset();
+  }, [reset, fields.length, append]);
 
   return (
     <Container>
@@ -35,115 +53,88 @@ const NewProductForm: React.FC<NewProductFormType> = ({
       </Typography>
       <form
         onSubmit={handleSubmit(submitHandeler)}
+        noValidate
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '10px',
         }}
       >
-        <Controller
-          name="title"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              helperText={errors.title?.message}
-              error={errors.title ? true : false}
-              label="title"
-            />
-          )}
-        />
-        <Controller
-          name="price"
-          control={control}
-          defaultValue={0}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              helperText={errors.price?.message}
-              error={errors.price ? true : false}
-              label="price"
-            />
-          )}
+        <TextField
+          type="text"
+          id="title"
+          label="title"
+          {...register('title')}
+          helperText={errors.title?.message}
+          error={errors.title ? true : false}
         />
 
-        <Controller
-          name="description"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              type="text"
-              helperText={errors.description?.message}
-              error={errors.description ? true : false}
-              label="description"
-            />
-          )}
+        <TextField
+          type="text"
+          id="description"
+          label="description"
+          {...register('description')}
+          helperText={errors.description?.message}
+          error={errors.description ? true : false}
         />
 
-        <Controller
-          name="images"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
+        <TextField
+          type="text"
+          id="price"
+          label="price"
+          {...register('price')}
+          helperText={errors.price?.message}
+          error={errors.price ? true : false}
+        />
+
+        <TextField
+          type="text"
+          id="categoryId"
+          label="categoryId"
+          {...register('categoryId')}
+          helperText={errors.categoryId?.message}
+          error={errors.categoryId ? true : false}
+        />
+        {fields.map((field, index) => (
+          <Box
+            key={field.id}
+            sx={{
+              display: 'flex',
+            }}
+          >
             <TextField
-              {...field}
-              multiline
+              fullWidth
               type="text"
+              id={`images[${index}]`}
+              label="images"
+              {...register(`images.${index}`)}
               helperText={errors.images?.message}
               error={errors.images ? true : false}
-              label="images"
             />
-          )}
-        />
-
-        <Controller
-          name="categoryId"
-          control={control}
-          defaultValue={0}
-          rules={{ required: false }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              helperText={errors.categoryId?.message}
-              error={errors.categoryId ? true : false}
-              label="categoryId"
-            />
-          )}
-        />
+            {index > 0 && (
+              <MuiButton onClick={() => remove(index)}>
+                <DeleteForeverIcon style={{ color: 'black' }} />
+              </MuiButton>
+            )}
+          </Box>
+        ))}
 
         <Button
-          type="submit"
-          variant="contained"
-          size="large"
-          style={{ marginTop: '16px' }}
-          sx={{
-            marginRight: '1rem',
-            background: '#0d2134',
-            '&:hover': { background: '#d93226' },
-          }}
-          onClick={() => handleSubmit}
+          sx={{ width: '150px' }}
+          type="button"
+          onClick={() => append(' ')}
         >
-          Submit
+          Add Image
         </Button>
-        <Button
-          type="reset"
-          variant="contained"
-          size="large"
-          style={{ marginTop: '16px' }}
-          sx={{
-            background: '#0d2134',
-            '&:hover': { background: '#d93226' },
-          }}
-          onClick={() => reset()}
-        >
-          Reset
-        </Button>
+
+        <Box>
+          <Button sx={{ marginRight: '10px' }} onClick={() => handleSubmit}>
+            Submit
+          </Button>
+          <Button type="reset" onClick={() => reset()}>
+            Reset
+          </Button>
+        </Box>
       </form>
       {error && <Alert severity="error">{error}</Alert>}
     </Container>

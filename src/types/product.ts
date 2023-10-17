@@ -17,14 +17,6 @@ export interface newProduct {
   categoryId: number;
 }
 
-export interface newProductYup {
-  title: string;
-  price: number;
-  description: string;
-  images: string;
-  categoryId: number;
-}
-
 export interface updatedProduct {
   id: number;
   updatedData: Partial<newProduct>;

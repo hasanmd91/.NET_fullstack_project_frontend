@@ -91,7 +91,7 @@ const productSlice = createSlice({
     });
 
     builder.addCase(createNewProductAsync.fulfilled, (state, action) => {
-      state.products = [...state.products, action.payload];
+      state.products = [action.payload, ...state.products];
       state.loading = false;
     });
 

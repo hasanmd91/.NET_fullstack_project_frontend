@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useForm, FormProvider } from 'react-hook-form';
 
 import Home from './pages/Home';
 import Root from './pages/Root';
@@ -16,6 +17,8 @@ import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/Profile';
 
 const App = () => {
+  const methods = useForm();
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -74,7 +77,11 @@ const App = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <FormProvider {...methods}>
+      <RouterProvider router={router} />;
+    </FormProvider>
+  );
 };
 
 export default App;

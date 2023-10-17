@@ -6,9 +6,9 @@ import { Alert, CircularProgress, Container, Grid } from '@mui/material';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import NewProductForm from '../components/NewProductForm/NewProductForm';
 import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
-import { newProduct, newProductYup, product } from '../types/product';
+import { newProduct, product } from '../types/product';
 import AdminSideBar from '../components/AdminSideBar/AdminSideBar';
-import { schema } from '../validation/productDataValidation';
+import { newProductSchema } from '../validation/productDataValidation';
 import Pagination from '../components/Pagination/Pagination';
 import SearchBar from '../components/InputSearch/SearchBar';
 import { usePagination } from '../hooks/usePagination';
@@ -21,6 +21,7 @@ import {
   getAllProductsAsync,
   getProductByTitleAsync,
 } from '../redux/thunks/productThunk';
+import { Link } from 'react-router-dom';
 
 const AdminDashbord = () => {
   const [open, setOpen] = useState(false);
@@ -35,12 +36,20 @@ const AdminDashbord = () => {
   );
 
   const {
+    register,
     reset,
-    control,
     handleSubmit,
     formState: { errors },
-  } = useForm<newProductYup>({
-    resolver: yupResolver(schema),
+  } = useForm<newProduct>({
+    defaultValues: {
+      title: '',
+      price: 0,
+      description: '',
+      images: [''],
+      categoryId: 0,
+    },
+
+    resolver: yupResolver(newProductSchema),
   });
 
   useEffect(() => {
@@ -54,12 +63,9 @@ const AdminDashbord = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const submitHandeler = (data: newProductYup) => {
-    const newData: newProduct = {
-      ...data,
-      images: data.images.split('\n').map((url) => url.trim()),
-    };
-    dispatch(createNewProductAsync(newData));
+  const submitHandeler = (data: newProduct) => {
+    console.log(data);
+    dispatch(createNewProductAsync(data));
 
     if (!error) {
       handleClose();
@@ -82,6 +88,8 @@ const AdminDashbord = () => {
     );
   }
 
+  //
+
   return (
     <Container maxWidth="xl" sx={{ marginTop: '1rem' }}>
       <Grid container spacing={1}>
@@ -93,7 +101,12 @@ const AdminDashbord = () => {
           <SearchBar search={search} setSearch={setSearch} />
 
           {currentProducts.map((product: product) => (
-            <AdminDataCard product={product} key={product.id} />
+            <Link
+              to={`/products/${product.id}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <AdminDataCard product={product} key={product.id} />
+            </Link>
           ))}
 
           <Pagination
@@ -112,9 +125,9 @@ const AdminDashbord = () => {
         <NewProductForm
           handleSubmit={handleSubmit}
           submitHandeler={submitHandeler}
-          control={control}
           reset={reset}
           errors={errors}
+          register={register}
         />
       </Modal>
     </Container>
