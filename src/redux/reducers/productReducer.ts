@@ -102,10 +102,6 @@ const productSlice = createSlice({
 
     /*DELETE A PRODUCT REDUCER*/
 
-    builder.addCase(deleteProductAsync.pending, (state, action) => {
-      state.loading = true;
-    });
-
     builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
       state.products = state.products.filter(
         (product) => product.id !== action.payload
@@ -119,10 +115,6 @@ const productSlice = createSlice({
     });
 
     /*UPDATE PRODUCT REDUCER*/
-
-    builder.addCase(updateProductAsync.pending, (state, action) => {
-      state.loading = true;
-    });
 
     builder.addCase(updateProductAsync.fulfilled, (state, action) => {
       const updatedProduct = action.payload;

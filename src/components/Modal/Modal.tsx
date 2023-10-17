@@ -20,16 +20,9 @@ type ModalType = {
   error: string;
 };
 
-const Modal: React.FC<ModalType> = ({
-  children,
-  open,
-  handleClose,
-  handleOpen,
-  error,
-}) => {
+const Modal: React.FC<ModalType> = ({ children, open, handleClose, error }) => {
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <MuiModal
         open={open}
         onClose={handleClose}

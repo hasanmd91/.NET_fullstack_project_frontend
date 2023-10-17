@@ -1,35 +1,38 @@
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
-import useAppSelector from '../hooks/useAppSelector';
-import useAppDispatch from '../hooks/useAppDispatch';
-import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
-import Modal from '../components/Modal/Modal';
-import NewProductForm from '../components/NewProductForm/NewProductForm';
-import { newProduct, newProductYup, product } from '../types/product';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Alert, CircularProgress, Container, Grid } from '@mui/material';
+
+import CenteredContainer from '../components/CenterContainer/CenterContainer';
+import NewProductForm from '../components/NewProductForm/NewProductForm';
+import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
+import { newProduct, newProductYup, product } from '../types/product';
+import AdminSideBar from '../components/AdminSideBar/AdminSideBar';
 import { schema } from '../validation/productDataValidation';
+import Pagination from '../components/Pagination/Pagination';
+import SearchBar from '../components/InputSearch/SearchBar';
+import { usePagination } from '../hooks/usePagination';
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
+import useDebounce from '../hooks/useDebounce';
+import Modal from '../components/Modal/Modal';
 import {
   createNewProductAsync,
   getAllProductsAsync,
+  getProductByTitleAsync,
 } from '../redux/thunks/productThunk';
 
 const AdminDashbord = () => {
-  const { products, status, error } = useAppSelector((state) => state.product);
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const dispatch = useAppDispatch();
+  const { debouncedValue } = useDebounce(search);
+  const { products, loading, error } = useAppSelector((state) => state.product);
+  const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
+    products,
+    30
+  );
 
   const {
     reset,
@@ -40,11 +43,16 @@ const AdminDashbord = () => {
     resolver: yupResolver(schema),
   });
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getProductByTitleAsync(debouncedValue));
+  }, [debouncedValue, dispatch]);
 
   useEffect(() => {
     dispatch(getAllProductsAsync());
   }, [dispatch]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const submitHandeler = (data: newProductYup) => {
     const newData: newProduct = {
@@ -58,7 +66,7 @@ const AdminDashbord = () => {
     }
   };
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <CenteredContainer>
         <CircularProgress color="error" size="5rem" />
@@ -74,50 +82,25 @@ const AdminDashbord = () => {
     );
   }
 
-  return products.length > 0 ? (
-    <Container maxWidth="xl" sx={{ margin: '1rem auto' }}>
+  return (
+    <Container maxWidth="xl" sx={{ marginTop: '1rem' }}>
       <Grid container spacing={1}>
-        <Grid item md={2} xs={12}>
-          <Box
-            sx={{
-              backgroundColor: '#0d2134',
-              minHeight: '50vh',
-              padding: '2px',
-            }}
-          >
-            <Button
-              size="small"
-              fullWidth
-              variant="contained"
-              sx={{
-                color: 'white',
-                backgroundColor: '#d93226',
-                margin: '5px 0',
-              }}
-              onClick={handleOpen}
-            >
-              Add Product
-            </Button>
-
-            <Button
-              size="small"
-              fullWidth
-              variant="contained"
-              sx={{
-                color: 'white',
-                backgroundColor: '#d93226',
-                margin: '5px 0',
-              }}
-            >
-              Users
-            </Button>
-          </Box>
+        <Grid item md={2}>
+          <AdminSideBar handleOpen={handleOpen} />
         </Grid>
 
-        <Grid item md={10}>
-          {products.map((product: product) => (
+        <Grid item md={10} xs={12}>
+          <SearchBar search={search} setSearch={setSearch} />
+
+          {currentProducts.map((product: product) => (
             <AdminDataCard product={product} key={product.id} />
           ))}
+
+          <Pagination
+            count={pageLimit}
+            currentPage={currentPage}
+            setPage={setPage}
+          />
         </Grid>
       </Grid>
       <Modal
@@ -135,10 +118,6 @@ const AdminDashbord = () => {
         />
       </Modal>
     </Container>
-  ) : (
-    <CenteredContainer>
-      <Typography>NO PRODUCT IN THE STORE</Typography>
-    </CenteredContainer>
   );
 };
 
