@@ -4,6 +4,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import { product } from '../../types/product';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { deleteProductAsync } from '../../redux/thunks/productThunk';
+import useButtonWithDelay from '../../hooks/useButtonWithDelay';
 
 type AdminDataCardType = {
   product: product;
@@ -11,10 +12,12 @@ type AdminDataCardType = {
 
 const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
   const dispatch = useAppDispatch();
+  const [isDisabled, disabledButtonForASecond] = useButtonWithDelay();
 
   const editHandeler = () => {};
   const deleteHandeler = (id: number) => {
     dispatch(deleteProductAsync(id));
+    disabledButtonForASecond();
   };
 
   return (
@@ -25,6 +28,9 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
         alignItems: 'center',
         padding: '0.5rem',
         marginBottom: '1rem',
+        '&:hover': {
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+        },
       }}
     >
       <Grid container spacing={2}>
@@ -54,7 +60,11 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
           <Button color="inherit" onClick={editHandeler} disabled>
             Edit
           </Button>
-          <Button color="error" onClick={() => deleteHandeler(product.id)}>
+          <Button
+            color="error"
+            onClick={() => deleteHandeler(product.id)}
+            disabled={isDisabled}
+          >
             Delete
           </Button>
         </Grid>

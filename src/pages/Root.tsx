@@ -6,11 +6,11 @@ import Navbar from '../components/Navbar/Navbar';
 
 const Root: React.FC = () => {
   return (
-    <>
+    <React.Fragment>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </React.Fragment>
   );
 };
 

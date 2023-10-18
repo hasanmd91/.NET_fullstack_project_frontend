@@ -69,10 +69,10 @@ const Footer = () => {
           </Typography>
         </Grid>
         <Grid md={12} item margin={'0 auto'}>
-          <Box maxWidth={'500px'} margin={'5rem auto'}>
+          <Box maxWidth={'500px'} margin={'6rem auto'}>
             <img
               src="/assets/card.png"
-              alt=""
+              alt="payment"
               style={{ width: '100%', objectFit: 'cover' }}
             />
           </Box>

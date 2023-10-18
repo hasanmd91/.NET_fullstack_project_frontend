@@ -4,8 +4,10 @@ export const newProductSchema = yup
   .object({
     title: yup.string().required(),
     description: yup.string().required(),
-    price: yup.number().required(),
-    categoryId: yup.number().required(),
-    images: yup.array(yup.string().url().required()).required(),
+    price: yup.number().required('price is required'),
+    categoryId: yup.number().required('categoryId is required'),
+    images: yup
+      .array(yup.string().url('Must be a image url').required())
+      .required(),
   })
   .required();

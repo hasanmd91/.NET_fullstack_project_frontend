@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Typography, Paper, Box, Button } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';

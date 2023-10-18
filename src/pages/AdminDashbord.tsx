@@ -21,7 +21,6 @@ import {
   getAllProductsAsync,
   getProductByTitleAsync,
 } from '../redux/thunks/productThunk';
-import { Link } from 'react-router-dom';
 
 const AdminDashbord = () => {
   const [open, setOpen] = useState(false);
@@ -41,14 +40,6 @@ const AdminDashbord = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<newProduct>({
-    defaultValues: {
-      title: '',
-      price: 0,
-      description: '',
-      images: [''],
-      categoryId: 0,
-    },
-
     resolver: yupResolver(newProductSchema),
   });
 
@@ -88,8 +79,6 @@ const AdminDashbord = () => {
     );
   }
 
-  //
-
   return (
     <Container maxWidth="xl" sx={{ marginTop: '1rem' }}>
       <Grid container spacing={1}>
@@ -101,12 +90,7 @@ const AdminDashbord = () => {
           <SearchBar search={search} setSearch={setSearch} />
 
           {currentProducts.map((product: product) => (
-            <Link
-              to={`/products/${product.id}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <AdminDataCard product={product} key={product.id} />
-            </Link>
+            <AdminDataCard product={product} key={product.id} />
           ))}
 
           <Pagination

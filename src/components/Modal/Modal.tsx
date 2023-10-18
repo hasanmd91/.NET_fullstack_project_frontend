@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, Box, Button, Modal as MuiModal } from '@mui/material';
+import { Alert, Box, Modal as MuiModal } from '@mui/material';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -8,7 +8,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '50%',
   bgcolor: 'background.paper',
-
   p: 4,
 };
 
@@ -28,6 +27,7 @@ const Modal: React.FC<ModalType> = ({ children, open, handleClose, error }) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{ overflowY: 'auto' }}
       >
         <Box sx={style}>
           {children}

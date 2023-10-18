@@ -1,13 +1,5 @@
-import {
-  Container,
-  TextField,
-  Alert,
-  Typography,
-  Box,
-  Button as MuiButton,
-} from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import React, { useEffect } from 'react';
+import { Container, TextField, Alert, Typography, Box } from '@mui/material';
 import {
   UseFormHandleSubmit,
   SubmitHandler,
@@ -16,6 +8,7 @@ import {
   UseFormRegister,
   useFieldArray,
 } from 'react-hook-form';
+
 import useAppSelector from '../../hooks/useAppSelector';
 import { newProduct } from '../../types/product';
 import Button from '../Button/Button';
@@ -40,11 +33,15 @@ const NewProductForm: React.FC<NewProductFormType> = ({
   const { fields, append, remove } = useFieldArray({ name: 'images' });
 
   useEffect(() => {
+    reset();
+    remove();
+  }, [reset, remove]);
+
+  useEffect(() => {
     if (fields.length === 0) {
       append({});
     }
-    reset();
-  }, [reset, fields.length, append]);
+  }, [fields.length, append]);
 
   return (
     <Container>
@@ -63,7 +60,7 @@ const NewProductForm: React.FC<NewProductFormType> = ({
         <TextField
           type="text"
           id="title"
-          label="title"
+          label="Title"
           {...register('title')}
           helperText={errors.title?.message}
           error={errors.title ? true : false}
@@ -72,29 +69,30 @@ const NewProductForm: React.FC<NewProductFormType> = ({
         <TextField
           type="text"
           id="description"
-          label="description"
+          label="Description"
           {...register('description')}
           helperText={errors.description?.message}
           error={errors.description ? true : false}
         />
 
         <TextField
-          type="text"
+          type="number"
           id="price"
-          label="price"
+          label="Price"
           {...register('price')}
           helperText={errors.price?.message}
           error={errors.price ? true : false}
         />
 
         <TextField
-          type="text"
+          type="number"
           id="categoryId"
-          label="categoryId"
+          label="CategoryId"
           {...register('categoryId')}
           helperText={errors.categoryId?.message}
           error={errors.categoryId ? true : false}
         />
+
         {fields.map((field, index) => (
           <Box
             key={field.id}
@@ -106,16 +104,11 @@ const NewProductForm: React.FC<NewProductFormType> = ({
               fullWidth
               type="text"
               id={`images[${index}]`}
-              label="images"
+              label="Image"
               {...register(`images.${index}`)}
               helperText={errors.images?.message}
               error={errors.images ? true : false}
             />
-            {index > 0 && (
-              <MuiButton onClick={() => remove(index)}>
-                <DeleteForeverIcon style={{ color: 'black' }} />
-              </MuiButton>
-            )}
           </Box>
         ))}
 
