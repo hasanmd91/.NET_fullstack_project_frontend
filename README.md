@@ -30,7 +30,7 @@ Welcome to the ILH Store E-commerce Application, a online shopping platform, and
 
 ## Deployment
 
-Live Link : [https://ilhstore.netlify.app/](https://ilhstore.netlify.app/)
+Live Link : [https://ilhecom.netlify.app/](https://ilhecom.netlify.app/)
 
 **Demo Admin User**
 
@@ -82,48 +82,54 @@ It correctly bundles React in production mode and optimizes the build for the be
 ## Folder Structure
 
 ```
-|───public
-│ └───assets
+├───public
+│   ├───assets
+│   └───projectImages
 └───src
-├───components
-│ ├───AdminDataCard
-│ ├───card
-│ ├───cartCalculator
-│ ├───CartIcon
-│ ├───CartItem
-│ ├───CenterContainer
-│ ├───FilterBar
-│ │ ├───CategoryFilter
-│ │ ├───FilterByName
-│ │ └───FilterByprice
-│ ├───ImageSlider
-│ ├───InputSelect
-│ ├───Link
-│ ├───LoginForm
-│ ├───Logo
-│ ├───Modal
-│ ├───Navbar
-│ │ ├───HamburgerMenu
-│ │ ├───NavigationBar
-│ │ └───TooltipMenu
-│ ├───NewProductForm
-│ ├───Pagination
-│ ├───ProfileComp
-│ ├───TextField
-│ └───UserRegisterForm
-├───Hooks
-├───pages
-├───redux
-│ ├───thunks
-│ └───reducers
-├───shared
-├───test
-│ ├───Data
-│ ├───Reducers
-│ └───server
-├───types
-├───utils
-└───Validation
+    ├───assets
+    ├───components
+    │   ├───AdminDataCard
+    │   ├───AdminProductDetails
+    │   ├───AdminSideBar
+    │   ├───AuthGuards
+    │   ├───Button
+    │   ├───Card
+    │   ├───CartCalculator
+    │   ├───CartIcon
+    │   ├───CartItem
+    │   ├───CenterContainer
+    │   ├───FilterBar
+    │   │   ├───CategoryFilter
+    │   │   ├───FilterByName
+    │   │   └───FilterByprice
+    │   ├───ImageSlider
+    │   ├───Info
+    │   ├───InputSearch
+    │   ├───InputSelect
+    │   ├───Link
+    │   ├───LoginForm
+    │   ├───Logo
+    │   ├───Modal
+    │   ├───Navbar
+    │   │   ├───HamburgerMenu
+    │   │   ├───NavigationBar
+    │   │   └───TooltipMenu
+    │   ├───NewProductForm
+    │   ├───Pagination
+    │   ├───ProfileComp
+    │   ├───TextField
+    │   └───UserRegisterForm
+    ├───hooks
+    ├───pages
+    ├───redux
+    │   ├───reducers
+    │   └───thunks
+    ├───test
+    │   ├───data
+    │   ├───reducers
+    │   └───server
+    ├───types
+    └───validation
 ```
 
 ## Features Done
