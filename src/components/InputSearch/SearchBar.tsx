@@ -22,6 +22,7 @@ const SearchBar: React.FC<searchType> = ({ search, setSearch }) => {
         display: 'flex',
         width: '60%',
         p: '2px 4px',
+        marginBottom: '5px',
       }}
     >
       <IconButton type="button" sx={{ p: '10px' }} aria-label="search">

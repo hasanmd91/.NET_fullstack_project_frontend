@@ -1,5 +1,15 @@
 import React, { useEffect } from 'react';
-import { Container, TextField, Alert, Typography, Box } from '@mui/material';
+import {
+  Container,
+  TextField,
+  Alert,
+  Typography,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import {
   UseFormHandleSubmit,
   SubmitHandler,
@@ -19,6 +29,8 @@ type NewProductFormType = {
   reset: UseFormReset<newProduct>;
   errors: FieldErrors<newProduct>;
   register: UseFormRegister<newProduct>;
+  isDirty: boolean;
+  isSubmitting: boolean;
 };
 
 const NewProductForm: React.FC<NewProductFormType> = ({
@@ -27,6 +39,8 @@ const NewProductForm: React.FC<NewProductFormType> = ({
   register,
   errors,
   reset,
+  isDirty,
+  isSubmitting,
 }) => {
   const { error } = useAppSelector((state) => state.user);
 
@@ -84,14 +98,21 @@ const NewProductForm: React.FC<NewProductFormType> = ({
           error={errors.price ? true : false}
         />
 
-        <TextField
-          type="number"
-          id="categoryId"
-          label="CategoryId"
-          {...register('categoryId')}
-          helperText={errors.categoryId?.message}
-          error={errors.categoryId ? true : false}
-        />
+        <FormControl fullWidth>
+          <InputLabel>Category</InputLabel>
+          <Select
+            {...register('categoryId')}
+            defaultValue={1}
+            label="Category"
+            error={Boolean(errors.categoryId)}
+          >
+            <MenuItem value={1}>Clothes</MenuItem>
+            <MenuItem value={2}>Electronics</MenuItem>
+            <MenuItem value={3}>Furniture</MenuItem>
+            <MenuItem value={4}>Shoes</MenuItem>
+            <MenuItem value={5}>Others</MenuItem>
+          </Select>
+        </FormControl>
 
         {fields.map((field, index) => (
           <Box
@@ -121,7 +142,11 @@ const NewProductForm: React.FC<NewProductFormType> = ({
         </Button>
 
         <Box>
-          <Button sx={{ marginRight: '10px' }} onClick={() => handleSubmit}>
+          <Button
+            disabled={!isDirty || isSubmitting}
+            sx={{ marginRight: '10px' }}
+            onClick={() => handleSubmit}
+          >
             Submit
           </Button>
           <Button type="reset" onClick={() => reset()}>

@@ -45,7 +45,6 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
 
   const { error } = useAppSelector((state) => state.user);
 
-  console.log(error);
 
   return (
     <Container
@@ -69,7 +68,7 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
           margin: '2rem 0',
         }}
       >
-        <Typography variant="h5"> Why not register!!</Typography>
+        <Typography variant="h5"> Welcome!!</Typography>
 
         <form onSubmit={handleSubmit(submitHandeler)}>
           <Controller

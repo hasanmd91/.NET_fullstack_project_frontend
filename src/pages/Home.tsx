@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 
+import brandvideo from '../assets/video.mp4';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import { getAllProductsAsync } from '../redux/thunks/productThunk';
 import ImageSlider from '../components/ImageSlider/ImageSlider';
@@ -49,19 +50,45 @@ const Home = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
-      <ImageSlider images={Images} />
+    <Container maxWidth="xl" sx={{ marginTop: '2rem' }}>
+      <Box
+        width={'100%'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+      >
+        <video
+          src={brandvideo}
+          autoPlay
+          loop
+          muted
+          style={{ objectFit: 'cover', width: '100%' }}
+        />
+      </Box>
+
       <Box sx={{ marginTop: '2rem' }}>
         <Divider />
         <Typography variant="h5" gutterBottom>
           Featured Products
         </Typography>
-        {products.length > 10 &&
-          products.slice(0, 10).map((product: product) => (
-            <Link to={`/products/${product.id}`} key={product.id}>
-              <MediaCard product={product} />
-            </Link>
-          ))}
+
+        <Box
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          flexWrap={'wrap'}
+        >
+          {products.length > 10 &&
+            products.slice(0, 30).map((product: product) => (
+              <Link to={`/products/${product.id}`} key={product.id}>
+                <MediaCard product={product} />
+              </Link>
+            ))}
+        </Box>
+
+        <ImageSlider images={Images} />
+
+        <Divider />
       </Box>
     </Container>
   );

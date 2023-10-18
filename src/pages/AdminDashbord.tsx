@@ -38,7 +38,7 @@ const AdminDashbord = () => {
     register,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isSubmitting },
   } = useForm<newProduct>({
     resolver: yupResolver(newProductSchema),
   });
@@ -88,7 +88,6 @@ const AdminDashbord = () => {
 
         <Grid item md={10} xs={12}>
           <SearchBar search={search} setSearch={setSearch} />
-
           {currentProducts.map((product: product) => (
             <AdminDataCard product={product} key={product.id} />
           ))}
@@ -107,6 +106,8 @@ const AdminDashbord = () => {
         error={error ? error : ''}
       >
         <NewProductForm
+          isDirty={isDirty}
+          isSubmitting={isSubmitting}
           handleSubmit={handleSubmit}
           submitHandeler={submitHandeler}
           reset={reset}

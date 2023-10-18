@@ -5,6 +5,7 @@ import { product } from '../../types/product';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { deleteProductAsync } from '../../redux/thunks/productThunk';
 import useButtonWithDelay from '../../hooks/useButtonWithDelay';
+import { Link } from 'react-router-dom';
 
 type AdminDataCardType = {
   product: product;
@@ -63,6 +64,10 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
           >
             Delete
           </Button>
+
+          <Link to={`/admidashbord/product/${product.id}`}>
+            <Button>Edit</Button>
+          </Link>
         </Grid>
       </Grid>
     </Paper>
