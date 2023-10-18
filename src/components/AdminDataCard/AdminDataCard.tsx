@@ -14,7 +14,6 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
   const dispatch = useAppDispatch();
   const [isDisabled, disabledButtonForASecond] = useButtonWithDelay();
 
-  const editHandeler = () => {};
   const deleteHandeler = (id: number) => {
     dispatch(deleteProductAsync(id));
     disabledButtonForASecond();
@@ -57,9 +56,6 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
           </Typography>
         </Grid>
         <Grid item md={3}>
-          <Button color="inherit" onClick={editHandeler} disabled>
-            Edit
-          </Button>
           <Button
             color="error"
             onClick={() => deleteHandeler(product.id)}

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getAllUsersAsync, updateUserAsync } from '../redux/thunks/userThunk';
+import React, { useEffect } from 'react';
+import { getAllUsersAsync } from '../redux/thunks/userThunk';
 import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
 import {
@@ -9,41 +9,20 @@ import {
   Button,
   CircularProgress,
   Container,
-  TextField,
   Paper,
   Stack,
   Typography,
 } from '@mui/material';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import { user } from '../types/user';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { userEditschema } from '../validation/userEditschema';
 
 const UsersList = () => {
   const { users, loading, error } = useAppSelector((state) => state.user);
-  const [editUser, setEditUser] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllUsersAsync());
   }, [dispatch]);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Partial<user>>({
-    resolver: yupResolver(userEditschema),
-  });
-
-  const onSubmit = (data: Partial<user>) => {
-    console.log(data);
-
-    if ('id' in data && typeof data.id === 'number') {
-      dispatch(updateUserAsync({ data: data, id: data.id }));
-    }
-  };
 
   if (loading) {
     return (
@@ -88,8 +67,8 @@ const UsersList = () => {
               <Typography>{user.role}</Typography>
             </Box>
             <Box>
-              <Button disabled> Edit</Button>
-              <Button disabled> Delete</Button>
+              <Button> Edit</Button>
+              <Button sx={{ color: 'orange' }}> Delete</Button>
             </Box>
           </Stack>
         </Paper>
