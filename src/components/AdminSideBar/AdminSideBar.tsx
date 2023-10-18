@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import Button from '../Button/Button';
+import Link from '../Link/Link';
 
 type AdminSideBarPropsType = {
   handleOpen: () => void;
@@ -19,7 +20,9 @@ const AdminSideBar: React.FC<AdminSideBarPropsType> = ({ handleOpen }) => {
         Add Product
       </Button>
 
-      <Button fullWidth>Users</Button>
+      <Link to="/admidashbord/users">
+        <Button fullWidth>Users</Button>
+      </Link>
     </Box>
   );
 };

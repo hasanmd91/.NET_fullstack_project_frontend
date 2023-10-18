@@ -15,6 +15,7 @@ import AdminDashbord from './pages/AdminDashbord';
 import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/Profile';
+import UsersList from './pages/UsersList';
 
 const App = () => {
   const methods = useForm();
@@ -61,6 +62,15 @@ const App = () => {
           element: (
             <AdminAuthGuard>
               <AdminDashbord />
+            </AdminAuthGuard>
+          ),
+        },
+
+        {
+          path: '/admidashbord/users',
+          element: (
+            <AdminAuthGuard>
+              <UsersList />
             </AdminAuthGuard>
           ),
         },

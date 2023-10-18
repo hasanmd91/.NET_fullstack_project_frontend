@@ -28,11 +28,3 @@ export type updateUserDataType = {
   data: Partial<Omit<user, 'id'>>;
   id: number;
 };
-
-export type isEmailAvailable = {
-  isAvailable: boolean;
-};
-
-export type emailType = {
-  email: string;
-};
