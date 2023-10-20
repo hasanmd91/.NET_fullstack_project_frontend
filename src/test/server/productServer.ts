@@ -1,9 +1,13 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import productsData from '../data/productsData';
-import { url } from 'inspector';
+import categoriesData from '../data/categoriesData';
+import { NewProduct, product } from '../../types/product';
+import { category } from '../../types/category';
 
 export const handlers = [
+  // get a product by search query
+
   rest.get(
     `https://api.escuelajs.co/api/v1/products`,
     async (req, res, ctx) => {
@@ -15,7 +19,7 @@ export const handlers = [
         if (products) {
           return res(ctx.json(products));
         }
-        return res(ctx.status(404, 'no product found'));
+        return res(ctx.status(404));
       }
     }
   ),
@@ -23,7 +27,11 @@ export const handlers = [
   rest.get(
     `https://api.escuelajs.co/api/v1/products`,
     async (req, res, ctx) => {
-      return res(ctx.json(productsData));
+      try {
+        return res(ctx.json(productsData));
+      } catch (error) {
+        return res(ctx.json('internal server error'));
+      }
     }
   ),
 
@@ -35,15 +43,38 @@ export const handlers = [
       if (product) {
         return res(ctx.json(product));
       }
+      return res(ctx.status(404, 'no product found'));
     }
   ),
 
   rest.post(
     `https://api.escuelajs.co/api/v1/products`,
     async (req, res, ctx) => {
-      const product = await req.json();
-      productsData.push(product);
-      return res(ctx.json(product));
+      const input: NewProduct = await req.json();
+      const category: category | undefined = categoriesData.find(
+        (c) => c.id === input.categoryId
+      );
+
+      if (category) {
+        const NewProduct: product = {
+          id: productsData.length + 1,
+          images: input.images,
+          title: input.title,
+          description: input.description,
+          category,
+          price: input.price,
+        };
+
+        productsData.push(NewProduct);
+        return res(ctx.json(NewProduct));
+      } else {
+        ctx.status(400);
+        ctx.json({
+          message: ['ivalid input or missing data'],
+          error: 'Bad Request',
+          statusCode: 400,
+        });
+      }
     }
   ),
 

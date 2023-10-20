@@ -7,7 +7,7 @@ import {
 } from '../../redux/thunks/productThunk';
 import useAppSelector from '../../hooks/useAppSelector';
 import { Controller, useForm } from 'react-hook-form';
-import { newProduct, product } from '../../types/product';
+import { NewProduct, product } from '../../types/product';
 import {
   Box,
   CircularProgress,
@@ -37,7 +37,7 @@ const AdminProductDetails = () => {
     }
   }, [dispatch, id, productId]);
 
-  const form = useForm<Omit<newProduct, 'id'>>();
+  const form = useForm<Omit<NewProduct, 'id'>>();
 
   const {
     reset,

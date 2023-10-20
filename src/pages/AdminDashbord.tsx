@@ -6,7 +6,7 @@ import { Alert, CircularProgress, Container, Grid } from '@mui/material';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import NewProductForm from '../components/NewProductForm/NewProductForm';
 import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
-import { newProduct, product } from '../types/product';
+import { NewProduct, product } from '../types/product';
 import AdminSideBar from '../components/AdminSideBar/AdminSideBar';
 import { newProductSchema } from '../validation/productDataValidation';
 import Pagination from '../components/Pagination/Pagination';
@@ -39,7 +39,7 @@ const AdminDashbord = () => {
     reset,
     handleSubmit,
     formState: { errors, isDirty, isSubmitting },
-  } = useForm<newProduct>({
+  } = useForm<NewProduct>({
     resolver: yupResolver(newProductSchema),
   });
 
@@ -54,7 +54,7 @@ const AdminDashbord = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const submitHandeler = (data: newProduct) => {
+  const submitHandeler = (data: NewProduct) => {
     console.log(data);
     dispatch(createNewProductAsync(data));
 

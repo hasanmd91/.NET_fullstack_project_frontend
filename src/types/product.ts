@@ -9,7 +9,7 @@ export interface product {
   images: string[];
 }
 
-export interface newProduct {
+export interface NewProduct {
   title: string;
   price: number;
   description: string;
@@ -17,7 +17,7 @@ export interface newProduct {
   categoryId: number;
 }
 
-export interface updatedProduct {
+export interface UpdatedProduct {
   id: number;
-  updatedData: Partial<newProduct>;
+  updatedData: Partial<NewProduct>;
 }

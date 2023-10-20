@@ -1,5 +1,5 @@
 import { createStore } from '../../redux/store';
-import { newProduct } from '../../types/product';
+import { NewProduct } from '../../types/product';
 import productsServer from '../server/productServer';
 import productsData from '../data/productsData';
 import productReducer, {
@@ -148,16 +148,31 @@ describe('Test async thunk actions in productsReducer', () => {
     );
   });
 
+  test('should not create product with wrong category id', async () => {
+    await store.dispatch(getAllProductsAsync());
+
+    const input: NewProduct = {
+      title: 'test product',
+      description: 'test product',
+      price: 100,
+      categoryId: 10,
+      images: ['image 1'],
+    };
+    await store.dispatch(createNewProductAsync(input));
+    expect(store.getState().product.products.length).toBe(3);
+    expect(store.getState().product.error).toBeDefined();
+  });
+
   test('Should create a product', async () => {
     await store.dispatch(getAllProductsAsync());
-    const newproduct: newProduct = {
+    const NewProduct: NewProduct = {
       title: 'Test Create Product1',
       price: 500,
       description: 'Test Create Product1',
       categoryId: 1,
       images: ['https://api.lorem.space/image/dummyImage'],
     };
-    await store.dispatch(createNewProductAsync(newproduct));
+    await store.dispatch(createNewProductAsync(NewProduct));
     expect(store.getState().product.products.length).toBe(4);
   });
 

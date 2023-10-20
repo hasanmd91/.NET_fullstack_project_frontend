@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { newProduct, product, updatedProduct } from '../../types/product';
+import { NewProduct, product, UpdatedProduct } from '../../types/product';
 
 /*GET ALL PRODUCT THUNK*/
 
@@ -44,13 +44,13 @@ export const getAProductsAsync = createAsyncThunk<
 
 export const createNewProductAsync = createAsyncThunk<
   product,
-  newProduct,
+  NewProduct,
   { rejectValue: string }
->('createNewProductAsync', async (newProduct, { rejectWithValue }) => {
+>('createNewProductAsync', async (NewProduct, { rejectWithValue }) => {
   try {
     const response = await axios.post<product>(
       `https://api.escuelajs.co/api/v1/products`,
-      newProduct
+      NewProduct
     );
     const createdProduct: product = response.data;
     return createdProduct;
@@ -86,7 +86,7 @@ export const deleteProductAsync = createAsyncThunk<
 
 export const updateProductAsync = createAsyncThunk<
   product,
-  updatedProduct,
+  UpdatedProduct,
   { rejectValue: string }
 >('updateProductAsync', async (updateProduct, { rejectWithValue }) => {
   try {

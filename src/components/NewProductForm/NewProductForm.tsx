@@ -20,15 +20,15 @@ import {
 } from 'react-hook-form';
 
 import useAppSelector from '../../hooks/useAppSelector';
-import { newProduct } from '../../types/product';
+import { NewProduct } from '../../types/product';
 import Button from '../Button/Button';
 
 type NewProductFormType = {
-  handleSubmit: UseFormHandleSubmit<newProduct>;
-  submitHandeler: SubmitHandler<newProduct>;
-  reset: UseFormReset<newProduct>;
-  errors: FieldErrors<newProduct>;
-  register: UseFormRegister<newProduct>;
+  handleSubmit: UseFormHandleSubmit<NewProduct>;
+  submitHandeler: SubmitHandler<NewProduct>;
+  reset: UseFormReset<NewProduct>;
+  errors: FieldErrors<NewProduct>;
+  register: UseFormRegister<NewProduct>;
   isDirty: boolean;
   isSubmitting: boolean;
 };

@@ -51,12 +51,7 @@ const Home = () => {
 
   return (
     <Container maxWidth="xl" sx={{ marginTop: '2rem' }}>
-      <Box
-        width={'100%'}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-      >
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
         <video
           src={brandvideo}
           autoPlay
