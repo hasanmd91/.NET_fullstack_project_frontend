@@ -3,14 +3,15 @@ import { Outlet } from 'react-router-dom';
 
 import Footer from './Footer';
 import Navbar from '../components/Navbar/Navbar';
+import { Box } from '@mui/material';
 
 const Root: React.FC = () => {
   return (
-    <React.Fragment>
+    <Box display="flex" flexDirection="column" justifyContent={'space-between'}>
       <Navbar />
       <Outlet />
       <Footer />
-    </React.Fragment>
+    </Box>
   );
 };
 

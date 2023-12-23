@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { NewProduct, product, UpdatedProduct } from '../../types/product';
+import { newProduct, product, updatedProduct } from '../../types/product';
 
 /*GET ALL PRODUCT THUNK*/
 
@@ -44,13 +44,13 @@ export const getAProductsAsync = createAsyncThunk<
 
 export const createNewProductAsync = createAsyncThunk<
   product,
-  NewProduct,
+  newProduct,
   { rejectValue: string }
->('createNewProductAsync', async (NewProduct, { rejectWithValue }) => {
+>('createNewProductAsync', async (newProduct, { rejectWithValue }) => {
   try {
     const response = await axios.post<product>(
       `https://api.escuelajs.co/api/v1/products`,
-      NewProduct
+      newProduct
     );
     const createdProduct: product = response.data;
     return createdProduct;
@@ -86,7 +86,7 @@ export const deleteProductAsync = createAsyncThunk<
 
 export const updateProductAsync = createAsyncThunk<
   product,
-  UpdatedProduct,
+  updatedProduct,
   { rejectValue: string }
 >('updateProductAsync', async (updateProduct, { rejectWithValue }) => {
   try {
@@ -117,25 +117,6 @@ export const getAllProductsByCategoryAsync = createAsyncThunk<
     );
     const products: product[] = response.data;
     return products;
-  } catch (error) {
-    const err = error as AxiosError;
-    return rejectWithValue(err.message);
-  }
-});
-
-/* SEARCH PRODUCTS BY TITLE */
-
-export const getProductByTitleAsync = createAsyncThunk<
-  product[],
-  string,
-  { rejectValue: string }
->('getProductByTitleAsync', async (searchQuery, { rejectWithValue }) => {
-  try {
-    const response = await axios.get<product[]>(
-      `https://api.escuelajs.co/api/v1/products/?title=${searchQuery}`
-    );
-
-    return response.data;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);

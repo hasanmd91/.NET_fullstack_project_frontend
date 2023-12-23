@@ -19,7 +19,7 @@ const Button: React.FC<ButtonType> = ({
   return (
     <MuiButton
       type={type}
-      variant={variant}
+      variant="contained"
       size="large"
       sx={{
         marginTop: '16px',

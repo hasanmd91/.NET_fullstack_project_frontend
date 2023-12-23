@@ -7,7 +7,6 @@ import {
   getAProductsAsync,
   getAllProductsAsync,
   getAllProductsByCategoryAsync,
-  getProductByTitleAsync,
   updateProductAsync,
 } from '../thunks/productThunk';
 
@@ -48,6 +47,12 @@ const productSlice = createSlice({
           a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1
         );
       }
+    },
+
+    searchProduct: (state, action: PayloadAction<string>) => {
+      state.products = state.products.filter((product) =>
+        product.title.includes(action.payload)
+      );
     },
   },
 
@@ -91,7 +96,7 @@ const productSlice = createSlice({
     });
 
     builder.addCase(createNewProductAsync.fulfilled, (state, action) => {
-      state.products = [action.payload, ...state.products];
+      state.products = [...state.products, action.payload];
       state.loading = false;
     });
 
@@ -101,6 +106,10 @@ const productSlice = createSlice({
     });
 
     /*DELETE A PRODUCT REDUCER*/
+
+    builder.addCase(deleteProductAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(deleteProductAsync.fulfilled, (state, action) => {
       state.products = state.products.filter(
@@ -115,6 +124,10 @@ const productSlice = createSlice({
     });
 
     /*UPDATE PRODUCT REDUCER*/
+
+    builder.addCase(updateProductAsync.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(updateProductAsync.fulfilled, (state, action) => {
       const updatedProduct = action.payload;
@@ -147,33 +160,10 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-
-    /*SEARCH ALL PRODUCT BY TITLE REDUCER*/
-
-    builder.addCase(getProductByTitleAsync.pending, (state, action) => {
-      state.loading = true;
-    });
-
-    builder.addCase(getProductByTitleAsync.fulfilled, (state, action) => {
-      state.loading = false;
-
-      const originalProducts = [...state.products];
-
-      if (!action.payload.length) {
-        state.products = originalProducts;
-      } else {
-        state.products = action.payload;
-      }
-    });
-
-    builder.addCase(getProductByTitleAsync.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
   },
 });
 
-export const { sortProduct } = productSlice.actions;
+export const { sortProduct, searchProduct } = productSlice.actions;
 const productReducer = productSlice.reducer;
 
 export default productReducer;

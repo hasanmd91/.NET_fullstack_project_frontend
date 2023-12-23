@@ -9,10 +9,8 @@ import {
   Typography,
 } from '@mui/material';
 
-import { product } from '../../types/product';
-
 type MediaCardPropsType = {
-  product: product;
+  product: any;
 };
 
 const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
@@ -25,8 +23,7 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
   return (
     <Card
       sx={{
-        width: { md: '200px', xs: '150px' },
-        height: { md: '260px', xs: '210px' },
+        width: { md: '200px', xs: '140px' },
         margin: '0.5rem',
         position: 'relative',
         display: 'inline-block',
@@ -44,8 +41,7 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
             : product.images[0]
         }
         alt="image"
-        sx={{ objectFit: 'cover', height: { md: '150px', xs: '100px' } }}
-        width={'100%'}
+        sx={{ objectFit: 'cover', width: '100%' }}
         onError={handleImageError}
       />
       <CardContent>

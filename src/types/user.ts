@@ -20,11 +20,19 @@ export type registerUser = {
 };
 
 export type updateUser = {
-  name?: string;
-  email?: string;
+  name: string;
+  email: string;
 };
 
 export type updateUserDataType = {
-  data: Partial<Omit<user, 'id'>>;
+  data: updateUser;
   id: number;
+};
+
+export type isEmailAvailable = {
+  isAvailable: boolean;
+};
+
+export type emailType = {
+  email: string;
 };

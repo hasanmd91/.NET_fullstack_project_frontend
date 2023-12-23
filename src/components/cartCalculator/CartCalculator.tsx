@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Divider,
@@ -7,7 +7,6 @@ import {
   MenuItem,
   Paper,
   Select,
-  SelectChangeEvent,
   Typography,
 } from '@mui/material';
 import Button from '../Button/Button';
@@ -17,14 +16,6 @@ type CartCalculatorType = {
 };
 
 const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
-  const [deliveryCost, setDeliveryCost] = useState<number>(4);
-
-  const changeHandeler = (e: SelectChangeEvent<number>) => {
-    const value = Number(e.target.value);
-
-    setDeliveryCost(value);
-  };
-
   return (
     <Paper
       elevation={1}
@@ -36,45 +27,29 @@ const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
         justifyContent: 'space-between',
       }}
     >
-      <Typography variant="body1">Total</Typography>
+      <Typography variant="h6">Total</Typography>
       <Divider />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="body1">Total</Typography>
-        <Typography variant="body1">${totalAmount} </Typography>
+        <Typography variant="h6">Sub-Total</Typography>
+        <Typography variant="h6">${totalAmount}</Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="body1">DeliverCost</Typography>
-        <Typography variant="body1">${deliveryCost} </Typography>
-      </Box>
-      <Divider />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="body1">Total</Typography>
-        <Typography variant="body1">
-          ${`${totalAmount + deliveryCost}`}
-        </Typography>
-      </Box>
-
-      <Typography variant="body1" gutterBottom>
+      <Typography variant="h6" gutterBottom>
         Delivery
       </Typography>
 
       <FormControl fullWidth>
-        <InputLabel>Standard Pick Up Point ($ 4)</InputLabel>
-        <Select
-          label="Standard Pick Up Point ($ 4)"
-          value={deliveryCost}
-          onChange={changeHandeler}
-        >
-          <MenuItem value={4}>Standard Pick Up Point ($ 4)</MenuItem>
-          <MenuItem value={15}>Next Day Delivery $20</MenuItem>
+        <InputLabel>Standard Pick Up Point ($ 8.50)</InputLabel>
+        <Select label="Standard Pick Up Point ($ 8.50)">
+          <MenuItem>Standard Pick Up Point ($ 8.50)</MenuItem>
+          <MenuItem>Next Day Delivery $20</MenuItem>
         </Select>
       </FormControl>
 
       <Button fullWidth>CHECKOUT</Button>
 
-      <Typography variant="body1" gutterBottom>
+      <Typography variant="h6" gutterBottom>
         WE ACCEPT:
       </Typography>
       <img src="/assets/card.png" alt="" style={{ width: '100%' }} />

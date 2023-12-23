@@ -8,13 +8,14 @@ import TooltipMenu from './TooltipMenu/TooltipMenu';
 import Link from '../Link/Link';
 import CartIcon from '../CartIcon/CartIcon';
 import Logo from '../Logo/Logo';
+import { shades } from '../../Theme';
 
 const Navbar = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const { cartItems } = useAppSelector((state) => state.cart);
 
   return (
-    <AppBar position="static" sx={{ background: '#0d2134' }}>
+    <AppBar position="static" sx={{ background: shades.primary[500] }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Logo />

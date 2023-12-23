@@ -1,14 +1,18 @@
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
+import { shades } from '../Theme';
 
 const Footer = () => {
   return (
     <Box
       sx={{
         marginTop: '2rem',
-        backgroundColor: '#0d2134',
+        backgroundColor: shades.primary[500],
         color: 'whitesmoke',
         padding: '16px',
+        position: 'absolute',
+        width: '100%',
+        bottom: 0,
       }}
     >
       <Grid container display={'flex'} justifyContent={'space-evenly'}>
@@ -69,10 +73,10 @@ const Footer = () => {
           </Typography>
         </Grid>
         <Grid md={12} item margin={'0 auto'}>
-          <Box maxWidth={'500px'} margin={'6rem auto'}>
+          <Box maxWidth={'500px'} margin={'5rem auto'}>
             <img
               src="/assets/card.png"
-              alt="payment"
+              alt=""
               style={{ width: '100%', objectFit: 'cover' }}
             />
           </Box>

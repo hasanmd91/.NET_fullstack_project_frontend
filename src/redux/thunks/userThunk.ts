@@ -82,7 +82,7 @@ export const createNewUserAsync = createAsyncThunk<
   user,
   registerUser,
   { rejectValue: string }
->('createNewUserAsync', async (newUser, { rejectWithValue }) => {
+>('createNewUserAsync', async (newUser: registerUser, { rejectWithValue }) => {
   try {
     const response = await axios.post<user>(
       'https://api.escuelajs.co/api/v1/users',

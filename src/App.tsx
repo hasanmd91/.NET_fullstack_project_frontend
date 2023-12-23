@@ -8,15 +8,12 @@ import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 import Login from './pages/Login';
 import UserRegister from './pages/UserRegister';
-import WishList from './pages/WishList';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import AdminDashbord from './pages/AdminDashbord';
 import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/Profile';
-import UsersList from './pages/UsersList';
-import AdminProductDetails from './components/AdminProductDetails/AdminProductDetails';
 
 const App = () => {
   const methods = useForm();
@@ -55,42 +52,8 @@ const App = () => {
           element: <Cart />,
         },
         {
-          path: '/wishlist',
-          element: <WishList />,
-        },
-        {
           path: '/admidashbord',
-          element: (
-            <AdminAuthGuard>
-              <AdminDashbord />
-            </AdminAuthGuard>
-          ),
-        },
-        {
-          path: '/admidashbord/product/:id',
-          element: (
-            <AdminAuthGuard>
-              <AdminProductDetails />
-            </AdminAuthGuard>
-          ),
-        },
-
-        {
-          path: '/admidashbord/users',
-          element: (
-            <AdminAuthGuard>
-              <UsersList />
-            </AdminAuthGuard>
-          ),
-        },
-
-        {
-          path: '/profile',
-          element: (
-            <CustomerAuthGuard>
-              <Profile />
-            </CustomerAuthGuard>
-          ),
+          element: <AdminDashbord />,
         },
       ],
     },
