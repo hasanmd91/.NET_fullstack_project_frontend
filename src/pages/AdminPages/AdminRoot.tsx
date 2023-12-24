@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminSideBar from '../components/AdminSideBar/AdminSideBar';
+import AdminSideBar from '../../components/AdminSideBar/AdminSideBar';
 import { Outlet } from 'react-router-dom';
 import { Container, Grid } from '@mui/material';
 

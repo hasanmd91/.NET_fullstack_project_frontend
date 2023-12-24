@@ -1,12 +1,12 @@
 import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { newProduct } from '../types/product';
-import { productSchema } from '../validation/productSchema';
-import TextField from '../components/TextField/TextField';
-import Button from '../components/Button/Button';
-import useAppDispatch from '../hooks/useAppDispatch';
-import { createNewProductAsync } from '../redux/thunks/productThunk';
+import { newProduct } from '../../types/product';
+import { productSchema } from '../../validation/productSchema';
+import TextField from '../../components/TextField/TextField';
+import Button from '../../components/Button/Button';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { createNewProductAsync } from '../../redux/thunks/productThunk';
 
 const AddProduct = () => {
   const {
@@ -26,6 +26,7 @@ const AddProduct = () => {
     <form onSubmit={handleSubmit(submitHandeler)}>
       <Controller
         name="title"
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
@@ -38,6 +39,7 @@ const AddProduct = () => {
       />
       <Controller
         name="description"
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
@@ -50,6 +52,7 @@ const AddProduct = () => {
       />
       <Controller
         name="price"
+        defaultValue={undefined}
         control={control}
         render={({ field }) => (
           <TextField
@@ -63,6 +66,7 @@ const AddProduct = () => {
       />
       <Controller
         name="quantity"
+        defaultValue={undefined}
         control={control}
         render={({ field }) => (
           <TextField
@@ -76,6 +80,7 @@ const AddProduct = () => {
       />
       <Controller
         name="CategoryId"
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
@@ -88,6 +93,7 @@ const AddProduct = () => {
       />
       <Controller
         name={`images.${0}.imageUrl`}
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
@@ -100,6 +106,7 @@ const AddProduct = () => {
       />
       <Controller
         name={`images.${1}.imageUrl`}
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
@@ -112,6 +119,7 @@ const AddProduct = () => {
       />
       <Controller
         name={`images.${2}.imageUrl`}
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField

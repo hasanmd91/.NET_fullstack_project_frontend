@@ -12,9 +12,10 @@ export const getAllProductsAsync = createAsyncThunk<
 >('getAllProductsAsync', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `https://api.escuelajs.co/api/v1/products`
+      `http://localhost:5137/api/product/`
     );
     const products: product[] = response.data;
+    console.log(products);
     return products;
   } catch (error) {
     const err = error as AxiosError;
@@ -31,7 +32,7 @@ export const getAProductsAsync = createAsyncThunk<
 >('getAProductsAsync', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.get<product>(
-      `https://api.escuelajs.co/api/v1/products/${id}`
+      `http://localhost:5137/api/product/${id}`
     );
     const product: product = response.data;
     return product;
@@ -50,7 +51,6 @@ export const createNewProductAsync = createAsyncThunk<
 >('createNewProductAsync', async (NewProduct, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-
     const response = await axios.post<product>(
       `http://localhost:5137/api/product/`,
       NewProduct,
@@ -71,13 +71,13 @@ export const createNewProductAsync = createAsyncThunk<
 /* DELETE A PRODUCT THUNK  */
 
 export const deleteProductAsync = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
 >('deleteProductAsync', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.delete<boolean>(
-      `https://api.escuelajs.co/api/v1/products/${id}`
+      `http://localhost:5137/api/product/${id}`
     );
     if (!response.data) {
       throw new Error('Unable to Delete Product');
@@ -100,7 +100,7 @@ export const updateProductAsync = createAsyncThunk<
   try {
     const { id, updatedData } = updateProduct;
     const response = await axios.put<product>(
-      `https://api.escuelajs.co/api/v1/products/${id}`,
+      `http://localhost:5137/api/product/${id}`,
       updatedData
     );
     const updateNewProduct: product = response.data;
@@ -140,7 +140,7 @@ export const getProductByTitleAsync = createAsyncThunk<
 >('getProductByTitleAsync', async (searchQuery, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `https://api.escuelajs.co/api/v1/products/?title=${searchQuery}`
+      `http://localhost:5137/api/product?Search=${searchQuery}`
     );
 
     return response.data;

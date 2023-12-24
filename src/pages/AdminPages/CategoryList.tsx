@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import useAppSelector from '../hooks/useAppSelector';
-import { category, updatedCategory } from '../types/category';
+import React, { useEffect, useState } from 'react';
+import useAppSelector from '../../hooks/useAppSelector';
+import { category } from '../../types/category';
 import { Box, Input, Paper } from '@mui/material';
 import {
   deleteCategoryAsync,
+  getAllCategoryAsync,
   updateCategoryAsync,
-} from '../redux/thunks/categoryThunk';
-import useAppDispatch from '../hooks/useAppDispatch';
-import Button from '../components/Button/Button';
+} from '../../redux/thunks/categoryThunk';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import Button from '../../components/Button/Button';
 
 const CategoryList = () => {
   const { categories, loading, error } = useAppSelector(
@@ -18,7 +19,10 @@ const CategoryList = () => {
 
   const dispatch = useAppDispatch();
 
-  console.log(updatedName);
+  useEffect(() => {
+    dispatch(getAllCategoryAsync());
+  }, [dispatch]);
+
   return (
     <Paper>
       {categories.map((category: category) => (
@@ -29,11 +33,12 @@ const CategoryList = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '5px 20px',
+            marginBottom: '5px',
           }}
         >
           <form>
             <Input
-              defaultValue={category.name}
+              value={editMode ? updatedName : category.name}
               disabled={!editMode}
               onChange={(e) => setUpdateName(e.target.value)}
             />
@@ -68,7 +73,15 @@ const CategoryList = () => {
               </Button>
             )}
 
-            <Button onClick={() => dispatch(deleteCategoryAsync(category.id))}>
+            <Button
+              onClick={() => {
+                dispatch(deleteCategoryAsync(category.id));
+
+                setTimeout(() => {
+                  dispatch(getAllCategoryAsync());
+                }, 1000);
+              }}
+            >
               Delete{' '}
             </Button>
           </Box>

@@ -61,6 +61,7 @@ const productSlice = createSlice({
     builder.addCase(getAllProductsAsync.fulfilled, (state, action) => {
       state.products = action.payload;
       state.loading = false;
+      state.error = '';
     });
 
     builder.addCase(getAllProductsAsync.rejected, (state, action) => {
@@ -77,6 +78,7 @@ const productSlice = createSlice({
     builder.addCase(getAProductsAsync.fulfilled, (state, action) => {
       state.product = action.payload;
       state.loading = false;
+      state.error = '';
     });
 
     builder.addCase(getAProductsAsync.rejected, (state, action) => {
@@ -93,6 +95,7 @@ const productSlice = createSlice({
     builder.addCase(createNewProductAsync.fulfilled, (state, action) => {
       state.products = [action.payload, ...state.products];
       state.loading = false;
+      state.error = '';
     });
 
     builder.addCase(createNewProductAsync.rejected, (state, action) => {
@@ -107,6 +110,7 @@ const productSlice = createSlice({
         (product) => product.id !== action.payload
       );
       state.loading = false;
+      state.error = '';
     });
 
     builder.addCase(deleteProductAsync.rejected, (state, action) => {
@@ -122,6 +126,7 @@ const productSlice = createSlice({
         product.id === updatedProduct.id ? updatedProduct : product
       );
       state.loading = false;
+      state.error = '';
     });
 
     builder.addCase(updateProductAsync.rejected, (state, action) => {

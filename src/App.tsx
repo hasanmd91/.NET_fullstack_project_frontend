@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import Home from './pages/Home';
@@ -10,13 +10,14 @@ import Login from './pages/Login';
 import UserRegister from './pages/UserRegister';
 import Cart from './pages/Cart';
 import About from './pages/About';
-import AdminDashbord from './pages/AdminDashbord';
+import AdminDashbord from './pages/AdminPages/AdminDashbord';
 import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
-import Profile from './pages/Profile';
-import AddProduct from './pages/AddProduct';
-import AdminRoot from './pages/AdminRoot';
-import AddCategory from './pages/AddCategory';
+import Profile from './pages/UserPages/Profile';
+import AddProduct from './pages/AdminPages/AddProduct';
+import AdminRoot from './pages/AdminPages/AdminRoot';
+import AddCategory from './pages/AdminPages/AddCategory';
+import CategoryList from './pages/AdminPages/CategoryList';
 
 const App = () => {
   const methods = useForm();
@@ -64,8 +65,9 @@ const App = () => {
 
           children: [
             { index: true, element: <AdminDashbord /> },
-            { path: 'addproduct', element: <AddProduct /> },
+            { path: 'addProduct', element: <AddProduct /> },
             { path: 'addCategory', element: <AddCategory /> },
+            { path: 'allCategory', element: <CategoryList /> },
           ],
         },
 

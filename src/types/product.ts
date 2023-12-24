@@ -1,14 +1,38 @@
-import { category } from '../types/category';
-
-export interface product {
-  id: number;
+export type product = {
+  id: string;
   title: string;
   description: string;
   price: number;
   quantity: number;
-  CategoryId: string;
-  images: { imageUrl: string }[];
-}
+  categoryId: string;
+  category: category;
+  images: Image[];
+  reviews: Review[];
+};
+
+type category = {
+  name: string;
+  id: string;
+  createdDate: string;
+  updatedDate: string;
+};
+
+type Image = {
+  imageUrl: string;
+  id: string;
+  createdDate: string;
+  updatedDate: string;
+};
+
+type Review = {
+  content: string;
+  ratings: number;
+  productId: string;
+  userId: string;
+  id: string;
+  createdDate: string;
+  updatedDate: string;
+};
 
 export interface newProduct {
   title: string;
@@ -17,14 +41,6 @@ export interface newProduct {
   quantity: number;
   CategoryId: string;
   images: { imageUrl: string }[];
-}
-
-export interface newProductYup {
-  title: string;
-  price: number;
-  description: string;
-  images: string;
-  categoryId: number;
 }
 
 export interface updatedProduct {

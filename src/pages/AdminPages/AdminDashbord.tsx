@@ -3,20 +3,20 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, CircularProgress, Container, Grid } from '@mui/material';
 
-import CenteredContainer from '../components/CenterContainer/CenterContainer';
-import AdminDataCard from '../components/AdminDataCard/AdminDataCard';
-import AdminSideBar from '../components/AdminSideBar/AdminSideBar';
-import Pagination from '../components/Pagination/Pagination';
-import SearchBar from '../components/InputSearch/SearchBar';
-import { usePagination } from '../hooks/usePagination';
-import useAppDispatch from '../hooks/useAppDispatch';
-import useAppSelector from '../hooks/useAppSelector';
-import Modal from '../components/Modal/Modal';
+import CenteredContainer from '../../components/CenterContainer/CenterContainer';
+import AdminDataCard from '../../components/AdminDataCard/AdminDataCard';
+import AdminSideBar from '../../components/AdminSideBar/AdminSideBar';
+import Pagination from '../../components/Pagination/Pagination';
+import SearchBar from '../../components/InputSearch/SearchBar';
+import { usePagination } from '../../hooks/usePagination';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useAppSelector from '../../hooks/useAppSelector';
+import Modal from '../../components/Modal/Modal';
 import {
   createNewProductAsync,
   getAllProductsAsync,
   getProductByTitleAsync,
-} from '../redux/thunks/productThunk';
+} from '../../redux/thunks/productThunk';
 import { Outlet } from 'react-router-dom';
 
 const AdminDashbord = () => {
