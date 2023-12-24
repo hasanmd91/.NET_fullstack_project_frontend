@@ -1,5 +1,5 @@
 export interface category {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -8,6 +8,6 @@ export interface newCategory {
 }
 
 export interface updatedCategory {
-  id: number;
+  id: string;
   name: string;
 }

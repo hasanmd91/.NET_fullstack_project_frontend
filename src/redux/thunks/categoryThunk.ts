@@ -55,15 +55,12 @@ export const createCategoryAsync = createAsyncThunk<
 );
 
 export const deleteCategoryAsync = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
 >('deleteCategoryAsync', async (id, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-
-    console.log(id);
-
     const response = await axios.delete<boolean>(
       `http://localhost:5137/api/category/${id}`,
       {

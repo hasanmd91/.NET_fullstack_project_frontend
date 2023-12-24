@@ -55,6 +55,7 @@ const productSlice = createSlice({
     /*GET ALL PRODUCT REDUCER*/
 
     builder.addCase(getAllProductsAsync.pending, (state, action) => {
+      state.error = '';
       state.loading = true;
     });
 
@@ -157,10 +158,12 @@ const productSlice = createSlice({
 
     builder.addCase(getProductByTitleAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
 
     builder.addCase(getProductByTitleAsync.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = '';
 
       const originalProducts = [...state.products];
 

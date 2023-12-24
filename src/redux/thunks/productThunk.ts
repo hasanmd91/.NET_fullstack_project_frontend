@@ -116,12 +116,12 @@ export const updateProductAsync = createAsyncThunk<
 
 export const getAllProductsByCategoryAsync = createAsyncThunk<
   product[],
-  number,
+  string,
   { rejectValue: string }
 >('getAllProductsByCategoryAsync', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `https://api.escuelajs.co/api/v1/categories/${id}/products`
+      `http://localhost:5137/api/product?CategoryId=${id}`
     );
     const products: product[] = response.data;
     return products;

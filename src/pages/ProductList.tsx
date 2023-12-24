@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Box, CircularProgress, Container } from '@mui/material';
+import { Alert, Box, CircularProgress, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import MediaCard from '../components/Card/Card';
@@ -14,6 +14,7 @@ import {
   getProductByTitleAsync,
 } from '../redux/thunks/productThunk';
 import useDebounce from '../hooks/useDebounce';
+import ProductSideBar from '../components/ProductSideBar/ProductSideBar';
 
 const ProductList = () => {
   const { products, loading, error } = useAppSelector((state) => state.product);
@@ -28,17 +29,13 @@ const ProductList = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (debouncedValue === '') {
+    if (!debouncedValue) {
       dispatch(getAllProductsAsync());
       return;
     }
 
     dispatch(getProductByTitleAsync(debouncedValue));
   }, [debouncedValue, dispatch]);
-
-  useEffect(() => {
-    dispatch(getAllProductsAsync());
-  }, [dispatch]);
 
   if (loading) {
     return (
@@ -57,39 +54,28 @@ const ProductList = () => {
   }
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{
-        marginTop: '2rem',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <Box
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Box width={'100%'}>
-          <SearchBar search={search} setSearch={setSearch} />
-        </Box>
-        {currentProducts.map((product) => (
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <MediaCard product={product} />
-          </Link>
-        ))}
-      </Box>
+    <Container maxWidth="xl" sx={{ marginTop: '10px' }}>
+      <Grid container spacing={1}>
+        <Grid item md={2}>
+          <ProductSideBar />
+        </Grid>
 
-      <Pagination
-        count={pageLimit}
-        currentPage={currentPage}
-        setPage={setPage}
-      />
+        <Grid item md={10} xs={12}>
+          <Box>
+            <SearchBar search={search} setSearch={setSearch} />
+            {currentProducts.map((product) => (
+              <Link to={`/products/${product.id}`} key={product.id}>
+                <MediaCard product={product} />
+              </Link>
+            ))}
+          </Box>
+          <Pagination
+            count={pageLimit}
+            currentPage={currentPage}
+            setPage={setPage}
+          />
+        </Grid>
+      </Grid>
     </Container>
   );
 };
