@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { newProduct, product, updatedProduct } from '../../types/product';
+import { getToken } from '../../utils/tokenUtils';
 
 /*GET ALL PRODUCT THUNK*/
 
@@ -46,11 +47,18 @@ export const createNewProductAsync = createAsyncThunk<
   product,
   newProduct,
   { rejectValue: string }
->('createNewProductAsync', async (newProduct, { rejectWithValue }) => {
+>('createNewProductAsync', async (NewProduct, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const response = await axios.post<product>(
-      `https://api.escuelajs.co/api/v1/products`,
-      newProduct
+      `http://localhost:5137/api/product/`,
+      NewProduct,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     const createdProduct: product = response.data;
     return createdProduct;
@@ -117,6 +125,25 @@ export const getAllProductsByCategoryAsync = createAsyncThunk<
     );
     const products: product[] = response.data;
     return products;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.message);
+  }
+});
+
+/* SEARCH PRODUCTS BY TITLE */
+
+export const getProductByTitleAsync = createAsyncThunk<
+  product[],
+  string,
+  { rejectValue: string }
+>('getProductByTitleAsync', async (searchQuery, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<product[]>(
+      `https://api.escuelajs.co/api/v1/products/?title=${searchQuery}`
+    );
+
+    return response.data;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);

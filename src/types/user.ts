@@ -1,6 +1,6 @@
 export enum userRole {
-  admin = 'admin',
-  customer = 'customer',
+  admin = 'Admin',
+  customer = 'User',
 }
 export type user = {
   id: number;
@@ -12,11 +12,14 @@ export type user = {
 };
 
 export type registerUser = {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
   avatar: string;
+  address: string;
+  zip: string;
+  city: string;
 };
 
 export type updateUser = {

@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
 import { category, newCategory, updatedCategory } from '../../types/category';
+import { getToken } from '../../utils/tokenUtils';
 
 export const getAllCategoryAsync = createAsyncThunk<
   category[],
@@ -9,8 +10,15 @@ export const getAllCategoryAsync = createAsyncThunk<
   { rejectValue: string }
 >('getAllCategoryAsync', async (_, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const response = await axios.get<category[]>(
-      'https://api.escuelajs.co/api/v1/categories'
+      'http://localhost:5137/api/category/',
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -27,9 +35,16 @@ export const createCategoryAsync = createAsyncThunk<
   'createCategoryAsync',
   async (newCategory: newCategory, { rejectWithValue }) => {
     try {
+      const storedToken = getToken();
+
       const response = await axios.post<category>(
-        'https://api.escuelajs.co/api/v1/categories',
-        newCategory
+        'http://localhost:5137/api/category/',
+        newCategory,
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -45,8 +60,17 @@ export const deleteCategoryAsync = createAsyncThunk<
   { rejectValue: string }
 >('deleteCategoryAsync', async (id, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
+    console.log(id);
+
     const response = await axios.delete<boolean>(
-      `https://api.escuelajs.co/api/v1/categories/${id}`
+      `http://localhost:5137/api/category/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     if (!response.data) {
       throw new Error('Unable to delete category');
@@ -64,12 +88,24 @@ export const updateCategoryAsync = createAsyncThunk<
   updatedCategory,
   { rejectValue: string }
 >('updateCategoryAsync', async (categoryData, { rejectWithValue }) => {
-  const { id, updatedData } = categoryData;
+  const { id, name } = categoryData;
+
   try {
-    const response = await axios.put<category>(
-      `https://api.escuelajs.co/api/v1/categories/${id}`,
-      updatedData
+    const storedToken = getToken();
+
+    const response = await axios.patch<category>(
+      `http://localhost:5137/api/category/${id}`,
+      { name: name },
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
+
+    console.log(response);
+
     return response.data;
   } catch (error) {
     const err = error as AxiosError;

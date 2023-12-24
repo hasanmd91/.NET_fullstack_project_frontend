@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button as MuiButton, ButtonProps } from '@mui/material';
+import { shades } from '../../Theme';
 
 type ButtonType = {
   variant?: 'contained' | 'outlined' | 'text';
@@ -23,8 +24,8 @@ const Button: React.FC<ButtonType> = ({
       size="large"
       sx={{
         marginTop: '16px',
-        background: '#0d2134',
-        '&:hover': { background: '#d93226' },
+        background: shades.primary[400],
+        '&:hover': shades.secondary[500],
         ...sx,
       }}
       {...rest}

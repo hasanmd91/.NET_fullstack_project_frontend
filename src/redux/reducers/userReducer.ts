@@ -8,7 +8,6 @@ import {
   loginUserAsync,
   authenticateUserAsync,
 } from '../thunks/userThunk';
-import { stat } from 'fs';
 
 type userStateType = {
   users: user[];
@@ -36,10 +35,12 @@ const userSlice = createSlice({
 
     builder.addCase(loginUserAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
     builder.addCase(loginUserAsync.fulfilled, (state, action) => {
       state.loading = false;
       state.currentUser = action.payload;
+      state.error = '';
     });
     builder.addCase(loginUserAsync.rejected, (state, action) => {
       state.loading = false;
@@ -51,25 +52,30 @@ const userSlice = createSlice({
 
     builder.addCase(authenticateUserAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
     builder.addCase(authenticateUserAsync.fulfilled, (state, action) => {
       state.loading = false;
       state.currentUser = action.payload;
+      state.error = '';
     });
     builder.addCase(authenticateUserAsync.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      state.error = '';
     });
 
     /* GET ALL USER REDUCER */
 
     builder.addCase(getAllUsersAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
 
     builder.addCase(getAllUsersAsync.fulfilled, (state, action) => {
       state.loading = false;
       state.users = action.payload;
+      state.error = '';
     });
 
     builder.addCase(getAllUsersAsync.rejected, (state, action) => {
@@ -81,12 +87,14 @@ const userSlice = createSlice({
 
     builder.addCase(createNewUserAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
 
     builder.addCase(createNewUserAsync.fulfilled, (state, action) => {
       state.loading = false;
       state.users = [...state.users, action.payload];
       state.currentUser = action.payload;
+      state.error = '';
     });
 
     builder.addCase(createNewUserAsync.rejected, (state, action) => {
@@ -98,16 +106,20 @@ const userSlice = createSlice({
 
     builder.addCase(updateUserAsync.pending, (state, action) => {
       state.loading = true;
+      state.error = '';
     });
 
     builder.addCase(
       updateUserAsync.fulfilled,
       (state, action: PayloadAction<user>) => {
         const updatedUser = action.payload;
+
         state.users = state.users.map((user) =>
           user.id === updatedUser.id ? updatedUser : user
         );
+        state.currentUser = action.payload;
         state.loading = false;
+        state.error = '';
       }
     );
 

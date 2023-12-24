@@ -3,18 +3,20 @@ import { category } from '../types/category';
 export interface product {
   id: number;
   title: string;
-  price: number;
   description: string;
-  category: category;
-  images: string[];
+  price: number;
+  quantity: number;
+  CategoryId: string;
+  images: { imageUrl: string }[];
 }
 
 export interface newProduct {
   title: string;
-  price: number;
   description: string;
-  images: string[];
-  categoryId: number;
+  price: number;
+  quantity: number;
+  CategoryId: string;
+  images: { imageUrl: string }[];
 }
 
 export interface newProductYup {

@@ -10,9 +10,7 @@ const Footer = () => {
         backgroundColor: shades.primary[500],
         color: 'whitesmoke',
         padding: '16px',
-        position: 'absolute',
         width: '100%',
-        bottom: 0,
       }}
     >
       <Grid container display={'flex'} justifyContent={'space-evenly'}>

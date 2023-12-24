@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
 import { registerUser, user, updateUserDataType } from '../../types/user';
-import { LoginResponse, userCredentials } from '../../types/auth';
+import { userCredentials } from '../../types/auth';
+import { saveToken } from '../../utils/tokenUtils';
 
 /* LOGIN USER THUNK USING LOGIN CREDENTIAL */
 
@@ -12,11 +13,14 @@ export const loginUserAsync = createAsyncThunk<
   { rejectValue: string }
 >('loginUserAsync ', async (credentials, { dispatch, rejectWithValue }) => {
   try {
-    const response = await axios.post<LoginResponse>(
-      'https://api.escuelajs.co/api/v1/auth/login',
+    const response = await axios.post<string>(
+      'http://localhost:5137/api/auth/login',
       credentials
     );
-    const { access_token } = response.data;
+    const { data: access_token } = response;
+
+    saveToken(access_token);
+
     const authenticatedResult = await dispatch(
       authenticateUserAsync(access_token)
     );
@@ -43,7 +47,7 @@ export const authenticateUserAsync = createAsyncThunk<
 >('authenticateUserAsync ', async (access_token, { rejectWithValue }) => {
   try {
     const userProfile = await axios.get(
-      'https://api.escuelajs.co/api/v1/auth/profile',
+      'http://localhost:5137/api/auth/profile',
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -82,7 +86,7 @@ export const createNewUserAsync = createAsyncThunk<
   user,
   registerUser,
   { rejectValue: string }
->('createNewUserAsync', async (newUser: registerUser, { rejectWithValue }) => {
+>('createNewUserAsync', async (newUser, { rejectWithValue }) => {
   try {
     const response = await axios.post<user>(
       'https://api.escuelajs.co/api/v1/users',

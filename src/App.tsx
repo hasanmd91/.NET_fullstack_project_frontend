@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import Home from './pages/Home';
@@ -14,6 +14,9 @@ import AdminDashbord from './pages/AdminDashbord';
 import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/Profile';
+import AddProduct from './pages/AddProduct';
+import AdminRoot from './pages/AdminRoot';
+import AddCategory from './pages/AddCategory';
 
 const App = () => {
   const methods = useForm();
@@ -53,7 +56,26 @@ const App = () => {
         },
         {
           path: '/admidashbord',
-          element: <AdminDashbord />,
+          element: (
+            <AdminAuthGuard>
+              <AdminRoot />
+            </AdminAuthGuard>
+          ),
+
+          children: [
+            { index: true, element: <AdminDashbord /> },
+            { path: 'addproduct', element: <AddProduct /> },
+            { path: 'addCategory', element: <AddCategory /> },
+          ],
+        },
+
+        {
+          path: '/profile',
+          element: (
+            <CustomerAuthGuard>
+              <Profile />
+            </CustomerAuthGuard>
+          ),
         },
       ],
     },
@@ -61,7 +83,7 @@ const App = () => {
 
   return (
     <FormProvider {...methods}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </FormProvider>
   );
 };
