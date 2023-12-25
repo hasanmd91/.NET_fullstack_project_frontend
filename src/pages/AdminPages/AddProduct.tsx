@@ -10,6 +10,7 @@ import { createNewProductAsync } from '../../redux/thunks/productThunk';
 
 const AddProduct = () => {
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -20,6 +21,7 @@ const AddProduct = () => {
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
     dispatch(createNewProductAsync(data));
+    reset();
   };
 
   return (
@@ -79,15 +81,15 @@ const AddProduct = () => {
         )}
       />
       <Controller
-        name="CategoryId"
+        name="categoryId"
         defaultValue=""
         control={control}
         render={({ field }) => (
           <TextField
             label="Category ID"
             {...field}
-            error={!!errors.CategoryId}
-            helperText={errors.CategoryId?.message}
+            error={!!errors.categoryId}
+            helperText={errors.categoryId?.message}
           />
         )}
       />

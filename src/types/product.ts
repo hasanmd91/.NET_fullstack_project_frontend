@@ -41,7 +41,7 @@ export type newProduct = {
   description: string;
   price: number;
   quantity: number;
-  CategoryId: string;
+  categoryId: string;
   images: { imageUrl: string }[];
 };
 

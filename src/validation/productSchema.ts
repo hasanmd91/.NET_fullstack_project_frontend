@@ -14,7 +14,7 @@ export const productSchema = yup.object().shape({
     .integer('Quantity must be an integer')
     .positive('Quantity must be greater than zero')
     .required('Quantity is required'),
-  CategoryId: yup.string().required('Category ID is required'),
+  categoryId: yup.string().required('Category ID is required'),
   images: yup
     .array()
     .of(

@@ -105,7 +105,7 @@ export const updateProductAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const { id, updatedData } = updateProduct;
-    const response = await axios.put<product>(
+    const response = await axios.patch<product>(
       `http://localhost:5137/api/product/${id}`,
       updatedData,
       {

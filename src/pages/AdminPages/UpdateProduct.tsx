@@ -7,17 +7,17 @@ import TextField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import {
-  createNewProductAsync,
   getAProductsAsync,
   updateProductAsync,
 } from '../../redux/thunks/productThunk';
 import { useParams } from 'react-router-dom';
 import useAppSelector from '../../hooks/useAppSelector';
-import { Alert, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 
 const UpdateProduct = () => {
   const {
+    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -35,9 +35,8 @@ const UpdateProduct = () => {
   }, [dispatch, id]);
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
-    console.log(id, data);
-
     id && dispatch(updateProductAsync({ id: id, updatedData: data }));
+    reset();
   };
 
   if (!product) {
@@ -105,14 +104,15 @@ const UpdateProduct = () => {
         )}
       />
       <Controller
-        name="CategoryId"
+        name="categoryId"
         defaultValue={product.categoryId}
+        control={control}
         render={({ field }) => (
           <TextField
             label="Category ID"
             {...field}
-            error={!!errors.CategoryId}
-            helperText={errors.CategoryId?.message}
+            error={!!errors.categoryId}
+            helperText={errors.categoryId?.message}
           />
         )}
       />
