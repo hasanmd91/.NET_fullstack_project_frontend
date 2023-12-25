@@ -123,9 +123,11 @@ export const updateUserAsync = createAsyncThunk<
   'updateUserAsync',
   async ({ data, id }: updateUserDataType, { rejectWithValue }) => {
     try {
+      console.log(data, id);
+
       const storedToken = getToken();
 
-      const response = await axios.put<user>(
+      const response = await axios.patch<user>(
         `http://localhost:5137/api/user/${id}`,
         data,
         {

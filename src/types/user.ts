@@ -25,14 +25,9 @@ export type registerUser = {
   city: string;
 };
 
-export type updateUser = {
-  name: string;
-  email: string;
-};
-
 export type updateUserDataType = {
-  data: updateUser;
-  id: number;
+  data: registerUser;
+  id: string;
 };
 
 export type isEmailAvailable = {

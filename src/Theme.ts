@@ -34,6 +34,15 @@ export const theme = createTheme({
       main: shades.secondary[500],
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   typography: {
     fontFamily: ['Fauna One', 'sans-serif'].join(','),
     fontSize: 11,

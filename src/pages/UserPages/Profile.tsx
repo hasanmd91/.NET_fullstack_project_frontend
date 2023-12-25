@@ -1,8 +1,21 @@
 import React from 'react';
-import useAppSelector from '../../hooks/useAppSelector';
+import UserDetails from './UserDetails';
+import { Container, Grid } from '@mui/material';
+import OrderList from './OrderList';
 
 const Profile = () => {
-  return <div>Profile</div>;
+  return (
+    <Container maxWidth="lg" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Grid container>
+        <Grid item md={6} xs={12}>
+          <UserDetails />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <OrderList />
+        </Grid>
+      </Grid>
+    </Container>
+  );
 };
 
 export default Profile;

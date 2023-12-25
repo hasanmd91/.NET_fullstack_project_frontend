@@ -2,14 +2,13 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { registerUser } from '../types/user';
-import { schema } from '../validation/userValidation';
 import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
 import UserRegisterForm from '../components/UserRegisterForm/UserRegisterForm';
 import { Box } from '@mui/material';
 import { createNewUserAsync } from '../redux/thunks/userThunk';
+import { userSchema } from '../validation/userValidation';
 
 const UserRegister = () => {
   const {
@@ -18,7 +17,7 @@ const UserRegister = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<registerUser>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(userSchema),
   });
 
   const dispatch = useAppDispatch();
