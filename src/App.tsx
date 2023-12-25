@@ -18,6 +18,7 @@ import AddProduct from './pages/AdminPages/AddProduct';
 import AdminRoot from './pages/AdminPages/AdminRoot';
 import AddCategory from './pages/AdminPages/AddCategory';
 import CategoryList from './pages/AdminPages/CategoryList';
+import AdminProductList from './pages/AdminPages/AdminProductList';
 
 const App = () => {
   const methods = useForm();
@@ -68,6 +69,7 @@ const App = () => {
             { path: 'addProduct', element: <AddProduct /> },
             { path: 'addCategory', element: <AddCategory /> },
             { path: 'allCategory', element: <CategoryList /> },
+            { path: 'allproduct', element: <AdminProductList /> },
           ],
         },
 

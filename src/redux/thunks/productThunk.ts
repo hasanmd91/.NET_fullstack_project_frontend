@@ -76,14 +76,18 @@ export const deleteProductAsync = createAsyncThunk<
   { rejectValue: string }
 >('deleteProductAsync', async (id, { rejectWithValue }) => {
   try {
-    const response = await axios.delete<boolean>(
-      `http://localhost:5137/api/product/${id}`
+    const storedToken = getToken();
+    const response = await axios.delete(
+      `http://localhost:5137/api/product/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
-    if (!response.data) {
-      throw new Error('Unable to Delete Product');
-    } else {
-      return id;
-    }
+
+    console.log(response);
+    return id;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);
@@ -98,10 +102,17 @@ export const updateProductAsync = createAsyncThunk<
   { rejectValue: string }
 >('updateProductAsync', async (updateProduct, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const { id, updatedData } = updateProduct;
     const response = await axios.put<product>(
       `http://localhost:5137/api/product/${id}`,
-      updatedData
+      updatedData,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     const updateNewProduct: product = response.data;
 
