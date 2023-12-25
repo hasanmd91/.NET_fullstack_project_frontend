@@ -7,7 +7,12 @@ import { Box } from '@mui/material';
 
 const Root: React.FC = () => {
   return (
-    <Box display="flex" flexDirection="column" justifyContent={'space-between'}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent={'space-between'}
+      minHeight={'100vh'}
+    >
       <Navbar />
       <Outlet />
       <Footer />

@@ -57,7 +57,7 @@ const TooltipMenu = () => {
         onClose={handleCloseUserMenu}
       >
         {currentUser?.role === userRole.customer && (
-          <Link to="/profile">
+          <Link to={`/profile/${currentUser.id}`}>
             <MenuItem>My Profile</MenuItem>
           </Link>
         )}

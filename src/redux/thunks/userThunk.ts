@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 
 import { registerUser, user, updateUserDataType } from '../../types/user';
 import { userCredentials } from '../../types/auth';
-import { saveToken } from '../../utils/tokenUtils';
+import { getToken, saveToken } from '../../utils/tokenUtils';
 
 /* LOGIN USER THUNK USING LOGIN CREDENTIAL */
 
@@ -69,8 +69,14 @@ export const getAllUsersAsync = createAsyncThunk<
   { rejectValue: string }
 >('getAllUsersAsync', async (_, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
     const response = await axios.get<user[]>(
-      'https://api.escuelajs.co/api/v1/users'
+      'http://localhost:5137/api/user/',
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     const users: user[] = response.data;
     return users;
@@ -88,9 +94,16 @@ export const createNewUserAsync = createAsyncThunk<
   { rejectValue: string }
 >('createNewUserAsync', async (newUser, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const response = await axios.post<user>(
-      'https://api.escuelajs.co/api/v1/users',
-      newUser
+      'http://localhost:5137/api/user/',
+      newUser,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     const newCreatedUser: user = response.data;
     return newCreatedUser;
@@ -110,9 +123,16 @@ export const updateUserAsync = createAsyncThunk<
   'updateUserAsync',
   async ({ data, id }: updateUserDataType, { rejectWithValue }) => {
     try {
+      const storedToken = getToken();
+
       const response = await axios.put<user>(
-        `https://api.escuelajs.co/api/v1/users/${id}`,
-        data
+        `http://localhost:5137/api/user/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
       );
       const updatedUser: user = response.data;
       return updatedUser;
@@ -122,3 +142,29 @@ export const updateUserAsync = createAsyncThunk<
     }
   }
 );
+
+/* GET A USER THUNK*/
+
+export const getAUserAsync = createAsyncThunk<
+  user,
+  string,
+  { rejectValue: string }
+>('getAUserAsync', async (userid, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+
+    const response = await axios.get<user>(
+      `http://localhost:5137/api/user/${userid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+    const user: user = response.data;
+    return user;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.message);
+  }
+});

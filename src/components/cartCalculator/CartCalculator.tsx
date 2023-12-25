@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Divider,
@@ -10,20 +10,28 @@ import {
   Typography,
 } from '@mui/material';
 import Button from '../Button/Button';
+import useAppSelector from '../../hooks/useAppSelector';
+import { useNavigate } from 'react-router-dom';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { totalCartPrice } from '../../redux/reducers/cartReducer';
 
-type CartCalculatorType = {
-  totalAmount: number;
-};
+const CartCalculator = () => {
+  const { totalAmount } = useAppSelector((state) => state.cart);
 
-const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
-  const [deliveryCost, setDeliveryCost] = useState(8.5); // Initial delivery cost
-  const [total, setTotal] = useState(totalAmount + deliveryCost); // Initial total
+  const [deliveryCost, setDeliveryCost] = useState<number>(8.5);
+  const { currentUser } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleDeliveryChange = (event: any) => {
     const selectedValue = Number(event.target.value);
     setDeliveryCost(selectedValue);
-    setTotal(totalAmount + selectedValue);
   };
+
+  useEffect(() => {
+    dispatch(totalCartPrice());
+  }, [dispatch]);
 
   return (
     <Paper
@@ -57,13 +65,25 @@ const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
           onChange={handleDeliveryChange}
           label="Select Delivery"
         >
-          <MenuItem value={8.5}>Standard Pick Up Point ($ 8.50)</MenuItem>
-          <MenuItem value={20}>Next Day Delivery $20</MenuItem>
+          <MenuItem value={8.5}>Standard Pick Up Point Free </MenuItem>
+          <MenuItem value={20} disabled>
+            Next Day Delivery{' '}
+          </MenuItem>
         </Select>
       </FormControl>
 
-      <Typography variant="h6">Total: ${total}</Typography>
-      <Button fullWidth>CHECKOUT</Button>
+      <Typography variant="h6">Total: ${totalAmount}</Typography>
+
+      {currentUser?.role !== 'User' && (
+        <Typography color="slateblue"> Login To checkout</Typography>
+      )}
+      <Button
+        fullWidth
+        disabled={currentUser?.role !== 'User' ? true : false}
+        onClick={() => navigate('/checkout')}
+      >
+        CHECKOUT
+      </Button>
 
       <Typography variant="h6" gutterBottom>
         WE ACCEPT:

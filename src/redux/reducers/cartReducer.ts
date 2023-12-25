@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CartItem } from '../../types/cart';
+import { stat } from 'fs';
 
 export type cartStateType = {
   cartItems: CartItem[];
@@ -51,14 +52,20 @@ const cartSlice = createSlice({
       }, 0);
     },
 
+    totalPriceWithDelivery: (state, action: PayloadAction<number>) => {
+      state.totalAmount = action.payload;
+    },
+
     clearCart: (state) => {
       state.cartItems = [];
+      state.totalAmount = 0;
     },
   },
 });
 
 const cartReducer = cartSlice.reducer;
 export const {
+  totalPriceWithDelivery,
   addItemToCart,
   removeItemFromCart,
   clearCart,

@@ -7,6 +7,7 @@ import {
   updateUserAsync,
   loginUserAsync,
   authenticateUserAsync,
+  getAUserAsync,
 } from '../thunks/userThunk';
 
 type userStateType = {
@@ -79,6 +80,24 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getAllUsersAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    /* GET A USER REDUCER */
+
+    builder.addCase(getAUserAsync.pending, (state, action) => {
+      state.loading = true;
+      state.error = '';
+    });
+
+    builder.addCase(getAUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+      state.currentUser = action.payload;
+      state.error = '';
+    });
+
+    builder.addCase(getAUserAsync.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

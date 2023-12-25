@@ -15,7 +15,6 @@ export const getAllProductsAsync = createAsyncThunk<
       `http://localhost:5137/api/product/`
     );
     const products: product[] = response.data;
-    console.log(products);
     return products;
   } catch (error) {
     const err = error as AxiosError;

@@ -137,7 +137,10 @@ const ProductView = () => {
               columnGap="1.33%"
             >
               {product.reviews.map((review: Review) => (
-                <Paper sx={{ padding: '10px', marginBottom: '5px' }}>
+                <Paper
+                  sx={{ padding: '10px', marginBottom: '5px' }}
+                  key={review.id}
+                >
                   <Rating value={review.ratings} readOnly />
                   <Typography> {review.content}</Typography>
                 </Paper>

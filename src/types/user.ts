@@ -1,3 +1,5 @@
+import { order } from './Order';
+
 export enum userRole {
   admin = 'Admin',
   customer = 'User',
@@ -9,6 +11,7 @@ export type user = {
   password: string;
   role: userRole;
   avatar: string;
+  orders?: order[];
 };
 
 export type registerUser = {

@@ -20,6 +20,7 @@ import AddCategory from './pages/AdminPages/AddCategory';
 import CategoryList from './pages/AdminPages/CategoryList';
 import AdminProductList from './pages/AdminPages/AdminProductList';
 import UpdateProduct from './pages/AdminPages/UpdateProduct';
+import Checkout from './pages/Checkout';
 
 const App = () => {
   const methods = useForm();
@@ -58,6 +59,10 @@ const App = () => {
           element: <Cart />,
         },
         {
+          path: '/checkout',
+          element: <Checkout />,
+        },
+        {
           path: '/admidashbord',
           element: (
             <AdminAuthGuard>
@@ -74,9 +79,8 @@ const App = () => {
             { path: 'allproduct/update/:id', element: <UpdateProduct /> },
           ],
         },
-
         {
-          path: '/profile',
+          path: '/profile/:id',
           element: (
             <CustomerAuthGuard>
               <Profile />
