@@ -26,12 +26,10 @@ const AdminSideBar: React.FC<AdminSideBarPropsType> = () => {
       <Link to={'/admidashbord/allCategory'}>
         <Button fullWidth>All Category List</Button>
       </Link>
-
       <Link to={'/admidashbord/allproduct'}>
         <Button fullWidth>All Product List</Button>
       </Link>
 
-      <Button fullWidth>All Product List</Button>
       <Button fullWidth>Add Category</Button>
       <Button fullWidth>User List</Button>
       <Button fullWidth>Order List</Button>

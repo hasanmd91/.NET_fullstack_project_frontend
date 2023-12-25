@@ -36,16 +36,16 @@ export type Review = {
 
 export type newReview = Omit<Review, 'id' | 'createdDate' | 'updatedDate'>;
 
-export interface newProduct {
+export type newProduct = {
   title: string;
   description: string;
   price: number;
   quantity: number;
   CategoryId: string;
   images: { imageUrl: string }[];
-}
+};
 
-export interface updatedProduct {
-  id: number;
-  updatedData: Partial<newProduct>;
-}
+export type updatedProduct = {
+  id: string;
+  updatedData: newProduct;
+};

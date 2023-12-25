@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Grid, Paper, Typography } from '@mui/material';
-
 import { product } from '../../types/product';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { deleteProductAsync } from '../../redux/thunks/productThunk';
@@ -65,7 +64,7 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
             Delete
           </Button>
 
-          <Link to={`/admidashbord/product/${product.id}`}>
+          <Link to={`update/${product.id}`}>
             <Button>Edit</Button>
           </Link>
         </Grid>
