@@ -29,9 +29,9 @@ const ImageSlider: React.FC<ImageSliderPropsType> = ({ images }) => {
             style={{
               maxWidth: '100%',
               objectFit: 'cover',
-              width: '100%', // Ensure the image takes up the full width
-              maxHeight: '700px', // Maintain the image's aspect ratio
-              display: 'block', // Prevent any default inline layout
+              width: '100%',
+              maxHeight: '700px',
+              display: 'block',
             }}
           />
         </Box>

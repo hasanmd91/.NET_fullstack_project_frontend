@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Divider,
@@ -16,6 +16,15 @@ type CartCalculatorType = {
 };
 
 const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
+  const [deliveryCost, setDeliveryCost] = useState(8.5); // Initial delivery cost
+  const [total, setTotal] = useState(totalAmount + deliveryCost); // Initial total
+
+  const handleDeliveryChange = (event: any) => {
+    const selectedValue = Number(event.target.value);
+    setDeliveryCost(selectedValue);
+    setTotal(totalAmount + selectedValue);
+  };
+
   return (
     <Paper
       elevation={1}
@@ -27,7 +36,9 @@ const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
         justifyContent: 'space-between',
       }}
     >
-      <Typography variant="h6">Total</Typography>
+      <Typography variant="h3">
+        <strong>Total</strong>
+      </Typography>
       <Divider />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -40,13 +51,18 @@ const CartCalculator: React.FC<CartCalculatorType> = ({ totalAmount }) => {
       </Typography>
 
       <FormControl fullWidth>
-        <InputLabel>Standard Pick Up Point ($ 8.50)</InputLabel>
-        <Select label="Standard Pick Up Point ($ 8.50)">
-          <MenuItem>Standard Pick Up Point ($ 8.50)</MenuItem>
-          <MenuItem>Next Day Delivery $20</MenuItem>
+        <InputLabel>Select Delivery</InputLabel>
+        <Select
+          value={deliveryCost}
+          onChange={handleDeliveryChange}
+          label="Select Delivery"
+        >
+          <MenuItem value={8.5}>Standard Pick Up Point ($ 8.50)</MenuItem>
+          <MenuItem value={20}>Next Day Delivery $20</MenuItem>
         </Select>
       </FormControl>
 
+      <Typography variant="h6">Total: ${total}</Typography>
       <Button fullWidth>CHECKOUT</Button>
 
       <Typography variant="h6" gutterBottom>

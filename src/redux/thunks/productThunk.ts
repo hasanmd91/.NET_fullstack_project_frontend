@@ -27,7 +27,7 @@ export const getAllProductsAsync = createAsyncThunk<
 
 export const getAProductsAsync = createAsyncThunk<
   product,
-  number,
+  string,
   { rejectValue: string }
 >('getAProductsAsync', async (id, { rejectWithValue }) => {
   try {

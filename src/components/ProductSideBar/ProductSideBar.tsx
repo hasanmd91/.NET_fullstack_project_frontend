@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import Button from '../Button/Button';
 import { shades } from '../../Theme';

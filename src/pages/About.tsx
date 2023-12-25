@@ -3,7 +3,7 @@ import { Container, Typography } from '@mui/material';
 
 const About = () => {
   return (
-    <Container maxWidth={'sm'} sx={{ marginTop: '16px' }}>
+    <Container maxWidth={'sm'} sx={{ marginTop: '16px', minHeight: '60vh' }}>
       <Typography fontWeight={'bold'} variant="h4" gutterBottom>
         Welcome to ILH Oy
       </Typography>

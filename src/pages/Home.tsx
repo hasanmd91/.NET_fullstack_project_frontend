@@ -1,12 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAppSelector from '../hooks/useAppSelector';
+import MainCarousel from '../components/MainCarousel/MainCarousel';
+import Subscribe from '../components/Subscribe/Subscribe';
+import { Box, Typography } from '@mui/material';
+import MediaCard from '../components/Card/Card';
+import { Link } from 'react-router-dom';
+import { product } from '../types/product';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { getAllProductsAsync } from '../redux/thunks/productThunk';
 
 const Home = () => {
-  const { currentUser } = useAppSelector((state) => state.user);
+  const { products } = useAppSelector((state) => state.product);
 
-  console.log(currentUser);
+  const dispatch = useAppDispatch();
 
-  return <div>Home</div>;
+  useEffect(() => {
+    dispatch(getAllProductsAsync());
+  }, [dispatch]);
+
+  return (
+    <Box>
+      <MainCarousel />
+
+      <Box mt="50px" width="100%">
+        <Box
+          mt="20px"
+          display="flex"
+          flexWrap="wrap"
+          columnGap="1.33%"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
+          <Box>
+            <Typography variant="h2" fontWeight="bold">
+              New & Featured
+            </Typography>
+          </Box>
+          <Box>
+            {products.slice(0, 10).map((p: product) => (
+              <Link to={`/products/${p.id}`} key={p.id}>
+                <MediaCard product={p} />
+              </Link>
+            ))}
+          </Box>
+        </Box>
+      </Box>
+      <Subscribe />
+    </Box>
+  );
 };
 
 export default Home;

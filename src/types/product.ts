@@ -17,22 +17,24 @@ type category = {
   updatedDate: string;
 };
 
-type Image = {
+export type Image = {
   imageUrl: string;
   id: string;
   createdDate: string;
   updatedDate: string;
 };
 
-type Review = {
+export type Review = {
+  id: string;
   content: string;
   ratings: number;
   productId: string;
   userId: string;
-  id: string;
   createdDate: string;
   updatedDate: string;
 };
+
+export type newReview = Omit<Review, 'id' | 'createdDate' | 'updatedDate'>;
 
 export interface newProduct {
   title: string;
