@@ -7,6 +7,7 @@ import {
   Divider,
   Paper,
   Rating,
+  Avatar,
 } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -27,6 +28,7 @@ import Button from '../components/Button/Button';
 import MediaCard from '../components/Card/Card';
 import TextField from '../components/TextField/TextField';
 import { createNewReview } from '../utils/reviewUtils';
+import { stringAvatar } from '../utils/stringAvatar';
 
 const ProductView = () => {
   const { product, products } = useAppSelector((state) => state.product);
@@ -58,8 +60,6 @@ const ProductView = () => {
       productId: product.id,
       userId: currentUser.id,
     };
-
-    console.log(reviewData);
     createNewReview(reviewData);
 
     setTimeout(() => {
@@ -141,6 +141,7 @@ const ProductView = () => {
                   sx={{ padding: '10px', marginBottom: '5px' }}
                   key={review.id}
                 >
+                  <Avatar {...stringAvatar(review.reviewer)} />
                   <Rating value={review.ratings} readOnly />
                   <Typography> {review.content}</Typography>
                 </Paper>

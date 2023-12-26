@@ -14,6 +14,7 @@ export type order = {
   id: string;
   user: user;
   totalPrice: number;
+  orderStatus: OrderStatus;
   orderDetails: orderDetail[];
   createdDate: string;
   updatedDate: string;
@@ -29,3 +30,11 @@ export type newOrder = {
   totalPrice: number;
   orderDetails: onewOrderDetail[];
 };
+
+export enum OrderStatus {
+  PENDING,
+  DELIVERED,
+  RETURNED,
+  CANCELED,
+  PAID,
+}

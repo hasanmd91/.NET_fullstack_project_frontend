@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useAppSelector from '../../hooks/useAppSelector';
 import { order } from '../../types/Order';
 import { Container, Paper } from '@mui/material';
+import { formatDateString } from '../../utils/formatDateString';
 
 const OrderReview = () => {
   const { currentUser } = useAppSelector((state) => state.user);
@@ -24,11 +25,26 @@ const OrderReview = () => {
       {orders.map((od: order, index: React.Key | null | undefined) => (
         <Accordion key={index} sx={{ marginTop: '10px' }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="h6">Order {od.id}</Typography>
+            <Typography variant="h6">
+              <strong>Order Number:</strong> {od.id}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Paper sx={{ width: '100%', padding: '10px' }}>
+              <Typography variant="h6">
+                <strong>Order Date:</strong> {formatDateString(od.createdDate)}
+              </Typography>
               <List disablePadding>
+                <ListItem>
+                  <ListItemText primary="OrderStatus" />
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ fontWeight: 700, color: 'green' }}
+                  >
+                    {od.orderStatus}
+                  </Typography>
+                </ListItem>
+
                 {od.orderDetails.map((item, idx) => (
                   <ListItem key={idx}>
                     <ListItemText primary={item.product.title} />

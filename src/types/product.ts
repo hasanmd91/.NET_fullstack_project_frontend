@@ -26,6 +26,7 @@ export type Image = {
 
 export type Review = {
   id: string;
+  reviewer: string;
   content: string;
   ratings: number;
   productId: string;
@@ -34,7 +35,10 @@ export type Review = {
   updatedDate: string;
 };
 
-export type newReview = Omit<Review, 'id' | 'createdDate' | 'updatedDate'>;
+export type newReview = Omit<
+  Review,
+  'id' | 'createdDate' | 'updatedDate' | 'reviewer'
+>;
 
 export type newProduct = {
   title: string;
