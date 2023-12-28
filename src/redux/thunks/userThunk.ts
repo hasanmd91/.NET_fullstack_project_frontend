@@ -123,8 +123,6 @@ export const updateUserAsync = createAsyncThunk<
   'updateUserAsync',
   async ({ data, id }: updateUserDataType, { rejectWithValue }) => {
     try {
-      console.log(data, id);
-
       const storedToken = getToken();
 
       const response = await axios.patch<user>(
@@ -165,6 +163,28 @@ export const getAUserAsync = createAsyncThunk<
     );
     const user: user = response.data;
     return user;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.message);
+  }
+});
+
+/* DELETE A USER THUNK*/
+
+export const deleteAUserAsync = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>('deleteAUserAsync', async (userid, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+
+    await axios.delete(`http://localhost:5137/api/user/${userid}`, {
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+      },
+    });
+    return userid;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);

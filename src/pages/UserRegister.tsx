@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerUser } from '../types/user';
+import { registerUser, userRole } from '../types/user';
 import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
 import UserRegisterForm from '../components/UserRegisterForm/UserRegisterForm';
@@ -23,7 +23,12 @@ const UserRegister = () => {
   const dispatch = useAppDispatch();
 
   const submitHandeler: SubmitHandler<registerUser> = (data: registerUser) => {
-    dispatch(createNewUserAsync(data));
+    const newData = {
+      ...data,
+      role: userRole.customer,
+    };
+
+    dispatch(createNewUserAsync(newData));
   };
 
   const { currentUser } = useAppSelector((state) => state.user);

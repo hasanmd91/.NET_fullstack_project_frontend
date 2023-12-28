@@ -8,6 +8,7 @@ import {
   loginUserAsync,
   authenticateUserAsync,
   getAUserAsync,
+  deleteAUserAsync,
 } from '../thunks/userThunk';
 
 type userStateType = {
@@ -145,6 +146,19 @@ const userSlice = createSlice({
     builder.addCase(updateUserAsync.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    });
+
+    /*DELETE A USER REDUCER*/
+
+    builder.addCase(deleteAUserAsync.fulfilled, (state, action) => {
+      state.users = state.users.filter((user) => user.id !== action.payload);
+      state.loading = false;
+      state.error = '';
+    });
+
+    builder.addCase(deleteAUserAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
     });
   },
 });

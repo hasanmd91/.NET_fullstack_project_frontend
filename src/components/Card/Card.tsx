@@ -38,7 +38,7 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
         image={
           imageError
             ? 'https://media.istockphoto.com/id/1226328537/vector/image-place-holder-with-a-gray-camera-icon.jpg?s=170667a&w=0&k=20&c=iLBbpRp4D_dbwg39-pubCdie04H1L0X1hPB1A2hJyjU='
-            : product.images[0].imageUrl
+            : product.images[0]?.imageUrl
         }
         alt="image"
         sx={{
@@ -50,10 +50,10 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
       />
       <CardContent>
         <Typography fontWeight={'bold'} noWrap={true}>
-          {product.title}
+          {product?.title}
         </Typography>
-        <Typography variant="caption">{product.category.name}</Typography>
-        <Typography fontWeight={'bold'}>€ {product.price}</Typography>
+        <Typography variant="caption">{product.category?.name}</Typography>
+        <Typography fontWeight={'bold'}>€ {product?.price}</Typography>
       </CardContent>
       <CardActions sx={{ top: 0, right: 0, position: 'absolute' }}>
         <Button size="small">

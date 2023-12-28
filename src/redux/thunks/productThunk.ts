@@ -76,16 +76,11 @@ export const deleteProductAsync = createAsyncThunk<
 >('deleteProductAsync', async (id, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-    const response = await axios.delete(
-      `http://localhost:5137/api/product/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      }
-    );
-
-    console.log(response);
+    await axios.delete(`http://localhost:5137/api/product/${id}`, {
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+      },
+    });
     return id;
   } catch (error) {
     const err = error as AxiosError;

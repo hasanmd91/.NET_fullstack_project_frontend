@@ -32,6 +32,8 @@ const OrderList = () => {
     );
   }
 
+  console.log(orders);
+
   if (error) {
     return (
       <CenteredContainer>
@@ -49,9 +51,23 @@ const OrderList = () => {
       {orders.map((od: order, index: React.Key | null | undefined) => (
         <Accordion key={index} sx={{ marginTop: '10px' }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="h6">
-              <strong>Order Number:</strong> {od.id}
-            </Typography>
+            <Box sx={{ flexBasis: '33%', textAlign: 'left' }}>
+              <Typography variant="h6">
+                <strong>Order Number:</strong> {od.id}
+              </Typography>
+            </Box>
+            <Box sx={{ flexBasis: '33%', textAlign: 'center' }}>
+              <Typography variant="h6">
+                <strong>Order By: </strong>
+                {`${od.user.firstName} ${od.user.lastName}`}
+              </Typography>
+            </Box>
+            <Box sx={{ flexBasis: '33%', textAlign: 'right' }}>
+              <Typography variant="h6">
+                <strong>Address: </strong>
+                {`${od.user.address}, ${od.user.zip} ${od.user.city}`}
+              </Typography>
+            </Box>
           </AccordionSummary>
           <AccordionDetails>
             <Paper sx={{ width: '100%', padding: '10px' }}>
@@ -88,6 +104,7 @@ const OrderList = () => {
                 </ListItem>
               </List>
             </Paper>
+            ;
           </AccordionDetails>
         </Accordion>
       ))}

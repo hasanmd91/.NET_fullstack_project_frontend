@@ -5,12 +5,16 @@ export enum userRole {
   customer = 'User',
 }
 export type user = {
-  id: number;
-  name: string;
+  id: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   role: userRole;
   avatar: string;
+  address: string;
+  zip: string;
+  city: string;
   orders?: order[];
 };
 
