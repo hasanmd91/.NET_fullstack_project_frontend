@@ -30,8 +30,6 @@ const Cart = () => {
     );
   }
 
-  console.log(cartItems, totalAmount);
-
   return (
     <Container maxWidth="lg">
       <Grid container spacing={4} marginTop={'2rem'}>

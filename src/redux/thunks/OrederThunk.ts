@@ -11,11 +11,18 @@ export const getAllOrdersAsync = createAsyncThunk<
   { rejectValue: string }
 >('getAllOrdersAsync', async (_, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const response = await axios.get<order[]>(
-      `http://localhost:5137/api/order/`
+      `http://localhost:5137/api/order/`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
     );
     const Orders: order[] = response.data;
-    console.log(Orders);
     return Orders;
   } catch (error) {
     const err = error as AxiosError;
@@ -31,8 +38,15 @@ export const getAOrdersAsync = createAsyncThunk<
   { rejectValue: string }
 >('getAOrdersAsync', async (id, { rejectWithValue }) => {
   try {
+    const storedToken = getToken();
+
     const response = await axios.get<order>(
-      `http://localhost:5137/api/order/${id}`
+      `http://localhost:5137/api/order/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
     );
     const order: order = response.data;
     return order;
@@ -50,6 +64,8 @@ export const createNewOrderAsync = createAsyncThunk<
   { rejectValue: string }
 >('createNewOrderAsync', async (NewOrder, { rejectWithValue }) => {
   try {
+    console.log(NewOrder);
+
     const storedToken = getToken();
     const response = await axios.post<order>(
       `http://localhost:5137/api/order/`,

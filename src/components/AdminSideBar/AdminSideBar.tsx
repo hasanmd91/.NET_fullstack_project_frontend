@@ -30,8 +30,13 @@ const AdminSideBar: React.FC<AdminSideBarPropsType> = () => {
         <Button fullWidth>All Product List</Button>
       </Link>
 
-      <Button fullWidth>User List</Button>
-      <Button fullWidth>Order List</Button>
+      <Link to={'/admidashbord/allOrders'}>
+        <Button fullWidth>Order List</Button>
+      </Link>
+
+      <Link to={'/admidashbord/allUserList'}>
+        <Button fullWidth>User List</Button>
+      </Link>
     </Box>
   );
 };

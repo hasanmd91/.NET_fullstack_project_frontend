@@ -9,12 +9,12 @@ import { usePagination } from '../hooks/usePagination';
 import Pagination from '../components/Pagination/Pagination';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import SearchBar from '../components/InputSearch/SearchBar';
+import ProductSideBar from '../components/ProductSideBar/ProductSideBar';
 import {
   getAllProductsAsync,
   getProductByTitleAsync,
 } from '../redux/thunks/productThunk';
 import useDebounce from '../hooks/useDebounce';
-import ProductSideBar from '../components/ProductSideBar/ProductSideBar';
 
 const ProductList = () => {
   const { products, loading, error } = useAppSelector((state) => state.product);
@@ -23,7 +23,7 @@ const ProductList = () => {
 
   const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
     products,
-    30
+    20
   );
 
   const dispatch = useAppDispatch();

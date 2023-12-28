@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useAppSelector from '../hooks/useAppSelector';
 import MainCarousel from '../components/MainCarousel/MainCarousel';
 import Subscribe from '../components/Subscribe/Subscribe';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Container, Typography } from '@mui/material';
 import MediaCard from '../components/Card/Card';
 import { Link } from 'react-router-dom';
 import { product } from '../types/product';
@@ -44,13 +44,13 @@ const Home = () => {
               <CircularProgress color="error" size="5rem" />
             </CenteredContainer>
           ) : (
-            <Box>
+            <Container maxWidth="lg">
               {products.slice(0, 10).map((p: product) => (
                 <Link to={`/products/${p.id}`} key={p.id}>
                   <MediaCard product={p} />
                 </Link>
               ))}
-            </Box>
+            </Container>
           )}
         </Box>
       </Box>

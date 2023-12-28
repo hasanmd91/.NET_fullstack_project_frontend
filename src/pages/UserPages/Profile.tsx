@@ -1,7 +1,7 @@
 import React from 'react';
 import UserDetails from './UserDetails';
 import { Container, Grid } from '@mui/material';
-import OrderList from './OrderList';
+import OrderList from './OrderReview';
 
 const Profile = () => {
   return (

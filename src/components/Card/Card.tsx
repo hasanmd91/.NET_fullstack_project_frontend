@@ -41,7 +41,11 @@ const MediaCard: React.FC<MediaCardPropsType> = ({ product }) => {
             : product.images[0].imageUrl
         }
         alt="image"
-        sx={{ objectFit: 'cover', width: '100%' }}
+        sx={{
+          objectFit: 'cover',
+          width: '100%',
+          maxHeight: { md: '200px', xs: '180px' },
+        }}
         onError={handleImageError}
       />
       <CardContent>

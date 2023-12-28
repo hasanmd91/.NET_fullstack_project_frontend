@@ -26,7 +26,26 @@ const About = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis
         architecto, accusantium rerum mollitia ex ab at beatae reiciendis. Quae,
         facilis sint ea aperiam non nam nisi dolores ratione repellat. Quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit. Nobis architecto,
+        accusantium rerum mollitia ex ab at beatae reiciendis. Quae, facilis
+        sint ea aperiam non nam nisi dolores ratione repellat. Quos. Lorem ipsum
+        dolor sit amet consectetur adipisicing elit.
       </Typography>
     </Container>
   );

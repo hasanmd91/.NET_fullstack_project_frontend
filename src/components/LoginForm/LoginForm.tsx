@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Paper, Typography } from '@mui/material';
+import { Alert, Box, Container, Paper, Typography } from '@mui/material';
 
 import TextField from '../TextField/TextField';
 import useAppSelector from '../../hooks/useAppSelector';
@@ -21,7 +21,7 @@ const LoginForm: React.FC<LoginFormType> = ({
   handlePasswordChange,
   handleSubmit,
 }) => {
-  const { error, errorMsg } = useAppSelector((state) => state.user);
+  const { error } = useAppSelector((state) => state.user);
 
   return (
     <Container
@@ -52,17 +52,16 @@ const LoginForm: React.FC<LoginFormType> = ({
             label="Email"
             value={email}
             onChange={handleEmailChange}
-            error={error}
-            helperText={errorMsg}
+            error={error ? true : false}
           />
           <TextField
             type="password"
             label="Password"
             value={password}
             onChange={handlePasswordChange}
-            error={error}
-            helperText={errorMsg}
+            error={error ? true : false}
           />
+          {error && <Alert severity="error">{error}</Alert>}
           <Button type="submit" fullWidth>
             Login
           </Button>

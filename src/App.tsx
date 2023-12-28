@@ -21,6 +21,8 @@ import CategoryList from './pages/AdminPages/CategoryList';
 import AdminProductList from './pages/AdminPages/AdminProductList';
 import UpdateProduct from './pages/AdminPages/UpdateProduct';
 import Checkout from './pages/Checkout';
+import OrderList from './pages/AdminPages/OrderList';
+import UserList from './pages/AdminPages/UserList';
 
 const App = () => {
   const methods = useForm();
@@ -77,6 +79,8 @@ const App = () => {
             { path: 'allCategory', element: <CategoryList /> },
             { path: 'allproduct', element: <AdminProductList /> },
             { path: 'allproduct/update/:id', element: <UpdateProduct /> },
+            { path: 'allOrders/', element: <OrderList /> },
+            { path: 'allUserList/', element: <UserList /> },
           ],
         },
         {

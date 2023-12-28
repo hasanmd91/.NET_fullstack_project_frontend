@@ -9,20 +9,36 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useAppSelector from '../../hooks/useAppSelector';
 import { order } from '../../types/Order';
-import { Container, Paper } from '@mui/material';
+import { Alert, CircularProgress, Container, Paper } from '@mui/material';
 import { formatDateString } from '../../utils/formatDateString';
+import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 
 const OrderReview = () => {
   const { currentUser } = useAppSelector((state) => state.user);
-  const { orders } = currentUser; // Assuming orders is an array of orders
+  const { orders, loading, error } = currentUser;
 
+  if (loading) {
+    return (
+      <CenteredContainer>
+        <CircularProgress color="error" size="5rem" />
+      </CenteredContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <CenteredContainer>
+        <Alert security="error">{error}</Alert>;
+      </CenteredContainer>
+    );
+  }
   return (
     <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
       <Typography variant="h2" gutterBottom>
         Order List
       </Typography>
 
-      {orders.map((od: order, index: React.Key | null | undefined) => (
+      {orders?.map((od: order, index: React.Key | null | undefined) => (
         <Accordion key={index} sx={{ marginTop: '10px' }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="h6">
@@ -32,7 +48,8 @@ const OrderReview = () => {
           <AccordionDetails>
             <Paper sx={{ width: '100%', padding: '10px' }}>
               <Typography variant="h6">
-                <strong>Order Date:</strong> {formatDateString(od.createdDate)}
+                <strong>Order Date:</strong>{' '}
+                {od?.createdDate && formatDateString(od?.createdDate)}
               </Typography>
               <List disablePadding>
                 <ListItem>

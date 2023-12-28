@@ -101,8 +101,6 @@ export const updateCategoryAsync = createAsyncThunk<
       }
     );
 
-    console.log(response);
-
     return response.data;
   } catch (error) {
     const err = error as AxiosError;
