@@ -4,6 +4,7 @@ import {
   createNewOrderAsync,
   getAOrdersAsync,
   getAllOrdersAsync,
+  updateOrderAsync,
 } from '../thunks/OrederThunk';
 
 export type orderStateType = {
@@ -71,6 +72,22 @@ const orderSlice = createSlice({
     });
 
     builder.addCase(createNewOrderAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    /*UPDATE PRODUCT REDUCER*/
+
+    builder.addCase(updateOrderAsync.fulfilled, (state, action) => {
+      const updatedOrder = action.payload;
+      state.orders = state.orders.map((order) =>
+        order.id === updatedOrder.id ? updatedOrder : order
+      );
+      state.loading = false;
+      state.error = '';
+    });
+
+    builder.addCase(updateOrderAsync.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

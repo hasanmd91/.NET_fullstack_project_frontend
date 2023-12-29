@@ -32,9 +32,14 @@ export type newOrder = {
 };
 
 export enum OrderStatus {
-  PENDING,
-  DELIVERED,
-  RETURNED,
-  CANCELED,
-  PAID,
+  PENDING = 'PENDING',
+  DELIVERED = 'DELIVERED',
+  RETURNED = 'RETURNED',
+  CANCELED = 'CANCELED',
+  PAID = 'PAID',
 }
+
+export type updateOrder = {
+  id: string;
+  orderStatus: OrderStatus;
+};
