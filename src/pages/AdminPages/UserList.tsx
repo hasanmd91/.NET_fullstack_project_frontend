@@ -77,6 +77,7 @@ const UsersList = () => {
                 <Grid item xs={12} md={6}>
                   <Box textAlign="right">
                     <Button
+                      disabled={user.orders?.length ? true : false}
                       sx={{ color: 'red' }}
                       onClick={() => deleteHandler(user.id)}
                     >
