@@ -7,21 +7,21 @@ export type product = {
   categoryId: string;
   category: category;
   images: Image[];
-  reviews: Review[];
+  reviews?: Review[];
 };
 
 type category = {
   name: string;
   id: string;
-  createdDate: string;
-  updatedDate: string;
+  createdDate?: string;
+  updatedDate?: string;
 };
 
 export type Image = {
   imageUrl: string;
   id: string;
-  createdDate: string;
-  updatedDate: string;
+  createdDate?: string;
+  updatedDate?: string;
 };
 
 export type Review = {
