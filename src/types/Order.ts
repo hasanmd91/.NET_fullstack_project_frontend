@@ -20,7 +20,7 @@ export type order = {
   updatedDate: string;
 };
 
-export type onewOrderDetail = {
+export type newOrderDetail = {
   productId: string;
   quantity: number;
 };
@@ -28,7 +28,7 @@ export type onewOrderDetail = {
 export type newOrder = {
   userId: string;
   totalPrice: number;
-  orderDetails: onewOrderDetail[];
+  orderDetails: newOrderDetail[];
 };
 
 export enum OrderStatus {

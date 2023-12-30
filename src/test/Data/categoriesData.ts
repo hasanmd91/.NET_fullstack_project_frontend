@@ -17,6 +17,10 @@ const categoriesData: category[] = [
     id: '4',
     name: 'Performance',
   },
+  {
+    id: '5',
+    name: 'Nike',
+  },
 ];
 
 export default categoriesData;
