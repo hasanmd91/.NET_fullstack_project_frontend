@@ -63,6 +63,7 @@ export const createNewProductAsync = createAsyncThunk<
     return createdProduct;
   } catch (error) {
     const err = error as AxiosError;
+
     return rejectWithValue(err.message);
   }
 });

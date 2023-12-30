@@ -1,9 +1,7 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import productsData from '../data/productsData';
-import categoriesData from '../data/categoriesData';
-import { NewProduct, newProduct, product } from '../../types/product';
-import { category, newCategory } from '../../types/category';
+import productsData from '../Data/productsData';
+import categoriesData from '../Data/categoriesData';
 
 export const handlers = [
   // get a product by search query

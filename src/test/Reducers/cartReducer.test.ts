@@ -7,7 +7,7 @@ import cartReducer, {
   totalCartPrice,
 } from '../../redux/reducers/cartReducer';
 import { createStore } from '../../redux/store';
-import cartItemsData from '../data/cartData';
+import cartItemsData from '../Data/cartData';
 
 let store = createStore();
 

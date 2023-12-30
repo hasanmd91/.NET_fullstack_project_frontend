@@ -7,8 +7,22 @@ import TextField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { createNewProductAsync } from '../../redux/thunks/productThunk';
+import useAppSelector from '../../hooks/useAppSelector';
+import {
+  Alert,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import { category } from '../../types/category';
 
 const AddProduct = () => {
+  const { error } = useAppSelector((state) => state.product);
+  const { categories } = useAppSelector((state) => state.category);
+
+  console.log(categories);
+
   const {
     reset,
     control,
@@ -80,19 +94,31 @@ const AddProduct = () => {
           />
         )}
       />
-      <Controller
-        name="categoryId"
-        defaultValue=""
-        control={control}
-        render={({ field }) => (
-          <TextField
-            label="Category ID"
-            {...field}
-            error={!!errors.categoryId}
-            helperText={errors.categoryId?.message}
-          />
+      <FormControl fullWidth>
+        <InputLabel id="categoryId-label">Category ID</InputLabel>
+        <Controller
+          name="categoryId"
+          defaultValue=""
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              labelId="categoryId-label"
+              label="Category"
+              error={!!errors.categoryId}
+            >
+              {categories.map((category: category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
+        />
+        {errors.categoryId && (
+          <Alert severity="error">{errors.categoryId.message}</Alert>
         )}
-      />
+      </FormControl>
       <Controller
         name={`images.${0}.imageUrl`}
         defaultValue=""
@@ -132,6 +158,7 @@ const AddProduct = () => {
           />
         )}
       />
+      {error && <Alert severity="error">{error}</Alert>}
       <Button fullWidth>Submit</Button>
     </form>
   );

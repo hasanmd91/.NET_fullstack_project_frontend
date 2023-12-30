@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import categoriesData from '../data/categoriesData';
+import categoriesData from '../Data/categoriesData';
 
 export const handlers = [
   rest.get(`http://localhost:5137/api/category/`, async (req, res, ctx) => {
