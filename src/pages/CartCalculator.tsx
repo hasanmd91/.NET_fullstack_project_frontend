@@ -9,11 +9,11 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import Button from '../Button/Button';
-import useAppSelector from '../../hooks/useAppSelector';
+import Button from '../components/Button/Button';
+import useAppSelector from '../hooks/useAppSelector';
 import { useNavigate } from 'react-router-dom';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import { totalCartPrice } from '../../redux/reducers/cartReducer';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { totalCartPrice } from '../redux/reducers/cartReducer';
 
 const CartCalculator = () => {
   const { totalAmount } = useAppSelector((state) => state.cart);

@@ -27,6 +27,8 @@ const AdminProductList = () => {
   );
 
   useEffect(() => {
+    if (!debouncedValue) return;
+
     dispatch(getProductByTitleAsync(debouncedValue));
   }, [debouncedValue, dispatch]);
 

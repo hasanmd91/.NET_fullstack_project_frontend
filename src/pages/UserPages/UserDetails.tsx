@@ -42,7 +42,6 @@ const UserDetails = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const ref = null;
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -88,7 +87,7 @@ const UserDetails = () => {
             control={control}
             defaultValue={currentUser.firstName}
             rules={{ required: true }}
-            render={({ field }) => (
+            render={({ field: { ref, ...field } }) => (
               <TextField
                 {...field}
                 helperText={errors.firstName?.message}
@@ -110,7 +109,6 @@ const UserDetails = () => {
                 helperText={errors.lastName?.message}
                 error={errors.lastName ? true : false}
                 label="Lastname"
-                ref={ref}
               />
             )}
           />
@@ -126,7 +124,6 @@ const UserDetails = () => {
                 helperText={errors.email?.message}
                 error={errors.email ? true : false}
                 label="Email"
-                ref={ref}
               />
             )}
           />
@@ -138,7 +135,6 @@ const UserDetails = () => {
             render={({ field }) => (
               <TextField
                 {...field}
-                ref={ref}
                 type={showPassword ? 'text' : 'password'}
                 helperText={errors.password?.message}
                 error={errors.password ? true : false}
@@ -180,7 +176,6 @@ const UserDetails = () => {
                 helperText={errors.avatar?.message}
                 error={errors.avatar ? true : false}
                 label="Avatar"
-                ref={ref}
               />
             )}
           />
@@ -196,7 +191,6 @@ const UserDetails = () => {
                 helperText={errors.address?.message}
                 error={errors.address ? true : false}
                 label="Address"
-                ref={ref}
               />
             )}
           />
@@ -212,7 +206,6 @@ const UserDetails = () => {
                 helperText={errors.zip?.message}
                 error={errors.zip ? true : false}
                 label="Zip Code"
-                ref={ref}
               />
             )}
           />
@@ -228,7 +221,6 @@ const UserDetails = () => {
                 helperText={errors.city?.message}
                 error={errors.city ? true : false}
                 label="City"
-                ref={ref}
               />
             )}
           />

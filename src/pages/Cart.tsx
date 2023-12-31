@@ -10,10 +10,10 @@ import useAppDispatch from '../hooks/useAppDispatch';
 import { clearCart, totalCartPrice } from '../redux/reducers/cartReducer';
 import Button from '../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
-import CartCalculator from '../components/CartCalculator/CartCalculator';
+import CartCalculator from './CartCalculator';
 
 const Cart = () => {
-  const { cartItems, totalAmount } = useAppSelector((state) => state.cart);
+  const { cartItems } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
