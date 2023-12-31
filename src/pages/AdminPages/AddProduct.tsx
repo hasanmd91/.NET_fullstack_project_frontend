@@ -33,7 +33,7 @@ const AddProduct = () => {
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
     dispatch(createNewProductAsync(data));
-    reset();
+    // reset();
   };
 
   return (
