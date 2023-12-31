@@ -91,8 +91,6 @@ export const updateOrderAsync = createAsyncThunk<
 >('updateOrderAsync', async (updateOrder, { rejectWithValue }) => {
   const { id, orderStatus } = updateOrder;
 
-  console.log(id, orderStatus);
-
   try {
     const storedToken = getToken();
     const response = await axios.patch<order>(

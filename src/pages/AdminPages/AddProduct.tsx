@@ -21,8 +21,6 @@ const AddProduct = () => {
   const { error } = useAppSelector((state) => state.product);
   const { categories } = useAppSelector((state) => state.category);
 
-  console.log(categories);
-
   const {
     reset,
     control,

@@ -17,8 +17,6 @@ const OrderReview = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const { orders, loading, error } = currentUser;
 
-  console.log(orders);
-
   if (loading) {
     return (
       <CenteredContainer>

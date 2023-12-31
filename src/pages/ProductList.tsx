@@ -20,7 +20,6 @@ const ProductList = () => {
   const { products, loading, error } = useAppSelector((state) => state.product);
   const [search, setSearch] = useState('');
   const { debouncedValue } = useDebounce(search);
-
   const { currentPage, pageLimit, currentProducts, setPage } = usePagination(
     products,
     20
@@ -48,7 +47,7 @@ const ProductList = () => {
   if (error) {
     return (
       <CenteredContainer>
-        <Alert security="error">{error}</Alert>;
+        <Alert security="error">{error}</Alert>
       </CenteredContainer>
     );
   }
@@ -63,7 +62,7 @@ const ProductList = () => {
         <Grid item md={10} xs={12}>
           <Box>
             <SearchBar search={search} setSearch={setSearch} />
-            {currentProducts.map((product) => (
+            {currentProducts?.map((product) => (
               <Link to={`/products/${product.id}`} key={product.id}>
                 <MediaCard product={product} />
               </Link>

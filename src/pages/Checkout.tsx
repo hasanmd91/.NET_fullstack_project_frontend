@@ -35,7 +35,6 @@ const Checkout = () => {
   const { cartItems, totalAmount } = useAppSelector((state) => state.cart);
   const { currentUser } = useAppSelector((state) => state.user);
 
-  console.log(currentUser);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
