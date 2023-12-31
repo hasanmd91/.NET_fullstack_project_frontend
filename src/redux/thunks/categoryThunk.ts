@@ -13,7 +13,7 @@ export const getAllCategoryAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.get<category[]>(
-      'http://localhost:5137/api/category/',
+      'https://ecommershop.azurewebsites.net/api/category/',
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -38,7 +38,7 @@ export const createCategoryAsync = createAsyncThunk<
       const storedToken = getToken();
 
       const response = await axios.post<category>(
-        'http://localhost:5137/api/category/',
+        'https://ecommershop.azurewebsites.net/api/category/',
         newCategory,
         {
           headers: {
@@ -62,7 +62,7 @@ export const deleteCategoryAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
     const response = await axios.delete<boolean>(
-      `http://localhost:5137/api/category/${id}`,
+      `https://ecommershop.azurewebsites.net/api/category/${id}`,
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -91,7 +91,7 @@ export const updateCategoryAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.patch<category>(
-      `http://localhost:5137/api/category/${id}`,
+      `https://ecommershop.azurewebsites.net/api/category/${id}`,
       { name: name },
       {
         headers: {

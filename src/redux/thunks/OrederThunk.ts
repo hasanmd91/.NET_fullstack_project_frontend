@@ -14,7 +14,7 @@ export const getAllOrdersAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.get<order[]>(
-      `http://localhost:5137/api/order/`,
+      `https://ecommershop.azurewebsites.net/api/order/`,
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -41,7 +41,7 @@ export const getAOrdersAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.get<order>(
-      `http://localhost:5137/api/order/${id}`,
+      `https://ecommershop.azurewebsites.net/api/order/${id}`,
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -66,7 +66,7 @@ export const createNewOrderAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
     const response = await axios.post<order>(
-      `http://localhost:5137/api/order/`,
+      `https://ecommershop.azurewebsites.net/api/order/`,
       NewOrder,
       {
         headers: {
@@ -96,7 +96,7 @@ export const updateOrderAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
     const response = await axios.patch<order>(
-      `http://localhost:5137/api/order/${id}`,
+      `https://ecommershop.azurewebsites.net/api/order/${id}`,
       { orderStatus },
       {
         headers: {

@@ -12,7 +12,7 @@ export const getAllProductsAsync = createAsyncThunk<
 >('getAllProductsAsync', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `http://localhost:5137/api/product/`
+      `https://ecommershop.azurewebsites.net/api/product/`
     );
     const products: product[] = response.data;
     return products;
@@ -31,7 +31,7 @@ export const getAProductsAsync = createAsyncThunk<
 >('getAProductsAsync', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.get<product>(
-      `http://localhost:5137/api/product/${id}`
+      `https://ecommershop.azurewebsites.net/api/product/${id}`
     );
     const product: product = response.data;
     return product;
@@ -51,7 +51,7 @@ export const createNewProductAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
     const response = await axios.post<product>(
-      `http://localhost:5137/api/product/`,
+      `https://ecommershop.azurewebsites.net/api/product/`,
       NewProduct,
       {
         headers: {
@@ -77,11 +77,14 @@ export const deleteProductAsync = createAsyncThunk<
 >('deleteProductAsync', async (id, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-    await axios.delete(`http://localhost:5137/api/product/${id}`, {
-      headers: {
-        Authorization: `Bearer ${storedToken}`,
-      },
-    });
+    await axios.delete(
+      `https://ecommershop.azurewebsites.net/api/product/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
     return id;
   } catch (error) {
     const err = error as AxiosError;
@@ -101,7 +104,7 @@ export const updateProductAsync = createAsyncThunk<
 
     const { id, updatedData } = updateProduct;
     const response = await axios.patch<product>(
-      `http://localhost:5137/api/product/${id}`,
+      `https://ecommershop.azurewebsites.net/api/product/${id}`,
       updatedData,
       {
         headers: {
@@ -127,7 +130,7 @@ export const getAllProductsByCategoryAsync = createAsyncThunk<
 >('getAllProductsByCategoryAsync', async (id, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `http://localhost:5137/api/product?CategoryId=${id}`
+      `https://ecommershop.azurewebsites.net/api/product?CategoryId=${id}`
     );
     const products: product[] = response.data;
     return products;
@@ -146,7 +149,7 @@ export const getProductByTitleAsync = createAsyncThunk<
 >('getProductByTitleAsync', async (searchQuery, { rejectWithValue }) => {
   try {
     const response = await axios.get<product[]>(
-      `http://localhost:5137/api/product?Search=${searchQuery}`
+      `https://ecommershop.azurewebsites.net/api/product?Search=${searchQuery}`
     );
 
     return response.data;

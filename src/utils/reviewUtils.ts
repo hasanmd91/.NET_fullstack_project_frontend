@@ -6,7 +6,7 @@ export const createNewReview = async (
 ): Promise<Review | string> => {
   try {
     const response = await axios.post<Review>(
-      `http://localhost:5137/api/review/`,
+      `https://ecommershop.azurewebsites.net/api/review/`,
       newReviewData
     );
     const createdReview: Review = response.data;

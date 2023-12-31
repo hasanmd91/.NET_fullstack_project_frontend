@@ -14,7 +14,7 @@ export const loginUserAsync = createAsyncThunk<
 >('loginUserAsync ', async (credentials, { dispatch, rejectWithValue }) => {
   try {
     const response = await axios.post<string>(
-      'http://localhost:5137/api/auth/login',
+      'https://ecommershop.azurewebsites.net/api/auth/login',
       credentials
     );
     const { data: access_token } = response;
@@ -47,7 +47,7 @@ export const authenticateUserAsync = createAsyncThunk<
 >('authenticateUserAsync ', async (access_token, { rejectWithValue }) => {
   try {
     const userProfile = await axios.get(
-      'http://localhost:5137/api/auth/profile',
+      'https://ecommershop.azurewebsites.net/api/auth/profile',
       {
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -71,7 +71,7 @@ export const getAllUsersAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
     const response = await axios.get<user[]>(
-      'http://localhost:5137/api/user/',
+      'https://ecommershop.azurewebsites.net/api/user/',
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -97,7 +97,7 @@ export const createNewUserAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.post<user>(
-      'http://localhost:5137/api/user/',
+      'https://ecommershop.azurewebsites.net/api/user/',
       newUser,
       {
         headers: {
@@ -126,7 +126,7 @@ export const updateUserAsync = createAsyncThunk<
       const storedToken = getToken();
 
       const response = await axios.patch<user>(
-        `http://localhost:5137/api/user/${id}`,
+        `https://ecommershop.azurewebsites.net/api/user/${id}`,
         data,
         {
           headers: {
@@ -154,7 +154,7 @@ export const getAUserAsync = createAsyncThunk<
     const storedToken = getToken();
 
     const response = await axios.get<user>(
-      `http://localhost:5137/api/user/${userid}`,
+      `https://ecommershop.azurewebsites.net/api/user/${userid}`,
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -179,11 +179,14 @@ export const deleteAUserAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
 
-    await axios.delete(`http://localhost:5137/api/user/${userid}`, {
-      headers: {
-        Authorization: `Bearer ${storedToken}`,
-      },
-    });
+    await axios.delete(
+      `https://ecommershop.azurewebsites.net/api/user/${userid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
     return userid;
   } catch (error) {
     const err = error as AxiosError;

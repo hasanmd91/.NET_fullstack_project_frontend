@@ -17,6 +17,8 @@ const OrderReview = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const { orders, loading, error } = currentUser;
 
+  console.log(orders);
+
   if (loading) {
     return (
       <CenteredContainer>
@@ -62,7 +64,7 @@ const OrderReview = () => {
                   </Typography>
                 </ListItem>
 
-                {od.orderDetails.map((item, idx) => (
+                {od?.orderDetails.map((item, idx) => (
                   <ListItem key={idx}>
                     <ListItemText primary={item.product.title} />
                     <Typography variant="caption">{item.quantity}X </Typography>

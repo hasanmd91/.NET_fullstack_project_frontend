@@ -3,43 +3,52 @@ import { setupServer } from 'msw/node';
 import categoriesData from '../Data/categoriesData';
 
 export const handlers = [
-  rest.get(`http://localhost:5137/api/category/`, async (req, res, ctx) => {
-    return res(ctx.json(categoriesData));
-  }),
-
-  rest.get(`http://localhost:5137/api/category/:id`, async (req, res, ctx) => {
-    const { id } = req.params;
-    const category = categoriesData.find((category) => category.id === id);
-    if (category) {
-      return res(ctx.json(category));
+  rest.get(
+    `https://ecommershop.azurewebsites.net/api/category/`,
+    async (req, res, ctx) => {
+      return res(ctx.json(categoriesData));
     }
-  }),
+  ),
 
-  rest.post(`http://localhost:5137/api/category/`, async (req, res, ctx) => {
-    const category = await req.json();
+  rest.get(
+    `https://ecommershop.azurewebsites.net/api/category/:id`,
+    async (req, res, ctx) => {
+      const { id } = req.params;
+      const category = categoriesData.find((category) => category.id === id);
+      if (category) {
+        return res(ctx.json(category));
+      }
+    }
+  ),
 
-    const existingCategory = categoriesData.find(
-      (cat) => cat.name === category.name
-    );
+  rest.post(
+    `https://ecommershop.azurewebsites.net/api/category/`,
+    async (req, res, ctx) => {
+      const category = await req.json();
 
-    if (existingCategory) {
-      return res(
-        ctx.status(400),
-        ctx.json({ error: 'Category with the same name already exists' })
+      const existingCategory = categoriesData.find(
+        (cat) => cat.name === category.name
       );
+
+      if (existingCategory) {
+        return res(
+          ctx.status(400),
+          ctx.json({ error: 'Category with the same name already exists' })
+        );
+      }
+
+      const newCategory = {
+        id: (categoriesData.length + 1).toString(),
+        name: category.name,
+      };
+
+      categoriesData.push(newCategory);
+      return res(ctx.json(newCategory));
     }
-
-    const newCategory = {
-      id: (categoriesData.length + 1).toString(),
-      name: category.name,
-    };
-
-    categoriesData.push(newCategory);
-    return res(ctx.json(newCategory));
-  }),
+  ),
 
   rest.patch(
-    `http://localhost:5137/api/category/:id`,
+    `https://ecommershop.azurewebsites.net/api/category/:id`,
     async (req, res, ctx) => {
       const { id } = req.params;
       const updatedData = await req.json();
@@ -60,7 +69,7 @@ export const handlers = [
   ),
 
   rest.delete(
-    `http://localhost:5137/api/category/:id`,
+    `https://ecommershop.azurewebsites.net/api/category/:id`,
     async (req, res, ctx) => {
       const { id } = req.params;
 
