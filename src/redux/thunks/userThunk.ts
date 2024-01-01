@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { registerUser, user, updateUserDataType } from '../../types/user';
 import { userCredentials } from '../../types/auth';
 import { getToken, saveToken } from '../../utils/tokenUtils';
+import { response } from 'msw';
 
 /* LOGIN USER THUNK USING LOGIN CREDENTIAL */
 
@@ -188,6 +189,33 @@ export const deleteAUserAsync = createAsyncThunk<
       }
     );
     return userid;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.message);
+  }
+});
+
+/* CREATE ADMIN  THUNK*/
+
+export const changeUserRoleAsync = createAsyncThunk<
+  user,
+  string,
+  { rejectValue: string }
+>('changeUserRoleAsync', async (userid, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+
+    const response = await axios.patch<user>(
+      `https://ecommershop.azurewebsites.net/api/user/changeuserrole/${userid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+
+    const user: user = response.data;
+    return user;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);

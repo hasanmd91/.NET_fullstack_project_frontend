@@ -9,6 +9,7 @@ import {
   authenticateUserAsync,
   getAUserAsync,
   deleteAUserAsync,
+  changeUserRoleAsync,
 } from '../thunks/userThunk';
 
 type userStateType = {
@@ -157,6 +158,26 @@ const userSlice = createSlice({
     });
 
     builder.addCase(deleteAUserAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    // UPDATE A USER ROLE
+
+    builder.addCase(
+      changeUserRoleAsync.fulfilled,
+      (state, action: PayloadAction<user>) => {
+        const updatedUser = action.payload;
+
+        state.users = state.users.map((user) => {
+          return user.id === updatedUser.id ? updatedUser : user;
+        });
+        state.loading = false;
+        state.error = '';
+      }
+    );
+
+    builder.addCase(changeUserRoleAsync.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

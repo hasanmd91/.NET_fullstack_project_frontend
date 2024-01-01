@@ -16,12 +16,12 @@ import {
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
 import {
+  changeUserRoleAsync,
   deleteAUserAsync,
   getAllUsersAsync,
 } from '../../redux/thunks/userThunk';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
-import { user } from '../../types/user';
-import { string } from 'yup';
+import { user, userRole } from '../../types/user';
 
 const UsersList = () => {
   const { users, loading, error } = useAppSelector((state) => state.user);
@@ -33,6 +33,10 @@ const UsersList = () => {
 
   const deleteHandler = (id: string) => {
     dispatch(deleteAUserAsync(id));
+  };
+
+  const createAdmin = (userId: string) => {
+    dispatch(changeUserRoleAsync(userId));
   };
 
   if (loading) {
@@ -82,6 +86,15 @@ const UsersList = () => {
                     >
                       Delete
                     </Button>
+
+                    {user.role === userRole.customer && (
+                      <Button
+                        sx={{ color: 'Green' }}
+                        onClick={() => createAdmin(user.id)}
+                      >
+                        Change To Admin
+                      </Button>
+                    )}
                   </Box>
                 </Grid>
               </Grid>
