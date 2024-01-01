@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { newProduct } from '../../types/product';
@@ -10,16 +10,24 @@ import { createNewProductAsync } from '../../redux/thunks/productThunk';
 import useAppSelector from '../../hooks/useAppSelector';
 import {
   Alert,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
 } from '@mui/material';
 import { category } from '../../types/category';
+import CenteredContainer from '../../components/CenterContainer/CenterContainer';
+import { getAllCategoryAsync } from '../../redux/thunks/categoryThunk';
 
 const AddProduct = () => {
   const { error } = useAppSelector((state) => state.product);
-  const { categories } = useAppSelector((state) => state.category);
+  const { categories, loading } = useAppSelector((state) => state.category);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategoryAsync());
+  }, [dispatch]);
 
   const {
     reset,
@@ -29,12 +37,27 @@ const AddProduct = () => {
   } = useForm({
     resolver: yupResolver(productSchema),
   });
-  const dispatch = useAppDispatch();
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
     dispatch(createNewProductAsync(data));
     reset();
   };
+
+  if (loading) {
+    return (
+      <CenteredContainer>
+        <CircularProgress color="error" size="5rem" />
+      </CenteredContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <CenteredContainer>
+        <Alert security="error">{error}</Alert>
+      </CenteredContainer>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(submitHandeler)}>
@@ -93,7 +116,7 @@ const AddProduct = () => {
         )}
       />
       <FormControl fullWidth>
-        <InputLabel id="categoryId-label">Category ID</InputLabel>
+        <InputLabel id="categoryId-label">Category </InputLabel>
         <Controller
           name="categoryId"
           defaultValue=""
@@ -105,7 +128,7 @@ const AddProduct = () => {
               label="Category"
               error={!!errors.categoryId}
             >
-              {categories.map((category: category) => (
+              {categories?.map((category: category) => (
                 <MenuItem key={category.id} value={category.id}>
                   {category.name}
                 </MenuItem>

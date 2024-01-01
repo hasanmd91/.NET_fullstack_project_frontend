@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { category } from './../../types/category';
+import { getAllCategoryAsync } from '../../redux/thunks/categoryThunk';
 
 const UpdateProduct = () => {
   const {
@@ -41,6 +42,7 @@ const UpdateProduct = () => {
   useEffect(() => {
     if (!id) return;
     dispatch(getAProductsAsync(id));
+    dispatch(getAllCategoryAsync());
   }, [dispatch, id]);
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {

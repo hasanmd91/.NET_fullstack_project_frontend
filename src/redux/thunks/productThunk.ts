@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { newProduct, product, updatedProduct } from '../../types/product';
 import { getToken } from '../../utils/tokenUtils';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /*GET ALL PRODUCT THUNK*/
 
@@ -60,10 +62,11 @@ export const createNewProductAsync = createAsyncThunk<
       }
     );
     const createdProduct: product = response.data;
+    toast.success('Products Created successfully');
     return createdProduct;
   } catch (error) {
     const err = error as AxiosError;
-
+    toast.error(`Error creating product: ${err.message}`);
     return rejectWithValue(err.message);
   }
 });

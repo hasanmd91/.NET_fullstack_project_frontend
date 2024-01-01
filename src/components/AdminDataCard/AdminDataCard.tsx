@@ -51,7 +51,7 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
           </Typography>
           <Typography>
             <strong> Price:</strong>
-            {product.price} <strong>Category:</strong>
+            {product?.price} <strong>Category:</strong>
             {product.category.name}
           </Typography>
         </Grid>
