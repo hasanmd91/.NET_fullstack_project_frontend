@@ -12,8 +12,16 @@ import {
 } from '../../redux/thunks/productThunk';
 import { useParams } from 'react-router-dom';
 import useAppSelector from '../../hooks/useAppSelector';
-import { CircularProgress } from '@mui/material';
+import {
+  Alert,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
+import { category } from './../../types/category';
 
 const UpdateProduct = () => {
   const {
@@ -27,6 +35,7 @@ const UpdateProduct = () => {
   const dispatch = useAppDispatch();
 
   const { product } = useAppSelector((state) => state.product);
+  const { categories } = useAppSelector((state) => state.category);
   const { id } = useParams();
 
   useEffect(() => {
@@ -103,19 +112,31 @@ const UpdateProduct = () => {
           />
         )}
       />
-      <Controller
-        name="categoryId"
-        defaultValue={product.categoryId}
-        control={control}
-        render={({ field }) => (
-          <TextField
-            label="Category ID"
-            {...field}
-            error={!!errors.categoryId}
-            helperText={errors.categoryId?.message}
-          />
+      <FormControl fullWidth>
+        <InputLabel id="categoryId-label">Category ID</InputLabel>
+        <Controller
+          name="categoryId"
+          defaultValue={product.categoryId}
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              labelId="categoryId-label"
+              label="Category"
+              error={!!errors.categoryId}
+            >
+              {categories?.map((category: category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
+        />
+        {errors.categoryId && (
+          <Alert severity="error">{errors.categoryId.message}</Alert>
         )}
-      />
+      </FormControl>
       <Controller
         name={`images.${0}.imageUrl`}
         defaultValue={product?.images[0]?.imageUrl}
