@@ -4,7 +4,7 @@ interface debouncedResult<T> {
   debouncedValue: T;
 }
 
-const useDebounce = <T>(value: T, delay: number = 1000): debouncedResult<T> => {
+const useDebounce = <T>(value: T, delay: number = 2000): debouncedResult<T> => {
   const [debouncedValue, setdebouncedValue] = useState<T>(value);
 
   useEffect(() => {
