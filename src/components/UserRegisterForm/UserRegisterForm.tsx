@@ -167,7 +167,7 @@ const UserRegisterForm: React.FC<UserRegisterFormType> = ({
                 {...field}
                 helperText={errors.avatar?.message}
                 error={errors.avatar ? true : false}
-                label="Avatar"
+                label="Avatar Url"
                 ref={ref}
               />
             )}
