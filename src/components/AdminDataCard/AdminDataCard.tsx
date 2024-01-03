@@ -64,7 +64,7 @@ const AdminDataCard: React.FC<AdminDataCardType> = ({ product }) => {
             Delete
           </Button>
 
-          <Link to={`update/${product.id}`}>
+          <Link to={`allproduct/update/${product.id}`}>
             <Button>Edit</Button>
           </Link>
         </Grid>
