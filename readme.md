@@ -21,7 +21,7 @@ Welcome to the ILH Store E-commerce Application, a online shopping platform, and
 
 ## Backend
 
-This backend of this project is build wtih ASP.NET Core, Entity Framework Core, and PostgreSQL and is deployed on Microsoft Azure. The backend provides endpoints for performing CRUD operations based on Authorization. The backend of the project is accessible in this repository at [https://github.com/hasanmd91/fs16_CSharp-FullStack](https://github.com/hasanmd91/fs16_CSharp-FullStack)
+This backend of this project is build wtih ASP.NET Core, Entity Framework Core, and PostgreSQL and is deployed on Microsoft Azure. The backend provides endpoints for performing CRUD operations based on Authorization. The backend of the project is accessible in this repository at [https://github.com/hasanmd91/.NET_fullstack_project_backend](https://github.com/hasanmd91/.NET_fullstack_project_backend)
 
 ## Technologies
 
