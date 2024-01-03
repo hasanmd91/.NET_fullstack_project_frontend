@@ -26,7 +26,6 @@ import { getAllCategoryAsync } from '../../redux/thunks/categoryThunk';
 
 const UpdateProduct = () => {
   const {
-    reset,
     control,
     handleSubmit,
     formState: { errors },
@@ -47,7 +46,6 @@ const UpdateProduct = () => {
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
     id && dispatch(updateProductAsync({ id: id, updatedData: data }));
-    reset();
   };
 
   if (!product) {
