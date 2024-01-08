@@ -7,8 +7,8 @@ import useAppSelector from '../hooks/useAppSelector';
 import { loginUserAsync } from '../redux/thunks/userThunk';
 
 const Login = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('admin@gmail.com');
+  const [password, setPassword] = useState<string>('nokia6300');
   const { currentUser } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();

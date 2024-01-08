@@ -23,8 +23,7 @@ const Button: React.FC<ButtonType> = ({
       variant="contained"
       size="large"
       sx={{
-        marginTop: '8px',
-        marginBottom: '8px',
+        marginTop: '16px',
         background: shades.primary[400],
         '&:hover': shades.secondary[500],
         ...sx,
