@@ -110,3 +110,32 @@ export const updateOrderAsync = createAsyncThunk<
     return rejectWithValue(err.message);
   }
 });
+
+/* DELETE A ORDER THUNK  */
+
+export const deleteOrderAsync = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>('deleteOrderAsync', async (orderId, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+    await axios.delete<order>(
+      `https://ecommershop.azurewebsites.net/api/order/${orderId}`,
+
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    return orderId;
+  } catch (error) {
+    const err = error as AxiosError;
+
+    console.log(err);
+
+    return rejectWithValue(err.response?.data as unknown as string);
+  }
+});

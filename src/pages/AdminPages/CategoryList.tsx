@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../components/Button/Button';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import useAppSelector from '../../hooks/useAppSelector';
 import { category } from './../../types/category';
@@ -9,64 +8,7 @@ import {
   getAllCategoryAsync,
   updateCategoryAsync,
 } from '../../redux/thunks/categoryThunk';
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Input,
-  Paper,
-  Modal,
-  Fade,
-  Typography,
-  ListItemSecondaryAction,
-  ListItem,
-  ListItemText,
-  List,
-} from '@mui/material';
-
-const EditCategoryModal: React.FC<{
-  open: boolean;
-  handleClose: () => void;
-  category: category;
-  onUpdateCategory: (updatedCategory: category) => void;
-}> = ({ open, handleClose, category, onUpdateCategory }) => {
-  const [updatedName, setUpdatedName] = useState(category.name);
-
-  const handleUpdate = () => {
-    onUpdateCategory({
-      id: category.id,
-      name: updatedName,
-    });
-    handleClose();
-  };
-
-  return (
-    <Modal open={open} onClose={handleClose} closeAfterTransition>
-      <Fade in={open}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            bgcolor: 'background.paper',
-            boxShadow: 24,
-            p: 4,
-            minWidth: 300,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <Input
-            value={updatedName}
-            onChange={(e) => setUpdatedName(e.target.value)}
-          />
-          <Button onClick={handleUpdate}>Update</Button>
-        </Box>
-      </Fade>
-    </Modal>
-  );
-};
+import { Alert, CircularProgress, Container } from '@mui/material';
 
 const CategoryList: React.FC = () => {
   const { categories, loading, error } = useAppSelector(
@@ -111,47 +53,7 @@ const CategoryList: React.FC = () => {
     );
   }
 
-  return (
-    <Paper>
-      <List>
-        {categories.map((category: category) => (
-          <ListItem
-            key={category.id}
-            sx={{ padding: '5px 10px', marginBottom: '10px' }}
-          >
-            <ListItemText>
-              <Typography variant="h6">{category.name}</Typography>
-            </ListItemText>
-            <ListItemSecondaryAction>
-              <Box sx={{ display: 'flex', gap: '10px' }}>
-                <Button onClick={() => handleOpenModal(category)}>
-                  Update
-                </Button>
-                <Button
-                  onClick={() => {
-                    dispatch(deleteCategoryAsync(category.id));
-                    setTimeout(() => {
-                      dispatch(getAllCategoryAsync());
-                    }, 1000);
-                  }}
-                >
-                  Delete
-                </Button>
-              </Box>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
-      {selectedCategory && (
-        <EditCategoryModal
-          open={true}
-          handleClose={handleCloseModal}
-          category={selectedCategory}
-          onUpdateCategory={handleUpdateCategory}
-        />
-      )}
-    </Paper>
-  );
+  return <Container></Container>;
 };
 
 export default CategoryList;

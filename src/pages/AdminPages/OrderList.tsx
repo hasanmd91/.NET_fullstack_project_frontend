@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import {
+  deleteOrderAsync,
   getAllOrdersAsync,
   updateOrderAsync,
 } from '../../redux/thunks/OrederThunk';
@@ -23,6 +24,7 @@ import useAppDispatch from '../../hooks/useAppDispatch';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { getOrderStatusColor } from '../../utils/statusColor';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '../../components/Modal/Modal';
 import moment from 'moment';
 
@@ -34,10 +36,8 @@ const OrderList = () => {
   );
 
   const { orders, loading, error } = useAppSelector((state) => state.order);
-  console.log(orders);
 
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     dispatch(getAllOrdersAsync());
   }, [dispatch]);
@@ -138,20 +138,28 @@ const OrderList = () => {
         );
       },
     },
+
+    {
+      field: 'delete',
+      headerName: 'Delete',
+      editable: false,
+      renderCell: (params) => (
+        <Button
+          size="small"
+          variant="text"
+          color="error"
+          onClick={() => dispatch(deleteOrderAsync(params.row.id))}
+        >
+          <DeleteIcon />
+        </Button>
+      ),
+    },
   ];
 
   if (loading) {
     return (
       <CenteredContainer>
         <CircularProgress color="error" size="5rem" />
-      </CenteredContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <CenteredContainer>
-        <Alert severity="error">{error}</Alert>
       </CenteredContainer>
     );
   }
@@ -200,6 +208,7 @@ const OrderList = () => {
           </Button>
         </FormControl>
       </Modal>
+      {error && <Alert severity="error">{error}</Alert>}
     </Container>
   );
 };

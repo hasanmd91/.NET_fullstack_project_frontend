@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { order } from '../../types/Order';
 import {
   createNewOrderAsync,
+  deleteOrderAsync,
   getAOrdersAsync,
   getAllOrdersAsync,
   updateOrderAsync,
@@ -88,6 +89,21 @@ const orderSlice = createSlice({
     });
 
     builder.addCase(updateOrderAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    /*DELETE A USER REDUCER*/
+
+    builder.addCase(deleteOrderAsync.fulfilled, (state, action) => {
+      state.orders = state.orders.filter(
+        (order) => order.id !== action.payload
+      );
+      state.loading = false;
+      state.error = '';
+    });
+
+    builder.addCase(deleteOrderAsync.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });
