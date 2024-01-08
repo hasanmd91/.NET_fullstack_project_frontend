@@ -1,7 +1,9 @@
 import React from 'react';
-import { Modal as MuiModal, Fade, Box } from '@mui/material';
+import { Modal as MuiModal, Fade, Box, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface GenericModalProps {
+  isModalOpen?: boolean;
   open: boolean;
   handleClose: () => void;
   children: React.ReactNode;
@@ -11,6 +13,7 @@ const Modal: React.FC<GenericModalProps> = ({
   open,
   handleClose,
   children,
+  isModalOpen,
 }) => {
   return (
     <MuiModal open={open} onClose={handleClose} closeAfterTransition>
@@ -29,6 +32,17 @@ const Modal: React.FC<GenericModalProps> = ({
             flexDirection: 'column',
           }}
         >
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
           {children}
         </Box>
       </Fade>

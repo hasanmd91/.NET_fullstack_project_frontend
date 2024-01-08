@@ -13,7 +13,6 @@ import {
   Select,
   Typography,
 } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import {
   deleteOrderAsync,
   getAllOrdersAsync,
@@ -24,6 +23,7 @@ import useAppDispatch from '../../hooks/useAppDispatch';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { getOrderStatusColor } from '../../utils/statusColor';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '../../components/Modal/Modal';
 import moment from 'moment';

@@ -61,7 +61,7 @@ export const deleteCategoryAsync = createAsyncThunk<
 >('deleteCategoryAsync', async (id, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-    const response = await axios.delete<boolean>(
+    await axios.delete(
       `https://ecommershop.azurewebsites.net/api/category/${id}`,
       {
         headers: {
@@ -69,11 +69,8 @@ export const deleteCategoryAsync = createAsyncThunk<
         },
       }
     );
-    if (!response.data) {
-      throw new Error('Unable to delete category');
-    } else {
-      return id;
-    }
+
+    return id;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);

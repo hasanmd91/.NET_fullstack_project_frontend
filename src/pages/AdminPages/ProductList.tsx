@@ -16,6 +16,8 @@ import UpdateProduct from './AddProduct';
 import { product } from '../../types/product';
 import AddIcon from '@mui/icons-material/Add';
 import { Container } from '@mui/system';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const AdminProductList = () => {
   const [search, setSearch] = useState('');
@@ -59,15 +61,14 @@ const AdminProductList = () => {
 
       renderCell: (params) => (
         <Button
-          size="small"
-          variant="outlined"
-          color="success"
+          variant="text"
+          color="warning"
           onClick={() => {
             setSelectedRow(params.row);
             setIsModalOpen(true);
           }}
         >
-          Edit
+          <EditIcon />
         </Button>
       ),
     },
@@ -77,12 +78,11 @@ const AdminProductList = () => {
       editable: false,
       renderCell: (params) => (
         <Button
-          size="small"
-          variant="outlined"
+          variant="text"
           color="error"
           onClick={() => dispatch(deleteProductAsync(params.row.id))}
         >
-          Delete
+          <DeleteIcon />
         </Button>
       ),
     },
