@@ -15,6 +15,7 @@ import Modal from '../../components/Modal/Modal';
 import UpdateProduct from './AddProduct';
 import { product } from '../../types/product';
 import AddIcon from '@mui/icons-material/Add';
+import { Container } from '@mui/system';
 
 const AdminProductList = () => {
   const [search, setSearch] = useState('');
@@ -96,7 +97,7 @@ const AdminProductList = () => {
   }
 
   return (
-    <div>
+    <Container maxWidth="xl">
       <SearchBar search={search} setSearch={setSearch} />
       <Button
         size="large"
@@ -124,10 +125,6 @@ const AdminProductList = () => {
             },
           },
         }}
-        getRowSpacing={(params) => ({
-          top: params.isFirstVisible ? 0 : 5,
-          bottom: params.isLastVisible ? 0 : 5,
-        })}
       />
       {isModalOpen && (
         <Modal open={isModalOpen} handleClose={() => !isModalOpen}>
@@ -138,7 +135,7 @@ const AdminProductList = () => {
         </Modal>
       )}
       {error && <Alert severity="error">{error}</Alert>}
-    </div>
+    </Container>
   );
 };
 

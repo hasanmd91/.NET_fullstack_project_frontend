@@ -16,6 +16,8 @@ import {
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PersonIcon from '@mui/icons-material/Person';
 
 const UsersList = () => {
   const { users, loading, error } = useAppSelector((state) => state.user);
@@ -48,6 +50,17 @@ const UsersList = () => {
     {
       field: 'role',
       headerName: 'Role',
+      renderCell: (params) => {
+        return params.row.role === 'Admin' ? (
+          <>
+            Admin <AdminPanelSettingsIcon />
+          </>
+        ) : (
+          <>
+            User <PersonIcon />
+          </>
+        );
+      },
     },
     {
       field: 'email',
@@ -74,7 +87,7 @@ const UsersList = () => {
         return (
           <Button
             size="small"
-            variant="outlined"
+            variant="text"
             color="primary"
             onClick={() => createAdmin(params.row.id)}
           >
@@ -90,11 +103,11 @@ const UsersList = () => {
       renderCell: (params) => (
         <Button
           size="small"
-          variant="outlined"
+          variant="text"
           color="error"
           onClick={() => deleteHandler(params.row.id)}
         >
-          Delete
+          <DeleteIcon />
         </Button>
       ),
     },

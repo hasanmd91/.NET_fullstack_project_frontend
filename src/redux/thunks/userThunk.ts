@@ -205,6 +205,7 @@ export const changeUserRoleAsync = createAsyncThunk<
   try {
     const storedToken = getToken();
 
+    console.log(storedToken, userid);
     const response = await axios.patch<user>(
       `https://ecommershop.azurewebsites.net/api/user/changeuserrole/${userid}`,
       {
@@ -213,6 +214,8 @@ export const changeUserRoleAsync = createAsyncThunk<
         },
       }
     );
+
+    console.log(response);
 
     const user: user = response.data;
     return user;
