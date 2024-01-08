@@ -10,8 +10,7 @@ import {
   getProductByTitleAsync,
 } from '../../redux/thunks/productThunk';
 import CenteredContainer from '../../components/CenterContainer/CenterContainer';
-import { Alert, CircularProgress } from '@mui/material';
-import Button from '../../components/Button/Button';
+import { Alert, Button, CircularProgress } from '@mui/material';
 import Modal from '../../components/Modal/Modal';
 import UpdateProduct from './AddProduct';
 import { product } from '../../types/product';
@@ -59,7 +58,9 @@ const AdminProductList = () => {
 
       renderCell: (params) => (
         <Button
-          sx={{ marginTop: 0 }}
+          size="small"
+          variant="outlined"
+          color="success"
           onClick={() => {
             setSelectedRow(params.row);
             setIsModalOpen(true);
@@ -75,7 +76,9 @@ const AdminProductList = () => {
       editable: false,
       renderCell: (params) => (
         <Button
-          sx={{ marginRight: '5px', marginTop: 0 }}
+          size="small"
+          variant="outlined"
+          color="error"
           onClick={() => dispatch(deleteProductAsync(params.row.id))}
         >
           Delete
@@ -96,6 +99,10 @@ const AdminProductList = () => {
     <div>
       <SearchBar search={search} setSearch={setSearch} />
       <Button
+        size="large"
+        variant="contained"
+        color="primary"
+        sx={{ margin: '10px' }}
         onClick={() => {
           setIsModalOpen(!isModalOpen);
           setSelectedRow(undefined);
