@@ -15,27 +15,19 @@ const AdminSideBar: React.FC<AdminSideBarPropsType> = () => {
         minHeight: '70vh',
       }}
     >
-      <Link to={'/admidashbord/addProduct'}>
-        <Button fullWidth> Add product</Button>
-      </Link>
-
-      <Link to={'/admidashbord/addCategory'}>
-        <Button fullWidth>Add Category</Button>
-      </Link>
-
       <Link to={'/admidashbord/allCategory'}>
-        <Button fullWidth>All Category List</Button>
+        <Button fullWidth> Categories</Button>
       </Link>
       <Link to={'/admidashbord/allproduct'}>
-        <Button fullWidth>All Product List</Button>
+        <Button fullWidth> ProductS</Button>
       </Link>
 
       <Link to={'/admidashbord/allOrders'}>
-        <Button fullWidth>Order List</Button>
+        <Button fullWidth>OrderS</Button>
       </Link>
 
       <Link to={'/admidashbord/allUserList'}>
-        <Button fullWidth>User List</Button>
+        <Button fullWidth>UserS </Button>
       </Link>
     </Box>
   );

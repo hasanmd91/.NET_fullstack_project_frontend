@@ -1,47 +1,38 @@
-import * as React from 'react';
-import { Alert, Box, Button, Modal as MuiModal } from '@mui/material';
+import React from 'react';
+import { Modal as MuiModal, Fade, Box } from '@mui/material';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '50%',
-  bgcolor: 'background.paper',
-
-  p: 4,
-};
-
-type ModalType = {
-  children: React.ReactElement;
+interface GenericModalProps {
   open: boolean;
-  handleOpen: () => void;
   handleClose: () => void;
-  error: string;
-};
+  children: React.ReactNode;
+}
 
-const Modal: React.FC<ModalType> = ({
-  children,
+const Modal: React.FC<GenericModalProps> = ({
   open,
   handleClose,
-  handleOpen,
-  error,
+  children,
 }) => {
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <MuiModal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+    <MuiModal open={open} onClose={handleClose} closeAfterTransition>
+      <Fade in={open}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            minWidth: 300,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           {children}
-          {error && <Alert>{error}</Alert>}
         </Box>
-      </MuiModal>
-    </div>
+      </Fade>
+    </MuiModal>
   );
 };
 

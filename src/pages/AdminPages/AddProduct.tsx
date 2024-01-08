@@ -6,64 +6,60 @@ import { productSchema } from '../../validation/productSchema';
 import TextField from '../../components/TextField/TextField';
 import Button from '../../components/Button/Button';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { createNewProductAsync } from '../../redux/thunks/productThunk';
 import useAppSelector from '../../hooks/useAppSelector';
+import { category } from '../../types/category';
+import { getAllCategoryAsync } from '../../redux/thunks/categoryThunk';
+import { product } from '../../types/product';
+import {
+  createNewProductAsync,
+  updateProductAsync,
+} from '../../redux/thunks/productThunk';
 import {
   Alert,
-  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
 } from '@mui/material';
-import { category } from '../../types/category';
-import CenteredContainer from '../../components/CenterContainer/CenterContainer';
-import { getAllCategoryAsync } from '../../redux/thunks/categoryThunk';
 
-const AddProduct = () => {
-  const { error } = useAppSelector((state) => state.product);
-  const { categories, loading } = useAppSelector((state) => state.category);
-  const dispatch = useAppDispatch();
+interface UpdateProductProps {
+  rowData?: product;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  useEffect(() => {
-    dispatch(getAllCategoryAsync());
-  }, [dispatch]);
-
+const AddProduct: React.FC<UpdateProductProps> = ({
+  rowData,
+  setIsModalOpen,
+}) => {
   const {
-    reset,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(productSchema),
   });
+  const dispatch = useAppDispatch();
+
+  const { categories } = useAppSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(getAllCategoryAsync());
+  }, [dispatch]);
 
   const submitHandeler: SubmitHandler<newProduct> = (data: newProduct) => {
-    dispatch(createNewProductAsync(data));
-    reset();
+    if (rowData) {
+      dispatch(updateProductAsync({ id: rowData?.id, updatedData: data }));
+      setIsModalOpen(false);
+    } else {
+      dispatch(createNewProductAsync(data));
+    }
   };
-
-  if (loading) {
-    return (
-      <CenteredContainer>
-        <CircularProgress color="error" size="5rem" />
-      </CenteredContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <CenteredContainer>
-        <Alert security="error">{error}</Alert>
-      </CenteredContainer>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit(submitHandeler)}>
       <Controller
         name="title"
-        defaultValue=""
+        defaultValue={rowData ? rowData.title : ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -76,7 +72,7 @@ const AddProduct = () => {
       />
       <Controller
         name="description"
-        defaultValue=""
+        defaultValue={rowData ? rowData.description : ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -89,7 +85,7 @@ const AddProduct = () => {
       />
       <Controller
         name="price"
-        defaultValue={undefined}
+        defaultValue={rowData ? rowData.price : undefined}
         control={control}
         render={({ field }) => (
           <TextField
@@ -103,7 +99,7 @@ const AddProduct = () => {
       />
       <Controller
         name="quantity"
-        defaultValue={undefined}
+        defaultValue={rowData ? rowData.quantity : undefined}
         control={control}
         render={({ field }) => (
           <TextField
@@ -116,10 +112,10 @@ const AddProduct = () => {
         )}
       />
       <FormControl fullWidth>
-        <InputLabel id="categoryId-label">Category </InputLabel>
+        <InputLabel id="categoryId-label">Category ID</InputLabel>
         <Controller
           name="categoryId"
-          defaultValue=""
+          defaultValue={rowData ? rowData.categoryId : ''}
           control={control}
           render={({ field }) => (
             <Select
@@ -142,7 +138,7 @@ const AddProduct = () => {
       </FormControl>
       <Controller
         name={`images.${0}.imageUrl`}
-        defaultValue=""
+        defaultValue={rowData ? rowData.images[0]?.imageUrl : ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -155,7 +151,7 @@ const AddProduct = () => {
       />
       <Controller
         name={`images.${1}.imageUrl`}
-        defaultValue=""
+        defaultValue={rowData ? rowData.images[1]?.imageUrl : ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -168,7 +164,7 @@ const AddProduct = () => {
       />
       <Controller
         name={`images.${2}.imageUrl`}
-        defaultValue=""
+        defaultValue={rowData ? rowData.images[2]?.imageUrl : ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -179,8 +175,10 @@ const AddProduct = () => {
           />
         )}
       />
-      {error && <Alert severity="error">{error}</Alert>}
-      <Button fullWidth>Submit</Button>
+      <Button fullWidth>Update</Button>
+      <Button type="button" fullWidth onClick={() => setIsModalOpen(false)}>
+        Cancle
+      </Button>
     </form>
   );
 };

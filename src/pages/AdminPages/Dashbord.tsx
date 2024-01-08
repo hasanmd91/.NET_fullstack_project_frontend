@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container } from '@mui/material';
-import AdminProductList from './AdminProductList';
+import AdminProductList from './ProductList';
 
 const AdminDashbord = () => {
   return (

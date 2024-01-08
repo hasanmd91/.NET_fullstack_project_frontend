@@ -115,6 +115,8 @@ export const updateProductAsync = createAsyncThunk<
         },
       }
     );
+
+    console.log(response);
     const updateNewProduct: product = response.data;
 
     return updateNewProduct;

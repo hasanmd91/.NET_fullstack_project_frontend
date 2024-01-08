@@ -10,16 +10,14 @@ import Login from './pages/Login';
 import UserRegister from './pages/UserRegister';
 import Cart from './pages/Cart';
 import About from './pages/About';
-import AdminDashbord from './pages/AdminPages/AdminDashbord';
+import AdminDashbord from './pages/AdminPages/Dashbord';
 import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/UserPages/Profile';
-import AddProduct from './pages/AdminPages/AddProduct';
 import AdminRoot from './pages/AdminPages/AdminRoot';
 import AddCategory from './pages/AdminPages/AddCategory';
 import CategoryList from './pages/AdminPages/CategoryList';
-import AdminProductList from './pages/AdminPages/AdminProductList';
-import UpdateProduct from './pages/AdminPages/UpdateProduct';
+import AdminProductList from './pages/AdminPages/ProductList';
 import Checkout from './pages/Checkout';
 import OrderList from './pages/AdminPages/OrderList';
 import UserList from './pages/AdminPages/UserList';
@@ -74,11 +72,9 @@ const App = () => {
 
           children: [
             { index: true, element: <AdminDashbord /> },
-            { path: 'addProduct', element: <AddProduct /> },
             { path: 'addCategory', element: <AddCategory /> },
             { path: 'allCategory', element: <CategoryList /> },
             { path: 'allproduct', element: <AdminProductList /> },
-            { path: 'allproduct/update/:id', element: <UpdateProduct /> },
             { path: 'allOrders/', element: <OrderList /> },
             { path: 'allUserList/', element: <UserList /> },
           ],
