@@ -204,23 +204,21 @@ export const changeUserRoleAsync = createAsyncThunk<
 >('changeUserRoleAsync', async (userid, { rejectWithValue }) => {
   try {
     const storedToken = getToken();
-
-    console.log(storedToken, userid);
-    const response = await axios.patch<user>(
+    const response = await axios.patch(
       `https://ecommershop.azurewebsites.net/api/user/changeuserrole/${userid}`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${storedToken}`,
+          'Content-Type': 'application/json',
         },
       }
     );
-
-    console.log(response);
 
     const user: user = response.data;
     return user;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });

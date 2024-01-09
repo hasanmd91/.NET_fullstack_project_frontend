@@ -20,7 +20,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import PersonIcon from '@mui/icons-material/Person';
 
 const UsersList = () => {
-  const { users, loading, error } = useAppSelector((state) => state.user);
+  const { users, error } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -29,10 +29,6 @@ const UsersList = () => {
 
   const deleteHandler = (id: string) => {
     dispatch(deleteAUserAsync(id));
-  };
-
-  const createAdmin = (userId: string) => {
-    dispatch(changeUserRoleAsync(userId));
   };
 
   const columns: GridColDef[] = [
@@ -89,7 +85,7 @@ const UsersList = () => {
             size="small"
             variant="text"
             color="primary"
-            onClick={() => createAdmin(params.row.id)}
+            onClick={() => dispatch(changeUserRoleAsync(params.row.id))}
           >
             <AdminPanelSettingsIcon />
           </Button>
@@ -111,27 +107,17 @@ const UsersList = () => {
         </Button>
       ),
     },
+    {
+      field: 'id',
+      headerName: 'Id',
+      width: 300,
+    },
   ];
-
-  if (loading) {
-    return (
-      <CenteredContainer>
-        <CircularProgress color="error" size="5rem" />
-      </CenteredContainer>
-    );
-  }
-
-  if (error) {
-    return (
-      <CenteredContainer>
-        <Alert severity="error">{error}</Alert>
-      </CenteredContainer>
-    );
-  }
 
   return (
     <Container>
       <DataGrid columns={columns} rows={users} />
+      {error && <Alert severity="error">{error}</Alert>}
     </Container>
   );
 };

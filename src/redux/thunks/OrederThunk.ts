@@ -133,9 +133,6 @@ export const deleteOrderAsync = createAsyncThunk<
     return orderId;
   } catch (error) {
     const err = error as AxiosError;
-
-    console.log(err);
-
     return rejectWithValue(err.response?.data as unknown as string);
   }
 });

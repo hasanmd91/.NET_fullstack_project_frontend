@@ -107,7 +107,6 @@ const CategoryList: React.FC = () => {
         columns={columns}
         rows={categories}
         getRowId={(row) => row.id}
-        checkboxSelection
         disableRowSelectionOnClick
         pageSizeOptions={[10, 20, 20, 50, 100]}
         initialState={{

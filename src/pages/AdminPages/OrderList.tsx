@@ -101,14 +101,15 @@ const OrderList = () => {
       field: 'orderDetails',
       headerName: 'Order Details',
       width: 200,
+
       renderCell: (params) => {
         const orderDetails = params.row.orderDetails;
 
         if (orderDetails && orderDetails.length > 0) {
           return (
             <Box>
-              {orderDetails.map((detail: orderDetail, index: any) => (
-                <Box key={index}>
+              {orderDetails.map((detail: orderDetail) => (
+                <Box key={detail.id}>
                   <Typography color="Highlight">
                     {detail.product.title}, {detail.quantity}x
                   </Typography>
@@ -170,7 +171,7 @@ const OrderList = () => {
         columns={columns}
         rows={orders}
         getRowId={(row) => row.id}
-        checkboxSelection
+        getRowHeight={() => 'auto'}
         disableRowSelectionOnClick
         pageSizeOptions={[10, 20, 20, 50, 100]}
         initialState={{
@@ -181,7 +182,10 @@ const OrderList = () => {
           },
         }}
       />
-      <Modal open={isModalOpen} handleClose={() => !isModalOpen}>
+      <Modal
+        open={isModalOpen}
+        handleClose={() => setIsModalOpen(!isModalOpen)}
+      >
         <FormControl fullWidth>
           <InputLabel id="status-select-label">Update Status</InputLabel>
           <Select

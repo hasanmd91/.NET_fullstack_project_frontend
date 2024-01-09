@@ -115,7 +115,6 @@ const AdminProductList = () => {
         columns={columns}
         rows={products}
         getRowId={(row) => row.id}
-        checkboxSelection
         disableRowSelectionOnClick
         pageSizeOptions={[10, 20, 20, 50, 100]}
         initialState={{
@@ -127,7 +126,10 @@ const AdminProductList = () => {
         }}
       />
       {isModalOpen && (
-        <Modal open={isModalOpen} handleClose={() => !isModalOpen}>
+        <Modal
+          open={isModalOpen}
+          handleClose={() => setIsModalOpen(!isModalOpen)}
+        >
           <UpdateProduct
             rowData={selectedRow}
             setIsModalOpen={setIsModalOpen}

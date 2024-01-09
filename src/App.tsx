@@ -15,7 +15,6 @@ import AdminAuthGuard from './components/AuthGuards/AdminAuthGuard';
 import CustomerAuthGuard from './components/AuthGuards/CustomerAuthGuard';
 import Profile from './pages/UserPages/Profile';
 import AdminRoot from './pages/AdminPages/AdminRoot';
-import AddCategory from './pages/AdminPages/AddCategory';
 import CategoryList from './pages/AdminPages/CategoryList';
 import AdminProductList from './pages/AdminPages/ProductList';
 import Checkout from './pages/Checkout';
@@ -72,7 +71,6 @@ const App = () => {
 
           children: [
             { index: true, element: <AdminDashbord /> },
-            { path: 'addCategory', element: <AddCategory /> },
             { path: 'allCategory', element: <CategoryList /> },
             { path: 'allproduct', element: <AdminProductList /> },
             { path: 'allOrders/', element: <OrderList /> },
