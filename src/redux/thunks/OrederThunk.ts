@@ -52,7 +52,7 @@ export const getAOrdersAsync = createAsyncThunk<
     return order;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -78,7 +78,7 @@ export const createNewOrderAsync = createAsyncThunk<
     return createdOrder;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -107,7 +107,7 @@ export const updateOrderAsync = createAsyncThunk<
     return updatedOrder;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -131,6 +131,32 @@ export const deleteOrderAsync = createAsyncThunk<
       }
     );
     return orderId;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.response?.data as unknown as string);
+  }
+});
+
+/*GET A ORDER THUNK*/
+
+export const getCurrentUserAllOrdersAsync = createAsyncThunk<
+  order[],
+  string,
+  { rejectValue: string }
+>('getCurrentUserAllOrdersAsync', async (id, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+
+    const response = await axios.get<order[]>(
+      `https://ecommershop.azurewebsites.net/api/order/getalluserorder/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+    const order: order[] = response.data;
+    return order;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.response?.data as unknown as string);

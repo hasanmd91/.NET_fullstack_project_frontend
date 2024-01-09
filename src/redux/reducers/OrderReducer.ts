@@ -77,7 +77,7 @@ const orderSlice = createSlice({
       state.loading = false;
     });
 
-    /*UPDATE PRODUCT REDUCER*/
+    /*UPDATE ORDER REDUCER*/
 
     builder.addCase(updateOrderAsync.fulfilled, (state, action) => {
       const updatedOrder = action.payload;
@@ -93,7 +93,7 @@ const orderSlice = createSlice({
       state.loading = false;
     });
 
-    /*DELETE A USER REDUCER*/
+    /*DELETE A ORDER REDUCER*/
 
     builder.addCase(deleteOrderAsync.fulfilled, (state, action) => {
       state.orders = state.orders.filter(

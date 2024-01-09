@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import { registerUser, user, updateUserDataType } from '../../types/user';
 import { userCredentials } from '../../types/auth';
 import { getToken, saveToken } from '../../utils/tokenUtils';
+import { order } from '../../types/Order';
 import { response } from 'msw';
 
 /* LOGIN USER THUNK USING LOGIN CREDENTIAL */
@@ -34,8 +35,8 @@ export const loginUserAsync = createAsyncThunk<
     }
     return authenticatedResult.payload as user;
   } catch (error) {
-    const err = error as Error;
-    return rejectWithValue(err.message);
+    const err = error as AxiosError;
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -58,7 +59,7 @@ export const authenticateUserAsync = createAsyncThunk<
     return userProfile.data;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -83,7 +84,7 @@ export const getAllUsersAsync = createAsyncThunk<
     return users;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -110,7 +111,7 @@ export const createNewUserAsync = createAsyncThunk<
     return newCreatedUser;
   } catch (error) {
     const err = error as AxiosError;
-    return rejectWithValue(err.message);
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });
 
@@ -139,7 +140,7 @@ export const updateUserAsync = createAsyncThunk<
       return updatedUser;
     } catch (error) {
       const err = error as AxiosError;
-      return rejectWithValue(err.message);
+      return rejectWithValue(err.response?.data as unknown as string);
     }
   }
 );
@@ -217,6 +218,33 @@ export const changeUserRoleAsync = createAsyncThunk<
 
     const user: user = response.data;
     return user;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.response?.data as unknown as string);
+  }
+});
+
+/*GET A ORDER THUNK*/
+
+export const cancelAOrderAsync = createAsyncThunk<
+  order,
+  string,
+  { rejectValue: string }
+>('cancelAOrderAsync', async (id, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+
+    const response = await axios.patch<order>(
+      `https://ecommershop.azurewebsites.net/api/order/${id}/cancel`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+    const order: order = response.data;
+    return order;
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.response?.data as unknown as string);

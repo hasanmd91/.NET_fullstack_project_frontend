@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { user } from '../../types/user';
-
+import { order } from '../../types/Order';
 import {
   createNewUserAsync,
   getAllUsersAsync,
@@ -10,11 +10,17 @@ import {
   getAUserAsync,
   deleteAUserAsync,
   changeUserRoleAsync,
+  cancelAOrderAsync,
 } from '../thunks/userThunk';
+import {
+  deleteOrderAsync,
+  getCurrentUserAllOrdersAsync,
+} from '../thunks/OrederThunk';
 
 type userStateType = {
   users: user[];
   currentUser?: user;
+  currentUserOrder?: order[];
   loading: boolean;
   error?: string;
 };
@@ -178,6 +184,58 @@ const userSlice = createSlice({
     );
 
     builder.addCase(changeUserRoleAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    /* GET A USER ALL ORDER REDUCER */
+
+    builder.addCase(getCurrentUserAllOrdersAsync.pending, (state, action) => {
+      state.loading = true;
+      state.error = '';
+    });
+
+    builder.addCase(getCurrentUserAllOrdersAsync.fulfilled, (state, action) => {
+      state.loading = false;
+      state.currentUserOrder = action.payload;
+      state.error = '';
+    });
+
+    builder.addCase(getCurrentUserAllOrdersAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    // DELETE CUSTOMER OWN ORDER
+
+    builder.addCase(deleteOrderAsync.fulfilled, (state, action) => {
+      state.currentUserOrder =
+        state?.currentUserOrder &&
+        state?.currentUserOrder.filter((order) => order.id !== action.payload);
+      state.loading = false;
+      state.error = '';
+    });
+
+    builder.addCase(deleteOrderAsync.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+
+    // UPDATE CUSTOMER OWN ORDER
+
+    builder.addCase(cancelAOrderAsync.fulfilled, (state, action) => {
+      const updatedorder = action.payload;
+
+      state.currentUserOrder =
+        state?.currentUserOrder &&
+        state?.currentUserOrder.map((order) =>
+          order.id === updatedorder.id ? updatedorder : order
+        );
+      state.loading = false;
+      state.error = '';
+    });
+
+    builder.addCase(cancelAOrderAsync.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
     });

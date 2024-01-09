@@ -20,7 +20,6 @@ import {
 } from '../../redux/thunks/OrederThunk';
 import { useEffect, useState } from 'react';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { getOrderStatusColor } from '../../utils/statusColor';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import EditIcon from '@mui/icons-material/Edit';
@@ -35,7 +34,7 @@ const OrderList = () => {
     OrderStatus.PAID
   );
 
-  const { orders, loading, error } = useAppSelector((state) => state.order);
+  const { orders, error } = useAppSelector((state) => state.order);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -156,14 +155,6 @@ const OrderList = () => {
       ),
     },
   ];
-
-  if (loading) {
-    return (
-      <CenteredContainer>
-        <CircularProgress color="error" size="5rem" />
-      </CenteredContainer>
-    );
-  }
 
   return (
     <Container>

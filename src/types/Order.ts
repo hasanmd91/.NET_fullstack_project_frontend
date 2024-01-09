@@ -12,12 +12,12 @@ export type orderDetail = {
 
 export type order = {
   id: string;
-  user: user;
+  user?: user;
   totalPrice: number;
   orderStatus: OrderStatus;
   orderDetails: orderDetail[];
-  createdDate: string;
-  updatedDate: string;
+  createdDate?: string;
+  updatedDate?: string;
 };
 
 export type newOrderDetail = {
