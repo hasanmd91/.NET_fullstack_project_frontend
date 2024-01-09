@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Alert,
-  Avatar,
-  Button,
-  CircularProgress,
-  Container,
-} from '@mui/material';
+import { Alert, Avatar, Button, Container } from '@mui/material';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useAppSelector from '../../hooks/useAppSelector';
 import {
@@ -13,7 +7,6 @@ import {
   deleteAUserAsync,
   getAllUsersAsync,
 } from '../../redux/thunks/userThunk';
-import CenteredContainer from '../../components/CenterContainer/CenterContainer';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import DeleteIcon from '@mui/icons-material/Delete';

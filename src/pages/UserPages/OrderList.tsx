@@ -2,7 +2,7 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import useAppSelector from '../../hooks/useAppSelector';
 import { orderDetail } from '../../types/Order';
-import { Alert, Box, Button, Container } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Container } from '@mui/material';
 import { useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import moment from 'moment';
@@ -18,6 +18,7 @@ const OrderList = () => {
   const { currentUser, currentUserOrder } = useAppSelector(
     (state) => state.user
   );
+
   const { error } = useAppSelector((state) => state.order);
 
   const dispatch = useAppDispatch();
@@ -113,6 +114,8 @@ const OrderList = () => {
     },
   ];
 
+  if (!currentUser && currentUserOrder.length < 0) return <CircularProgress />;
+
   return (
     <Container
       sx={{
@@ -122,7 +125,7 @@ const OrderList = () => {
     >
       <DataGrid
         columns={columns}
-        rows={currentUserOrder}
+        rows={currentUserOrder ? currentUserOrder : currentUser.orders}
         getRowId={(row) => row.id}
         getRowHeight={() => 'auto'}
         disableRowSelectionOnClick

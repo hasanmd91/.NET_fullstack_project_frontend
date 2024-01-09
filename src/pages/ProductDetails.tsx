@@ -1,4 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
+import { addItemToCart } from '../redux/reducers/cartReducer';
+import useAppDispatch from '../hooks/useAppDispatch';
+import useAppSelector from '../hooks/useAppSelector';
+import { CartItem } from '../types/cart';
+import { Image, Review, newReview, product } from '../types/product';
+import Button from '../components/Button/Button';
+import MediaCard from '../components/Card/Card';
+import { stringAvatar } from '../utils/stringAvatar';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { userRole } from '../types/user';
+import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import {
   Container,
   Typography,
@@ -8,27 +23,16 @@ import {
   Paper,
   Rating,
   Avatar,
+  Button as MuiButton,
+  OutlinedInput,
 } from '@mui/material';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-
-import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import {
+  createNewReviewAsync,
+  deleteNewReviewAsync,
   getAProductsAsync,
   getAllProductsByCategoryAsync,
 } from '../redux/thunks/productThunk';
-import ImageSlider from '../components/ImageSlider/ImageSlider';
-import { addItemToCart } from '../redux/reducers/cartReducer';
-import useAppDispatch from '../hooks/useAppDispatch';
-import useAppSelector from '../hooks/useAppSelector';
-import { CartItem } from '../types/cart';
-import { Image, Review, newReview, product } from '../types/product';
-import Button from '../components/Button/Button';
-import MediaCard from '../components/Card/Card';
-import TextField from '../components/TextField/TextField';
-import { createNewReview } from '../utils/reviewUtils';
-import { stringAvatar } from '../utils/stringAvatar';
 
 const ProductView = () => {
   const { product, products } = useAppSelector((state) => state.product);
@@ -53,6 +57,7 @@ const ProductView = () => {
 
   const submitHandler = (event: any) => {
     event.preventDefault();
+
     if (!currentUser || !product || !rating) return;
     const reviewData: newReview = {
       content: review,
@@ -60,11 +65,8 @@ const ProductView = () => {
       productId: product.id,
       userId: currentUser.id,
     };
-    createNewReview(reviewData);
-
-    setTimeout(() => {
-      dispatch(getAProductsAsync(product.id));
-    }, 1000);
+    dispatch(createNewReviewAsync(reviewData));
+    event.target.reset();
   };
 
   const addTocart = () => {
@@ -138,12 +140,36 @@ const ProductView = () => {
             >
               {product.reviews.map((review: Review) => (
                 <Paper
-                  sx={{ padding: '10px', marginBottom: '5px' }}
+                  sx={{
+                    padding: '10px',
+                    marginBottom: '5px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
                   key={review.id}
                 >
-                  <Avatar {...stringAvatar(review.reviewer)} />
-                  <Rating value={review.ratings} readOnly />
-                  <Typography> {review.content}</Typography>
+                  <Box>
+                    <Avatar {...stringAvatar(review.reviewer)} />
+                    <Rating value={review.ratings} readOnly />
+                    <Typography> {review.content}</Typography>
+                  </Box>
+                  {currentUser.id === review.userId ||
+                  currentUser.role === userRole.admin ? (
+                    <Box display={'flex'}>
+                      <MuiButton size="small" variant="text">
+                        <EditIcon />
+                      </MuiButton>
+                      <MuiButton
+                        size="small"
+                        variant="text"
+                        onClick={() =>
+                          dispatch(deleteNewReviewAsync(review.id))
+                        }
+                      >
+                        <DeleteIcon />
+                      </MuiButton>
+                    </Box>
+                  ) : null}
                 </Paper>
               ))}
 
@@ -156,7 +182,12 @@ const ProductView = () => {
                       setRating(newValue);
                     }}
                   />
-                  <TextField onChange={(e) => setReview(e.target.value)} />
+                  <Box display={'flex'}>
+                    <OutlinedInput
+                      fullWidth
+                      onChange={(e) => setReview(e.target.value)}
+                    />
+                  </Box>
                   <Button>Post Review</Button>
                 </form>
               </Paper>

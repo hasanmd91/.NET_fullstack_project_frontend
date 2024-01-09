@@ -1,9 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { newProduct, product, updatedProduct } from '../../types/product';
+import {
+  Review,
+  newProduct,
+  newReview,
+  product,
+  updatedProduct,
+} from '../../types/product';
 import { getToken } from '../../utils/tokenUtils';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 /*GET ALL PRODUCT THUNK*/
 
@@ -62,7 +67,6 @@ export const createNewProductAsync = createAsyncThunk<
       }
     );
     const createdProduct: product = response.data;
-    toast.success('Products Created successfully');
     return createdProduct;
   } catch (error) {
     const err = error as AxiosError;
@@ -116,7 +120,6 @@ export const updateProductAsync = createAsyncThunk<
       }
     );
 
-    console.log(response);
     const updateNewProduct: product = response.data;
 
     return updateNewProduct;
@@ -161,5 +164,55 @@ export const getProductByTitleAsync = createAsyncThunk<
   } catch (error) {
     const err = error as AxiosError;
     return rejectWithValue(err.message);
+  }
+});
+
+/* CREATE REVIEW THUNK */
+
+export const createNewReviewAsync = createAsyncThunk<
+  Review,
+  newReview,
+  { rejectValue: string }
+>('createNewReviewAsync', async (newReviewData, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+    const response = await axios.post<Review>(
+      `https://ecommershop.azurewebsites.net/api/review/`,
+      newReviewData,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.response?.data as unknown as string);
+  }
+});
+
+/* DELETE REVIEW THUNK */
+
+export const deleteNewReviewAsync = createAsyncThunk<
+  boolean,
+  string,
+  { rejectValue: string }
+>('deleteNewReviewAsync', async (id, { rejectWithValue }) => {
+  try {
+    const storedToken = getToken();
+    const response = await axios.delete<boolean>(
+      `https://ecommershop.azurewebsites.net/api/review/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const err = error as AxiosError;
+    return rejectWithValue(err.response?.data as unknown as string);
   }
 });

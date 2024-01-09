@@ -3,6 +3,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { product } from '../../types/product';
 import {
   createNewProductAsync,
+  createNewReviewAsync,
+  deleteNewReviewAsync,
   deleteProductAsync,
   getAProductsAsync,
   getAllProductsAsync,
@@ -85,6 +87,19 @@ const productSlice = createSlice({
     builder.addCase(getAProductsAsync.rejected, (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    });
+
+    builder.addCase(createNewReviewAsync.fulfilled, (state, action) => {
+      if (state.product) {
+        state.product = {
+          ...state.product,
+          reviews: state.product.reviews
+            ? [...state.product.reviews, action.payload]
+            : [action.payload],
+        };
+      }
+      state.loading = false;
+      state.error = '';
     });
 
     /*CREATE NEW PRODUCT REDUCER*/
