@@ -138,7 +138,7 @@ const ProductView = () => {
               flexDirection={'column'}
               columnGap="1.33%"
             >
-              {product.reviews.map((review: Review) => (
+              {product?.reviews?.map((review: Review) => (
                 <Paper
                   sx={{
                     padding: '10px',
@@ -153,8 +153,8 @@ const ProductView = () => {
                     <Rating value={review.ratings} readOnly />
                     <Typography> {review.content}</Typography>
                   </Box>
-                  {currentUser.id === review.userId ||
-                  currentUser.role === userRole.admin ? (
+                  {(currentUser && currentUser?.id === review.userId) ||
+                  currentUser?.role === userRole.admin ? (
                     <Box display={'flex'}>
                       <MuiButton size="small" variant="text">
                         <EditIcon />
@@ -173,24 +173,26 @@ const ProductView = () => {
                 </Paper>
               ))}
 
-              <Paper sx={{ padding: '10px', marginBottom: '5px' }}>
-                <form onSubmit={submitHandler}>
-                  <Rating
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={(event, newValue) => {
-                      setRating(newValue);
-                    }}
-                  />
-                  <Box display={'flex'}>
-                    <OutlinedInput
-                      fullWidth
-                      onChange={(e) => setReview(e.target.value)}
+              {currentUser && currentUser.role === userRole.customer && (
+                <Paper sx={{ padding: '10px', marginBottom: '5px' }}>
+                  <form onSubmit={submitHandler}>
+                    <Rating
+                      name="simple-controlled"
+                      value={rating}
+                      onChange={(event, newValue) => {
+                        setRating(newValue);
+                      }}
                     />
-                  </Box>
-                  <Button>Post Review</Button>
-                </form>
-              </Paper>
+                    <Box display={'flex'}>
+                      <OutlinedInput
+                        fullWidth
+                        onChange={(e) => setReview(e.target.value)}
+                      />
+                    </Box>
+                    <Button>Post Review</Button>
+                  </form>
+                </Paper>
+              )}
             </Box>
           </Box>
 
@@ -199,7 +201,7 @@ const ProductView = () => {
               Related Products
             </Typography>
             <Box mt="20px" display="flex" flexWrap="wrap" columnGap="1.33%">
-              {products.slice(0, 5).map((p: product) => (
+              {products?.slice(0, 5).map((p: product) => (
                 <Link to={`/products/${p.id}`} key={p.id}>
                   <MediaCard product={p} />
                 </Link>
