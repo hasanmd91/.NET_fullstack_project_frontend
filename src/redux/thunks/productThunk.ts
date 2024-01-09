@@ -186,6 +186,8 @@ export const createNewReviewAsync = createAsyncThunk<
       }
     );
 
+    console.log(response);
+
     return response.data;
   } catch (error) {
     const err = error as AxiosError;

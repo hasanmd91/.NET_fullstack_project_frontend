@@ -18,6 +18,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Container } from '@mui/system';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { category } from '../../types/category';
 
 const AdminProductList = () => {
   const [search, setSearch] = useState('');
@@ -27,6 +28,8 @@ const AdminProductList = () => {
   const dispatch = useAppDispatch();
   const { debouncedValue } = useDebounce(search);
   const { products, loading, error } = useAppSelector((state) => state.product);
+  const { categories } = useAppSelector((state) => state.category);
+
   useEffect(() => {
     if (!debouncedValue) return;
     dispatch(getProductByTitleAsync(debouncedValue));
@@ -43,8 +46,14 @@ const AdminProductList = () => {
       field: 'category',
       headerName: 'Category',
       width: 150,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.category.name}`,
+      valueGetter: (params: GridValueGetterParams) => {
+        const categoryName =
+          params.row.category?.name ||
+          categories.find((c: category) => c.id === params.row.categoryId)
+            ?.name ||
+          '';
+        return categoryName;
+      },
     },
     {
       field: 'description',

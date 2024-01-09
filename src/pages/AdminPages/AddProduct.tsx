@@ -125,7 +125,7 @@ const AddProduct: React.FC<UpdateProductProps> = ({
               error={!!errors.categoryId}
             >
               {categories?.map((category: category) => (
-                <MenuItem key={category.id} value={category.id}>
+                <MenuItem key={category?.id} value={category?.id}>
                   {category.name}
                 </MenuItem>
               ))}
@@ -175,7 +175,7 @@ const AddProduct: React.FC<UpdateProductProps> = ({
           />
         )}
       />
-      <Button fullWidth>Update</Button>
+      <Button fullWidth>{rowData ? 'Update' : 'Add new product'}</Button>
       <Button type="button" fullWidth onClick={() => setIsModalOpen(false)}>
         Cancle
       </Button>
