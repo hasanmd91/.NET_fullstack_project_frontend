@@ -10,8 +10,6 @@ import { Image, Review, newReview, product } from '../types/product';
 import Button from '../components/Button/Button';
 import MediaCard from '../components/Card/Card';
 import { stringAvatar } from '../utils/stringAvatar';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { userRole } from '../types/user';
 import CenteredContainer from '../components/CenterContainer/CenterContainer';
 import {
@@ -23,13 +21,11 @@ import {
   Paper,
   Rating,
   Avatar,
-  Button as MuiButton,
   OutlinedInput,
 } from '@mui/material';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   createNewReviewAsync,
-  deleteNewReviewAsync,
   getAProductsAsync,
   getAllProductsByCategoryAsync,
 } from '../redux/thunks/productThunk';
@@ -153,23 +149,6 @@ const ProductView = () => {
                     <Rating value={review.ratings} readOnly />
                     <Typography> {review.content}</Typography>
                   </Box>
-                  {(currentUser && currentUser?.id === review.userId) ||
-                  currentUser?.role === userRole.admin ? (
-                    <Box display={'flex'}>
-                      <MuiButton size="small" variant="text">
-                        <EditIcon />
-                      </MuiButton>
-                      <MuiButton
-                        size="small"
-                        variant="text"
-                        onClick={() =>
-                          dispatch(deleteNewReviewAsync(review.id))
-                        }
-                      >
-                        <DeleteIcon />
-                      </MuiButton>
-                    </Box>
-                  ) : null}
                 </Paper>
               ))}
 
