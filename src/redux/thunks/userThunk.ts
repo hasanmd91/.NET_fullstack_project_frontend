@@ -5,7 +5,6 @@ import { registerUser, user, updateUserDataType } from '../../types/user';
 import { userCredentials } from '../../types/auth';
 import { getToken, saveToken } from '../../utils/tokenUtils';
 import { order } from '../../types/Order';
-import { response } from 'msw';
 
 /* LOGIN USER THUNK USING LOGIN CREDENTIAL */
 

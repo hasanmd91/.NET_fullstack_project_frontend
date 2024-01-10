@@ -9,6 +9,7 @@ import cartReducer, {
 import { createStore } from '../../redux/store';
 import cartItemsData from '../Data/cartData';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 let store = createStore();
 
 beforeEach(() => {
