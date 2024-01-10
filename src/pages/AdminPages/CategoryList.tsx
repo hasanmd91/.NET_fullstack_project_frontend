@@ -17,9 +17,7 @@ import {
 import { Button, Container, FormControl } from '@mui/material';
 
 const CategoryList: React.FC = () => {
-  const { categories, loading, error } = useAppSelector(
-    (state) => state.category
-  );
+  const { categories } = useAppSelector((state) => state.category);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<category | undefined>();

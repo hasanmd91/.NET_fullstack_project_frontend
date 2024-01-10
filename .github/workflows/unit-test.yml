@@ -13,5 +13,5 @@ jobs:
         run: npm install
       - name: Run unit test
         run: npm test
-      - name: Collect coverage
-        run: npm test --coverage
+      - name: Run lint
+        run: npm run lint --fix

@@ -4,7 +4,6 @@ import { product } from '../../types/product';
 import {
   createNewProductAsync,
   createNewReviewAsync,
-  deleteNewReviewAsync,
   deleteProductAsync,
   getAProductsAsync,
   getAllProductsAsync,
