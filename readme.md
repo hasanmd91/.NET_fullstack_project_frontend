@@ -64,6 +64,7 @@ docker run -p 3000:3000 hasanmd91/ilhfrontend
 - Users can add products to their shopping cart.
 - Cart management functionality is available.
 - Users can order product by checkout no payment info is required
+- users recive order confirmation email
 
 ### Admin Functionalities
 
