@@ -12,12 +12,13 @@ Welcome to the ILH Store E-commerce Application, a online shopping platform, and
 ## Table of content
 
 1. [Backend](#backend)
-1. [Technologies](#technologies)
-1. [Deployment](#deployment)
-1. [Features](#features)
-1. [Api Reference](#api-reference)
-1. [Folder Structure](#folder-structure)
-1. [Screenshots](#screenshots)
+2. [Technologies](#technologies)
+3. [Deployment](#deployment)
+4. [Docker](#docker)
+5. [Features](#features)
+6. [Api Reference](#api-reference)
+7. [Folder Structure](#folder-structure)
+8. [Screenshots](#screenshots)
 
 ## Backend
 
@@ -37,6 +38,20 @@ This backend of this project is build wtih ASP.NET Core, Entity Framework Core, 
 ## Deployment
 
 Live Link : [https://ilhshoestore.netlify.app/](https://ilhshoestore.netlify.app)
+
+## Docker
+
+To use the pre-built Docker image for this project, you can pull it from Docker Hub. Run the following command:
+
+```
+docker pull hasanmd91/ilhfrontend
+```
+
+Once the image is pulled, you can run the Docker container using the following command:
+
+```
+docker run -p 3000:3000 hasanmd91/ilhfrontend
+```
 
 ## Features
 

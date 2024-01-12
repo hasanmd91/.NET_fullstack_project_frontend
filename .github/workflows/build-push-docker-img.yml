@@ -20,4 +20,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: hasanmd91/ilh-frontend:latest
+          tags: hasanmd91/ilhfrontend:latest
