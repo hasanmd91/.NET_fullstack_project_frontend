@@ -24,7 +24,6 @@ const ProductSideBar: React.FC<ProductSideBarPropsType> = () => {
 
   return (
     <Stack
-      width={'250px'}
       sx={{
         backgroundColor: shades.primary[500],
         padding: '20px',

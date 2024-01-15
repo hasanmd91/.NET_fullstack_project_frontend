@@ -55,11 +55,11 @@ const ProductList = () => {
   return (
     <Container maxWidth="xl" sx={{ marginTop: '10px' }}>
       <Grid container spacing={1}>
-        <Grid item md={2}>
+        <Grid item md={3} xl={2}>
           <ProductSideBar />
         </Grid>
 
-        <Grid item md={10} xs={12}>
+        <Grid item md={9} xl={10} xs={12}>
           <Box>
             <SearchBar search={search} setSearch={setSearch} />
             {currentProducts?.map((product) => (
