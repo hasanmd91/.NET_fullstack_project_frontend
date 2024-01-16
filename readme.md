@@ -168,10 +168,10 @@ It correctly bundles React in production mode and optimizes the build for the be
     └───validation
 ```
 
-## Credits and Acknowledgements
-
-- pIctures: https://www.pexels.com/
-
 ## Demo
 
 [![Youtube Demo](https://img.youtube.com/vi/kPy1wzJwmSU/0.jpg)](https://www.youtube.com/watch?v=kPy1wzJwmSU)
+
+## Credits and Acknowledgements
+
+- pIctures: https://www.pexels.com/
