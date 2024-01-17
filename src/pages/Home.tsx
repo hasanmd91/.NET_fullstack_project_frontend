@@ -44,7 +44,15 @@ const Home = () => {
               <CircularProgress color="error" size="5rem" />
             </CenteredContainer>
           ) : (
-            <Container maxWidth="lg">
+            <Container
+              maxWidth="lg"
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
+            >
               {products.slice(0, 10).map((p: product) => (
                 <Link to={`/products/${p.id}`} key={p.id}>
                   <MediaCard product={p} />
